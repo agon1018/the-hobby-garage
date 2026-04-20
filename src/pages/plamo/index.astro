@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 import { plamoKits } from '../../data/plamoKits';
 ---
@@ -6,7 +6,7 @@ import { plamoKits } from '../../data/plamoKits';
 <Layout title="プラモの部屋">
   <main class="page">
     <a href="/" class="back">トップへ戻る</a>
-    <header>
+    <header class="title-head">
       <p class="label">Plamo Room</p>
       <h1>プラモの部屋</h1>
       <p>制作したキット一覧です。気になるキットを選ぶと、個別のギャラリーページへ移動します。</p>
@@ -54,6 +54,27 @@ import { plamoKits } from '../../data/plamoKits';
     margin: 0 auto 1.4rem;
   }
 
+  .title-head {
+    border: 1px solid #d7e7ee;
+    border-radius: 1.15rem;
+    padding: 1rem 1.15rem 1.05rem;
+    background:
+      radial-gradient(circle at 88% 14%, rgba(127, 182, 201, 0.24), transparent 34%),
+      radial-gradient(circle at 12% 85%, rgba(47, 126, 98, 0.14), transparent 34%),
+      #fcfeff;
+    box-shadow: 0 12px 24px rgba(31, 99, 119, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .title-head::after {
+    content: '';
+    position: absolute;
+    inset: auto 14% 0 14%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--plamo-palette-1), var(--plamo-palette-3), transparent);
+  }
+
   .label {
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -65,12 +86,14 @@ import { plamoKits } from '../../data/plamoKits';
   h1 {
     margin: 0.35rem 0 0.8rem;
     color: var(--plamo-palette-3);
-    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.6rem);
     font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
   }
 
   header p {
-    line-height: 1.8;
+    line-height: 1.7;
+    font-size: 0.95rem;
     margin: 0;
   }
 
@@ -78,8 +101,8 @@ import { plamoKits } from '../../data/plamoKits';
     max-width: 980px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.8rem;
   }
 
   .kit-card {
@@ -89,7 +112,7 @@ import { plamoKits } from '../../data/plamoKits';
     background: #fff;
     border: 1px solid #d4e5eb;
     border-radius: 1rem;
-    padding: 1.1rem 1.1rem 3rem;
+    padding: 0.95rem 0.95rem 2.7rem;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
     color: inherit;
     text-decoration: none;
@@ -154,22 +177,100 @@ import { plamoKits } from '../../data/plamoKits';
 
   .kit-card h2 {
     margin: 0.35rem 0;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   .meta {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #4a616d;
   }
 
   .kit-card p {
-    line-height: 1.8;
+    line-height: 1.6;
+    font-size: 0.9rem;
   }
 
   .go {
     display: inline-block;
-    margin-top: 0.6rem;
+    margin-top: 0.45rem;
     color: var(--plamo-palette-1);
     font-weight: 700;
+    font-size: 0.86rem;
+  }
+
+  @media (max-width: 700px) {
+    .page {
+      padding: 1rem 0.8rem 2rem;
+    }
+
+    .back {
+      margin-bottom: 0.7rem;
+      font-size: 0.86rem;
+    }
+
+    .title-head {
+      border-radius: 0.9rem;
+      padding: 0.78rem 0.82rem 0.84rem;
+    }
+
+    .label {
+      font-size: 0.72rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h1 {
+      font-size: 1.45rem;
+      margin: 0.22rem 0 0.48rem;
+    }
+
+    header p {
+      font-size: 0.83rem;
+      line-height: 1.5;
+    }
+
+    .kit-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+    }
+
+    .kit-card {
+      border-radius: 0.8rem;
+      padding: 0.72rem 0.72rem 2.25rem;
+    }
+
+    .kit-card::after {
+      width: 1.72rem;
+      height: 1.72rem;
+      right: 0.62rem;
+      bottom: 0.58rem;
+      font-size: 0.85rem;
+    }
+
+    .status {
+      font-size: 0.71rem;
+    }
+
+    .kit-card h2 {
+      font-size: 0.94rem;
+      line-height: 1.35;
+      margin: 0.2rem 0;
+    }
+
+    .meta,
+    .kit-card p {
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .go {
+      font-size: 0.78rem;
+      margin-top: 0.35rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .kit-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

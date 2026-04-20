@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 
 const rooms = [
@@ -73,7 +73,25 @@ const rooms = [
     margin: 0 auto;
     max-width: 940px;
     text-align: center;
-    padding: 2.5rem 0 2rem;
+    padding: 2rem 1.4rem 1.7rem;
+    border: 1px solid #e7e3d9;
+    border-radius: 1.4rem;
+    background:
+      radial-gradient(circle at 15% 22%, rgba(76, 181, 174, 0.16), transparent 34%),
+      radial-gradient(circle at 85% 78%, rgba(228, 87, 46, 0.14), transparent 34%),
+      #ffffff;
+    box-shadow: 0 14px 28px rgba(30, 35, 51, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 20% 0 20%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #2f9e97, #e4572e, transparent);
+    opacity: 0.8;
   }
 
   .eyebrow {
@@ -87,23 +105,26 @@ const rooms = [
   h1 {
     margin: 0;
     font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-    font-size: clamp(2.1rem, 4vw, 3.3rem);
+    font-size: clamp(1.8rem, 3.3vw, 3rem);
+    letter-spacing: 0.04em;
+    text-wrap: balance;
   }
 
   .copy {
-    margin: 1.2rem auto 0;
+    margin: 0.9rem auto 0;
     max-width: 740px;
-    line-height: 1.9;
+    line-height: 1.75;
+    font-size: 0.97rem;
   }
 
   .room-section {
-    margin: 0 auto;
+    margin: 0.85rem auto 0;
     max-width: 1080px;
   }
 
   .room-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
   }
 
@@ -118,7 +139,7 @@ const rooms = [
     background: #ffffff;
     border: 1px solid var(--line);
     border-radius: 1rem;
-    padding: 1.4rem 1.4rem 3.2rem;
+    padding: 1.05rem 1.05rem 2.8rem;
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
@@ -181,27 +202,87 @@ const rooms = [
 
   .room-card h2 {
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.18rem;
   }
 
   .room-card p {
     margin: 0;
-    line-height: 1.8;
+    line-height: 1.65;
+    font-size: 0.93rem;
   }
 
   .room-card span {
     margin-top: auto;
     font-weight: 700;
     color: #227775;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 700px) {
     .portal {
-      padding-top: 1.25rem;
+      padding: 1rem 0.8rem 2rem;
     }
 
     .hero {
-      padding-top: 1.4rem;
+      padding: 1.1rem 0.9rem 1.1rem;
+      border-radius: 1rem;
+    }
+
+    .eyebrow {
+      margin-bottom: 0.5rem;
+      font-size: 0.72rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .copy {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      margin-top: 0.55rem;
+    }
+
+    .room-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+    }
+
+    .room-card {
+      padding: 0.8rem 0.8rem 2.5rem;
+      border-radius: 0.85rem;
+    }
+
+    .room-card::after {
+      width: 1.75rem;
+      height: 1.75rem;
+      right: 0.75rem;
+      bottom: 0.7rem;
+      font-size: 0.88rem;
+    }
+
+    .state {
+      font-size: 0.72rem;
+    }
+
+    .room-card h2 {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .room-card p {
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .room-card span {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .room-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

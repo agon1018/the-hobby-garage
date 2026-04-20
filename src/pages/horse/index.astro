@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -19,6 +19,10 @@ import Layout from '../../layouts/Layout.astro';
 
 <style>
   .page {
+    --horse-palette-1: #7c592d;
+    --horse-palette-2: #c7a26e;
+    --horse-palette-3: #9a4d22;
+
     min-height: 100vh;
     background: #f9f8f4;
     color: #302822;
@@ -28,7 +32,7 @@ import Layout from '../../layouts/Layout.astro';
 
   .back {
     display: inline-block;
-    color: #7c592d;
+    color: var(--horse-palette-1);
     text-decoration: none;
     font-weight: 700;
     margin-bottom: 1rem;
@@ -41,19 +45,31 @@ import Layout from '../../layouts/Layout.astro';
     border: 1px solid #e2d8ca;
     border-radius: 1rem;
     padding: 1.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--horse-palette-1), var(--horse-palette-2), var(--horse-palette-3));
   }
 
   .label {
     margin: 0;
     text-transform: uppercase;
-    color: #7c592d;
+    color: var(--horse-palette-1);
     font-weight: 700;
     letter-spacing: 0.06em;
   }
 
   h1 {
     margin: 0.4rem 0 0.8rem;
+    color: var(--horse-palette-3);
     font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.03em;
   }
 
   p {
@@ -64,6 +80,48 @@ import Layout from '../../layouts/Layout.astro';
   .note {
     margin-top: 1rem;
     font-weight: 700;
-    color: #9a4d22;
+    color: var(--horse-palette-3);
+  }
+
+  .accent-link {
+    color: var(--horse-palette-1);
+  }
+
+  .accent-link-secondary {
+    color: var(--horse-palette-3);
+  }
+
+  @media (max-width: 700px) {
+    .page {
+      padding: 1rem 0.8rem;
+    }
+
+    .back {
+      font-size: 0.86rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .panel {
+      border-radius: 0.9rem;
+      padding: 0.82rem;
+    }
+
+    .label {
+      font-size: 0.72rem;
+    }
+
+    h1 {
+      font-size: 1.42rem;
+      margin: 0.25rem 0 0.52rem;
+    }
+
+    p {
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .note {
+      margin-top: 0.65rem;
+    }
   }
 </style>
