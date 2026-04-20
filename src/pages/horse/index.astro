@@ -1,10 +1,17 @@
 ﻿---
 import Layout from '../../layouts/Layout.astro';
+import RoomSidebar from '../../components/RoomSidebar.astro';
 ---
 
 <Layout title="競馬の部屋">
+  <RoomSidebar
+    currentPath="/horse"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { label: '競馬の部屋' },
+    ]}
+  >
   <main class="page">
-    <a href="/" class="back">トップへ戻る</a>
     <div class="panel">
       <p class="label">Horse Room</p>
       <h1>競馬の部屋</h1>
@@ -15,6 +22,7 @@ import Layout from '../../layouts/Layout.astro';
       <p class="note">現在は準備中です。</p>
     </div>
   </main>
+  </RoomSidebar>
 </Layout>
 
 <style>
@@ -28,14 +36,6 @@ import Layout from '../../layouts/Layout.astro';
     color: #302822;
     font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
     padding: 2rem 1.2rem;
-  }
-
-  .back {
-    display: inline-block;
-    color: var(--horse-palette-1);
-    text-decoration: none;
-    font-weight: 700;
-    margin-bottom: 1rem;
   }
 
   .panel {
@@ -94,11 +94,6 @@ import Layout from '../../layouts/Layout.astro';
   @media (max-width: 700px) {
     .page {
       padding: 1rem 0.8rem;
-    }
-
-    .back {
-      font-size: 0.86rem;
-      margin-bottom: 0.65rem;
     }
 
     .panel {

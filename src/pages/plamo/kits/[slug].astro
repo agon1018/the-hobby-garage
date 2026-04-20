@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import RoomSidebar from '../../../components/RoomSidebar.astro';
 import { plamoKits, type KitInfo } from '../../../data/plamoKits';
 
 export function getStaticPaths() {
@@ -10,9 +11,15 @@ const { kit } = Astro.props as { kit: KitInfo };
 ---
 
 <Layout title={`${kit.name} | プラモの部屋`}>
+  <RoomSidebar
+    currentPath="/plamo"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/plamo', label: 'プラモの部屋' },
+      { label: kit.name },
+    ]}
+  >
   <main class="page">
-    <a href="/plamo" class="back">プラモ一覧へ戻る</a>
-
     <header class="head">
       <p class="scale">{kit.scale} / {kit.era}</p>
       <h1>{kit.name}</h1>
@@ -28,6 +35,7 @@ const { kit } = Astro.props as { kit: KitInfo };
       ))}
     </section>
   </main>
+  </RoomSidebar>
 </Layout>
 
 <style>
@@ -37,14 +45,6 @@ const { kit } = Astro.props as { kit: KitInfo };
     color: #222f4d;
     padding: 2rem 1.2rem 3rem;
     font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
-  }
-
-  .back {
-    display: inline-block;
-    color: #2c4e9f;
-    text-decoration: none;
-    font-weight: 700;
-    margin-bottom: 1rem;
   }
 
   .head {

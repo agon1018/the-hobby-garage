@@ -1,5 +1,6 @@
 ﻿---
 import Layout from '../../layouts/Layout.astro';
+import RoomSidebar from '../../components/RoomSidebar.astro';
 
 const apps = [
   {
@@ -20,8 +21,14 @@ const apps = [
 ---
 
 <Layout title="アプリの部屋">
+  <RoomSidebar
+    currentPath="/apps"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { label: 'アプリの部屋' },
+    ]}
+  >
   <main class="page">
-    <a href="/" class="back">トップへ戻る</a>
     <header class="title-head">
       <p class="label">App Room</p>
       <h1>アプリの部屋</h1>
@@ -48,6 +55,7 @@ const apps = [
       ))}
     </section>
   </main>
+  </RoomSidebar>
 </Layout>
 
 <style>
@@ -61,14 +69,6 @@ const apps = [
     color: #2b2c34;
     font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
     padding: 2rem 1.2rem 3rem;
-  }
-
-  .back {
-    display: inline-block;
-    color: var(--app-palette-1);
-    font-weight: 700;
-    text-decoration: none;
-    margin-bottom: 1.2rem;
   }
 
   header {

@@ -1,11 +1,18 @@
 ﻿---
 import Layout from '../../layouts/Layout.astro';
+import RoomSidebar from '../../components/RoomSidebar.astro';
 import { plamoKits } from '../../data/plamoKits';
 ---
 
 <Layout title="プラモの部屋">
+  <RoomSidebar
+    currentPath="/plamo"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { label: 'プラモの部屋' },
+    ]}
+  >
   <main class="page">
-    <a href="/" class="back">トップへ戻る</a>
     <header class="title-head">
       <p class="label">Plamo Room</p>
       <h1>プラモの部屋</h1>
@@ -24,6 +31,7 @@ import { plamoKits } from '../../data/plamoKits';
       ))}
     </section>
   </main>
+  </RoomSidebar>
 </Layout>
 
 <style>
@@ -39,14 +47,6 @@ import { plamoKits } from '../../data/plamoKits';
     color: #1f2f36;
     font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
     padding: 2rem 1.2rem 3.2rem;
-  }
-
-  .back {
-    display: inline-block;
-    color: var(--plamo-palette-1);
-    text-decoration: none;
-    font-weight: 700;
-    margin-bottom: 1rem;
   }
 
   header {
