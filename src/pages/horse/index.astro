@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="競馬の部屋">
+  <main class="page">
+    <a href="/" class="back">トップへ戻る</a>
+    <div class="panel">
+      <p class="label">Horse Room</p>
+      <h1>競馬の部屋</h1>
+      <p>
+        このページは今後、閲覧制限付きで公開予定です。<br />
+        馬ごとの成績・メモ・注目ポイントを整理できる形で実装します。
+      </p>
+      <p class="note">現在は準備中です。</p>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    min-height: 100vh;
+    background: #f9f8f4;
+    color: #302822;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    padding: 2rem 1.2rem;
+  }
+
+  .back {
+    display: inline-block;
+    color: #7c592d;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .panel {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #e2d8ca;
+    border-radius: 1rem;
+    padding: 1.2rem;
+  }
+
+  .label {
+    margin: 0;
+    text-transform: uppercase;
+    color: #7c592d;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  h1 {
+    margin: 0.4rem 0 0.8rem;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .note {
+    margin-top: 1rem;
+    font-weight: 700;
+    color: #9a4d22;
+  }
+</style>

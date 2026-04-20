@@ -1,0 +1,205 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const apps = [
+  {
+    name: 'BuildChronicle',
+    description:
+      'プラモデル製作を工程・写真・塗料・ツール・ウィッシュリストで管理する開発中アプリです。楽天アフィリエイト連携の紹介ページを公開中です。',
+    href: '/apps/buildchronicle',
+    tag: '開発中',
+  },
+  {
+    name: '次期アプリ（準備中）',
+    description:
+      '次に公開予定のアプリ紹介枠です。ここに新規アプリの概要、仕様、スクリーンショットを追加できます。',
+    href: '#',
+    tag: '準備中',
+  },
+];
+---
+
+<Layout title="アプリの部屋">
+  <main class="page">
+    <a href="/" class="back">トップへ戻る</a>
+    <header>
+      <p class="label">App Room</p>
+      <h1>アプリの部屋</h1>
+      <p>開発しているアプリの概要、仕様、利用方法をまとめています。</p>
+    </header>
+
+    <section class="list">
+      {apps.map((app) => (
+        app.href === '#' ? (
+          <article class="card disabled-card" aria-disabled="true">
+            <p class="tag">{app.tag}</p>
+            <h2>{app.name}</h2>
+            <p>{app.description}</p>
+            <span class="disabled">近日公開</span>
+          </article>
+        ) : (
+          <a class="card clickable-card" href={app.href}>
+            <p class="tag">{app.tag}</p>
+            <h2>{app.name}</h2>
+            <p>{app.description}</p>
+            <span class="go">紹介ページへ</span>
+          </a>
+        )
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    --app-palette-1: #c76a12;
+    --app-palette-2: #e8b15d;
+    --app-palette-3: #0d7065;
+
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fff8ec 0%, #ffffff 45%);
+    color: #2b2c34;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    padding: 2rem 1.2rem 3rem;
+  }
+
+  .back {
+    display: inline-block;
+    color: var(--app-palette-1);
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 1.2rem;
+  }
+
+  header {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .label {
+    color: var(--app-palette-1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--app-palette-3);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  }
+
+  header p {
+    line-height: 1.8;
+  }
+
+  .list {
+    max-width: 860px;
+    margin: 1.4rem auto 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e6dccf;
+    border-radius: 1rem;
+    padding: 1.2rem;
+  }
+
+  .clickable-card {
+    position: relative;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    padding-bottom: 3rem;
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .clickable-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--app-palette-1), var(--app-palette-2), var(--app-palette-3));
+    opacity: 0.85;
+  }
+
+  .clickable-card::after {
+    content: '→';
+    position: absolute;
+    right: 1rem;
+    bottom: 0.9rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#ffffff, #ffffff) padding-box,
+      linear-gradient(135deg, var(--app-palette-1), var(--app-palette-2), var(--app-palette-3)) border-box;
+    color: #2b2c34;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 8px 16px rgba(213, 138, 55, 0.25);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .clickable-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--app-palette-2) 60%, #ffffff);
+    box-shadow: 0 12px 24px rgba(199, 106, 18, 0.16);
+  }
+
+  .clickable-card:hover::after,
+  .clickable-card:focus-visible::after {
+    transform: translateX(2px);
+    box-shadow: 0 10px 20px rgba(213, 138, 55, 0.35);
+  }
+
+  .clickable-card:focus-visible {
+    outline: 3px solid #cc8b43;
+    outline-offset: 2px;
+    transform: translateY(-4px);
+  }
+
+  .disabled-card {
+    opacity: 0.82;
+  }
+
+  .tag {
+    color: var(--app-palette-1);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .card h2 {
+    margin: 0.5rem 0 0.4rem;
+  }
+
+  .card p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .go,
+  .disabled {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 700;
+  }
+
+  .go {
+    color: var(--app-palette-3);
+  }
+
+  .disabled {
+    color: #8f8f8f;
+  }
+</style>

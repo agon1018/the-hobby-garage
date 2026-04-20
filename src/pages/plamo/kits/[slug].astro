@@ -1,0 +1,104 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { plamoKits, type KitInfo } from '../../../data/plamoKits';
+
+export function getStaticPaths() {
+  return plamoKits.map((kit) => ({ params: { slug: kit.slug }, props: { kit } }));
+}
+
+const { kit } = Astro.props as { kit: KitInfo };
+---
+
+<Layout title={`${kit.name} | プラモの部屋`}>
+  <main class="page">
+    <a href="/plamo" class="back">プラモ一覧へ戻る</a>
+
+    <header class="head">
+      <p class="scale">{kit.scale} / {kit.era}</p>
+      <h1>{kit.name}</h1>
+      <p>{kit.summary}</p>
+    </header>
+
+    <section class="gallery-grid">
+      {kit.gallery.map((label, index) => (
+        <figure class="frame">
+          <div class="dummy-image">PHOTO {index + 1}</div>
+          <figcaption>{label}</figcaption>
+        </figure>
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    min-height: 100vh;
+    background: #f6f9ff;
+    color: #222f4d;
+    padding: 2rem 1.2rem 3rem;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+  }
+
+  .back {
+    display: inline-block;
+    color: #2c4e9f;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .head {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #d5def5;
+    border-radius: 1rem;
+    padding: 1.2rem;
+  }
+
+  .scale {
+    margin: 0;
+    color: #5c6ea0;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 0.4rem 0 0.8rem;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  }
+
+  .head p {
+    line-height: 1.8;
+  }
+
+  .gallery-grid {
+    max-width: 960px;
+    margin: 1rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .frame {
+    margin: 0;
+    background: #fff;
+    border: 1px solid #d5def5;
+    border-radius: 0.8rem;
+    overflow: hidden;
+  }
+
+  .dummy-image {
+    aspect-ratio: 4 / 3;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #dae5ff, #f1f5ff);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #51648f;
+  }
+
+  figcaption {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+</style>

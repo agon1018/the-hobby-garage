@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { plamoKits } from '../../data/plamoKits';
+---
+
+<Layout title="プラモの部屋">
+  <main class="page">
+    <a href="/" class="back">トップへ戻る</a>
+    <header>
+      <p class="label">Plamo Room</p>
+      <h1>プラモの部屋</h1>
+      <p>制作したキット一覧です。気になるキットを選ぶと、個別のギャラリーページへ移動します。</p>
+    </header>
+
+    <section class="kit-grid">
+      {plamoKits.map((kit) => (
+        <a class="kit-card" href={`/plamo/kits/${kit.slug}`}>
+          <p class="status">{kit.status}</p>
+          <h2>{kit.name}</h2>
+          <p class="meta">スケール: {kit.scale}</p>
+          <p>{kit.note}</p>
+          <span class="go">ギャラリーへ</span>
+        </a>
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    --plamo-palette-1: #2f86a1;
+    --plamo-palette-2: #7fb6c9;
+    --plamo-palette-3: #2f7e62;
+
+    min-height: 100vh;
+    background:
+      linear-gradient(155deg, rgba(17, 127, 166, 0.09) 0%, rgba(255, 255, 255, 0) 40%),
+      #f7fbfd;
+    color: #1f2f36;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    padding: 2rem 1.2rem 3.2rem;
+  }
+
+  .back {
+    display: inline-block;
+    color: var(--plamo-palette-1);
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  header {
+    max-width: 980px;
+    margin: 0 auto 1.4rem;
+  }
+
+  .label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    color: var(--plamo-palette-1);
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 0.35rem 0 0.8rem;
+    color: var(--plamo-palette-3);
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  }
+
+  header p {
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .kit-grid {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .kit-card {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #d4e5eb;
+    border-radius: 1rem;
+    padding: 1.1rem 1.1rem 3rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .kit-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--plamo-palette-1), var(--plamo-palette-2), var(--plamo-palette-3));
+    opacity: 0.85;
+  }
+
+  .kit-card::after {
+    content: '→';
+    position: absolute;
+    right: 0.95rem;
+    bottom: 0.85rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#ffffff, #ffffff) padding-box,
+      linear-gradient(135deg, var(--plamo-palette-1), var(--plamo-palette-2), var(--plamo-palette-3)) border-box;
+    color: #1f2f36;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 8px 16px rgba(47, 134, 161, 0.25);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .kit-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--plamo-palette-2);
+    box-shadow: 0 12px 24px rgba(29, 102, 124, 0.2);
+  }
+
+  .kit-card:hover::after,
+  .kit-card:focus-visible::after {
+    transform: translateX(2px);
+    box-shadow: 0 10px 20px rgba(47, 134, 161, 0.35);
+  }
+
+  .kit-card:focus-visible {
+    outline: 3px solid #5ea2bb;
+    outline-offset: 2px;
+    transform: translateY(-4px);
+  }
+
+  .status {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--plamo-palette-3);
+    font-weight: 700;
+  }
+
+  .kit-card h2 {
+    margin: 0.35rem 0;
+    font-size: 1.2rem;
+  }
+
+  .meta {
+    font-size: 0.9rem;
+    color: #4a616d;
+  }
+
+  .kit-card p {
+    line-height: 1.8;
+  }
+
+  .go {
+    display: inline-block;
+    margin-top: 0.6rem;
+    color: var(--plamo-palette-1);
+    font-weight: 700;
+  }
+</style>

@@ -1,0 +1,494 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="BuildChronicle - プラモデル製作記録アプリ">
+  <main>
+    <!-- ヒーローセクション -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="app-icon-placeholder">BC</div>
+        <h1>BuildChronicle</h1>
+        <p class="tagline">プラモデル製作をもっと楽しく、もっと丁寧に記録しよう</p>
+        <p class="sub-tagline">工程管理・カラー記録・写真ギャラリー・ウィッシュリストを一括管理</p>
+        <div class="badge-area">
+          <span class="badge">開発中</span>
+          <span class="badge platform">Android / iOS 対応予定</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- アプリ概要 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">アプリについて</h2>
+        <p class="section-desc">
+          BuildChronicle は、プラモデルの製作記録を管理するモバイルアプリです。<br />
+          複数のプロジェクトを作成し、工程ごとに使用した塗料・ツール・写真を記録できます。<br />
+          製作中に気になったアイテムをウィッシュリストに追加して、楽天市場での購入もスムーズに行えます。
+        </p>
+      </div>
+    </section>
+
+    <!-- 主な機能 -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">主な機能</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <h3>プロジェクト管理</h3>
+            <p>製作中・完成済みのプラモデルをプロジェクトとして管理。カバー写真やカバーカラーを設定してひと目で識別できます。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>工程・ステップ記録</h3>
+            <p>製作工程を区分目と子工程の2階層で整理。各工程にコメント・使用塗料・使用ツール・写真を紐付けて詳細に記録できます。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>カラー管理・検索</h3>
+            <p>使用した塗料をカラーマスターとして登録。メーカー・色番号での検索や、複数塗料の混色比率計算にも対応しています。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📸</div>
+            <h3>フォトギャラリー</h3>
+            <p>プロジェクトごとに製作過程・完成写真をまとめて閲覧。工程に紐付いた写真をギャラリー形式で確認できます。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛠️</div>
+            <h3>ツール管理</h3>
+            <p>ニッパー・やすり・塗装ブラシなど所持しているモデリングツールを一覧管理。工程への紐付けで使用記録も残せます。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛒</div>
+            <h3>ウィッシュリスト</h3>
+            <p>欲しい塗料やツールをウィッシュリストに追加。楽天市場の商品リンクを登録することで、ワンタップで購入ページへアクセスできます。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>SNS 投稿プレビュー</h3>
+            <p>完成した作品の写真を選択して SNS 投稿用の画像プレビューを生成。X（旧 Twitter）などへの投稿をサポートします。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>テンプレート</h3>
+            <p>よく使う工程パターンをテンプレートとして保存。新しいプロジェクト開始時に流用でき、入力の手間を大幅に削減します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 楽天ウィッシュリスト連携 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">楽天市場との連携</h2>
+        <div class="rakuten-section">
+          <div class="rakuten-content">
+            <p>
+              BuildChronicle のウィッシュリスト機能は、<strong>楽天アフィリエイト</strong>と連携しています。<br />
+              欲しい塗料・ツールを登録する際に楽天市場の商品ページ URL を紐付けることができ、<br />
+              アプリ内から直接商品ページへ遷移して購入できます。
+            </p>
+            <ul class="rakuten-list">
+              <li>塗料・ツールの商品ページをウィッシュリストに登録</li>
+              <li>楽天アフィリエイトリンクをアプリ内ブラウザで開く</li>
+              <li>購入済みフラグで管理状況を把握</li>
+              <li>カラーマスター・ツールマスターと連動した自動登録</li>
+            </ul>
+          </div>
+          <div class="rakuten-badge">
+            <span class="r-badge">楽天アフィリエイト<br />連携対応</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 対象ユーザー -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">こんな方におすすめ</h2>
+        <div class="target-grid">
+          <div class="target-card">
+            <span class="target-icon">🏆</span>
+            <p>製作の過程を詳細に記録したい方</p>
+          </div>
+          <div class="target-card">
+            <span class="target-icon">🎨</span>
+            <p>使用した塗料・混色レシピを管理したい方</p>
+          </div>
+          <div class="target-card">
+            <span class="target-icon">📸</span>
+            <p>完成写真を整理して振り返りたい方</p>
+          </div>
+          <div class="target-card">
+            <span class="target-icon">🛒</span>
+            <p>欲しいアイテムをリスト管理したい方</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 開発情報 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">開発情報</h2>
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th>アプリ名</th>
+              <td>BuildChronicle</td>
+            </tr>
+            <tr>
+              <th>対応OS</th>
+              <td>Android / iOS（開発中）</td>
+            </tr>
+            <tr>
+              <th>開発環境</th>
+              <td>.NET MAUI（.NET 10）</td>
+            </tr>
+            <tr>
+              <th>価格</th>
+              <td>基本無料（一部機能は有料プラン）</td>
+            </tr>
+            <tr>
+              <th>ステータス</th>
+              <td>開発中</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+      <p>© 2025 BuildChronicle. All rights reserved.</p>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --accent: #f59e0b;
+    --bg: #f8fafc;
+    --bg-alt: #e8f0fe;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --hero-bg: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #7c3aed 100%);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ヒーロー */
+  .hero {
+    background: var(--hero-bg);
+    color: white;
+    padding: 80px 20px 60px;
+    text-align: center;
+  }
+
+  .hero-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .app-icon-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    opacity: 0.95;
+  }
+
+  .sub-tagline {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 28px;
+  }
+
+  .badge-area {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    background: rgba(245, 158, 11, 0.9);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .badge.platform {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  /* セクション共通 */
+  .section {
+    padding: 64px 20px;
+  }
+
+  .section-alt {
+    background: var(--bg-alt);
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 12px;
+    color: var(--primary-dark);
+    position: relative;
+    padding-bottom: 16px;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 12px auto 0;
+  }
+
+  .section-desc {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-top: 24px;
+  }
+
+  /* 機能グリッド */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .feature-card:hover {
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary-dark);
+  }
+
+  .feature-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* 楽天連携 */
+  .rakuten-section {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .rakuten-content {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .rakuten-content p {
+    font-size: 1rem;
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .rakuten-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .rakuten-list li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 0.95rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .rakuten-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .rakuten-badge {
+    flex-shrink: 0;
+  }
+
+  .r-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #bf0000, #e00000);
+    color: white;
+    padding: 24px 32px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.6;
+    box-shadow: 0 4px 16px rgba(191, 0, 0, 0.25);
+  }
+
+  /* 対象ユーザー */
+  .target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .target-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .target-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .target-card p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+
+  /* 開発情報テーブル */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .info-table th,
+  .info-table td {
+    padding: 16px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  .info-table th {
+    background: var(--bg-alt);
+    font-weight: 700;
+    color: var(--primary-dark);
+    width: 160px;
+  }
+
+  .info-table tr:last-child th,
+  .info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* フッター */
+  .footer {
+    background: var(--text);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 0.85rem;
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .section {
+      padding: 48px 16px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+    }
+
+    .info-table th {
+      width: 110px;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 12px 16px;
+    }
+  }
+</style>
