@@ -1,6 +1,107 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
+
+type FeatureDetail = {
+  id: string;
+  icon: string;
+  title: string;
+  lead: string;
+  chips: string[];
+  tip: string;
+  imgs?: string[];
+};
+
+const featureDetails: FeatureDetail[] = [
+  {
+    id: 'project',
+    icon: '📋',
+    title: 'プロジェクト管理',
+    lead: '作品ごとに開始日・進捗・完成状態をひとまとめに。カバー写真やテーマカラーで複数プロジェクトを直感的に識別できます。',
+    chips: ['進行中 / 完成 / 保留のステータス管理', 'カバー画像とカバーカラーで視覚識別', '工程・写真・ツールをプロジェクト単位で一括参照'],
+    tip: '複数キットを並行製作しても「次にやるべき作品」がすぐ分かります。',
+    imgs: ['/images/buildchronicle/project.jpg'],
+  },
+  {
+    id: 'step',
+    icon: '🔧',
+    title: '工程・ステップ記録',
+    lead: '区分工程と子ステップの2階層で製作作業を時系列に残せます。テンプレート化で次回製作への流用も可能です。',
+    chips: ['工程ごとにコメント・写真・使用色・工具を紐付け', '失敗メモ・再作業メモを記録して次回に活かす', 'よく使う工程をテンプレートとして保存・流用'],
+    tip: '「表面処理 → サフ → 基本塗装 → スミ入れ」のような定番工程を一度登録すれば毎回コピーして使い回せます。',
+    imgs: ['/images/buildchronicle/project_detail.jpg'],
+  },
+  {
+    id: 'color',
+    icon: '🎨',
+    title: 'カラー管理・検索',
+    lead: '使用塗料をメーカー別に整理し、色番号・名称で高速検索。混色比率も保存できるので完成後の再現も容易です。',
+    chips: ['初期収録 120色以上 を想定', 'GSIクレオス / ガイアノーツ / タミヤ / ウォーハンマー の4社収録', '混色比率を保存してプロジェクト単位で再現レシピを管理'],
+    tip: '「この赤、どうやって作った？」を後から追跡できるのが最大の狙いです。',
+    imgs: ['/images/buildchronicle/color_manager_1.jpg', '/images/buildchronicle/color_manager_2.jpg'],
+  },
+  {
+    id: 'gallery',
+    icon: '📸',
+    title: 'フォトギャラリー',
+    lead: '製作途中と完成写真を同一プロジェクト内で整理。工程ごとの紐付けと全体ギャラリー、両方の閲覧に対応します。',
+    chips: ['工程単位での写真紐付け', '撮影日時順で進捗を振り返り', 'SNS投稿用の候補写真もここから選択'],
+    tip: '途中状態の比較がしやすくなり、改善点の振り返りがスムーズに行えます。',
+    imgs: ['/images/buildchronicle/photo_gallery.jpg'],
+  },
+  {
+    id: 'tool',
+    icon: '🛠️',
+    title: 'ツール管理',
+    lead: '所持工具と消耗品を一元管理し、工程への紐付けで使用履歴も残せます。買い足しや交換時期の判断にも活用できます。',
+    chips: ['初期登録 300点以上 を想定', 'タミヤ / ゴッドハンド / WAVE / GSIクレオス / ハセガワ 等をカテゴリ管理', '工程紐付けで「どの工具で仕上げたか」を記録'],
+    tip: '消耗品の残量管理や工具ごとの使用回数も追えるよう設計しています。',
+    imgs: ['/images/buildchronicle/tool_manager_1.jpg', '/images/buildchronicle/tool_manager_2.jpg'],
+  },
+  {
+    id: 'wishlist',
+    icon: '🛒',
+    title: '欲しいものリスト',
+    lead: '欲しい塗料や工具を購入候補として積み上げ。楽天市場のURLを登録して即遷移し、購入状態もアプリ内で追跡できます。',
+    chips: ['楽天市場URLを登録してワンタップ遷移', '購入予定 / 検討中 / 購入済みで状態管理', 'カラー・ツールマスターからワンタップ登録'],
+    tip: '製作中に見つけた候補をその場でメモして、後でまとめて比較・購入できます。',
+    imgs: ['/images/buildchronicle/wishlist.jpg'],
+  },
+  {
+    id: 'sns',
+    icon: '📱',
+    title: 'SNS 投稿プレビュー',
+    lead: '投稿前に見せ方を確認しながら説明文とハッシュタグを準備。投稿品質を揃えつつ毎回の文章作成を省力化します。',
+    chips: ['選択画像から投稿プレビューを生成', '作品名・スケール・使用色などの定型文を自動補助', 'ハッシュタグを自動付与する運用を想定'],
+    tip: 'プレビューで確認 → コピー → 貼り付けで投稿するだけ。毎回の文章作成時間を大幅に短縮できます。',
+    imgs: ['/images/buildchronicle/sns.jpg'],
+  },
+  {
+    id: 'template',
+    icon: '📄',
+    title: 'テンプレート',
+    lead: 'よく使う工程構成をテンプレートとして保存し、新規プロジェクト開始時に即適用。入力の手間を大幅に削減します。',
+    chips: ['塗装中心・改造中心など製作タイプ別に保存', '新規プロジェクトにワンタップで適用', '工程のコピー・並び替えも簡単に操作可能'],
+    tip: '毎回ゼロから工程を作らずに済むため、記録習慣が自然に定着します。',
+    imgs: ['/images/buildchronicle/template.jpg'],
+  },
+];
+
+type ScreenshotItem = {
+  img: string;
+  label: string;
+};
+
+const allScreenshots: ScreenshotItem[] = [
+  { img: '/images/buildchronicle/project.jpg', label: 'プロジェクト一覧' },
+  { img: '/images/buildchronicle/project_detail.jpg', label: 'プロジェクト詳細' },
+  { img: '/images/buildchronicle/sns.jpg', label: 'SNS投稿プレビュー' },
+  { img: '/images/buildchronicle/photo_gallery.jpg', label: 'フォトギャラリー' },
+  { img: '/images/buildchronicle/color_manager_1.jpg', label: 'カラー管理' },
+  { img: '/images/buildchronicle/tool_manager_1.jpg', label: 'ツール管理' },
+  { img: '/images/buildchronicle/wishlist.jpg', label: '欲しいものリスト' },
+  { img: '/images/buildchronicle/template.jpg', label: 'テンプレート' },
+];
 ---
 
 <Layout title="BuildChronicle - プラモデル製作記録アプリ">
@@ -32,6 +133,8 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
       <ul>
         <li><a href="#about">アプリについて</a></li>
         <li><a href="#features">主な機能</a></li>
+        <li><a href="#feature-detail">各機能の詳細</a></li>
+        <li><a href="#screenshots">スクリーンショット</a></li>
         <li><a href="#rakuten">楽天市場との連携</a></li>
         <li><a href="#target">こんな方におすすめ</a></li>
         <li><a href="#info">開発情報</a></li>
@@ -45,7 +148,7 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
         <p class="section-desc">
           BuildChronicle は、プラモデルの製作記録を管理するモバイルアプリです。<br />
           複数のプロジェクトを作成し、工程ごとに使用した塗料・ツール・写真を記録できます。<br />
-          製作中に気になったアイテムをウィッシュリストに追加して、楽天市場での購入もスムーズに行えます。
+          製作中に気になったアイテムを欲しいものリストに追加して、楽天市場での購入もスムーズに行えます。
         </p>
       </div>
     </section>
@@ -55,46 +158,81 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
       <div class="container">
         <h2 class="section-title">主な機能</h2>
         <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📋</div>
-            <h3>プロジェクト管理</h3>
-            <p>製作中・完成済みのプラモデルをプロジェクトとして管理。カバー写真やカバーカラーを設定してひと目で識別できます。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔧</div>
-            <h3>工程・ステップ記録</h3>
-            <p>製作工程を区分目と子工程の2階層で整理。各工程にコメント・使用塗料・使用ツール・写真を紐付けて詳細に記録できます。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎨</div>
-            <h3>カラー管理・検索</h3>
-            <p>使用した塗料をカラーマスターとして登録。メーカー・色番号での検索や、複数塗料の混色比率計算にも対応しています。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📸</div>
-            <h3>フォトギャラリー</h3>
-            <p>プロジェクトごとに製作過程・完成写真をまとめて閲覧。工程に紐付いた写真をギャラリー形式で確認できます。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🛠️</div>
-            <h3>ツール管理</h3>
-            <p>ニッパー・やすり・塗装ブラシなど所持しているモデリングツールを一覧管理。工程への紐付けで使用記録も残せます。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🛒</div>
-            <h3>ウィッシュリスト</h3>
-            <p>欲しい塗料やツールをウィッシュリストに追加。楽天市場の商品リンクを登録することで、ワンタップで購入ページへアクセスできます。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📱</div>
-            <h3>SNS 投稿プレビュー</h3>
-            <p>完成した作品の写真を選択して SNS 投稿用の画像プレビューを生成。X（旧 Twitter）などへの投稿をサポートします。</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📄</div>
-            <h3>テンプレート</h3>
-            <p>よく使う工程パターンをテンプレートとして保存。新しいプロジェクト開始時に流用でき、入力の手間を大幅に削減します。</p>
-          </div>
+          {featureDetails.map((item) => (
+            <a class="feature-card" href={`#fd-${item.id}`}>
+              <div class="feature-icon">{item.icon}</div>
+              <h3>{item.title}</h3>
+              <p>{item.lead}</p>
+              <span class="feature-link-hint">詳細を見る →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 機能詳細 -->
+    <section class="section" id="feature-detail">
+      <div class="container">
+        <h2 class="section-title">各機能の詳細</h2>
+        <div class="fd-grid">
+          {featureDetails.map((item) => (
+            <article class="fd-card" id={`fd-${item.id}`}>
+              <div class="fd-accent-bar"></div>
+              <div class="fd-inner">
+                <div class="fd-body">
+                  <div class="fd-head">
+                    <span class="fd-icon">{item.icon}</span>
+                    <h3>{item.title}</h3>
+                  </div>
+                  <p class="fd-lead">{item.lead}</p>
+                  <div class="fd-chips">
+                    {item.chips.map((chip) => (
+                      <span class="fd-chip">{chip}</span>
+                    ))}
+                  </div>
+                  <div class="fd-tip">{item.tip}</div>
+                </div>
+                <div class="fd-phone">
+                  {item.imgs && item.imgs.length > 0
+                    ? item.imgs.map((src) => (
+                        <div class="phone-frame">
+                          <div class="phone-bar"></div>
+                          <div class="phone-screen">
+                            <img src={src} alt={item.title} />
+                          </div>
+                          <div class="phone-chin"></div>
+                        </div>
+                      ))
+                    : (
+                        <div class="phone-frame">
+                          <div class="phone-bar"></div>
+                          <div class="phone-screen">
+                            <span class="phone-placeholder-label">準備中</span>
+                          </div>
+                          <div class="phone-chin"></div>
+                        </div>
+                      )
+                  }
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- スクリーンショットギャラリー -->
+    <section class="section section-alt" id="screenshots">
+      <div class="container">
+        <h2 class="section-title">スクリーンショット</h2>
+        <p class="section-desc">実際のアプリ画面をご覧いただけます。</p>
+        <div class="ss-grid">
+          {allScreenshots.map((s) => (
+            <div class="ss-item">
+              <img class="ss-img" src={s.img} alt={s.label} />
+              <p class="ss-label">{s.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -144,6 +282,14 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
           <div class="target-card">
             <span class="target-icon">🛒</span>
             <p>欲しいアイテムをリスト管理したい方</p>
+          </div>
+          <div class="target-card">
+            <span class="target-icon">📱</span>
+            <p>製作記録をSNSで発信・共有したい方</p>
+          </div>
+          <div class="target-card">
+            <span class="target-icon">🌐</span>
+            <p>自分の作品を広く公開・アーカイブしたい方</p>
           </div>
         </div>
       </div>
@@ -372,6 +518,206 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
     margin-top: 24px;
   }
 
+  /* 機能カード詳細 */
+  .fd-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .fd-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fd-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.13);
+  }
+
+  .fd-accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #1e3a8a, #2563eb, #7c3aed);
+    flex-shrink: 0;
+  }
+
+  .fd-inner {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex: 1;
+  }
+
+  .fd-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .fd-phone {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 16px 16px 16px 0;
+    flex-shrink: 0;
+    align-items: flex-start;
+  }
+
+  .fd-phone .phone-frame {
+    width: 130px;
+    max-width: 130px;
+  }
+
+  .fd-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 18px 8px;
+  }
+
+  .fd-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .fd-card h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin: 0;
+  }
+
+  .fd-lead {
+    padding: 0 18px 10px;
+    font-size: 0.88rem;
+    color: #324255;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .fd-chips {
+    padding: 0 18px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .fd-chip {
+    display: inline-block;
+    background: var(--bg-alt);
+    color: var(--primary-dark);
+    font-size: 0.76rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 4px 10px;
+    border: 1px solid #c4d5f5;
+  }
+
+  .fd-tip {
+    margin: auto 18px 16px;
+    padding: 10px 13px;
+    background: #fffbf0;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #6b5318;
+    line-height: 1.65;
+  }
+
+  .phone-frame {
+    width: 100%;
+    max-width: 150px;
+    background: #1c2536;
+    border-radius: 16px;
+    padding: 5px 5px 8px;
+    box-shadow:
+      0 8px 24px rgba(15, 23, 42, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    border: 1px solid #2a3a54;
+  }
+
+  .phone-bar {
+    width: 30%;
+    height: 4px;
+    background: #0f172a;
+    border-radius: 999px;
+    margin: 0 auto 4px;
+  }
+
+  .phone-screen {
+    width: 100%;
+    aspect-ratio: 9 / 19;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1e3a8a 0%, #2563eb 55%, #7c3aed 100%);
+    display: grid;
+    place-items: center;
+  }
+
+  .phone-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .phone-placeholder-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.04em;
+  }
+
+  .phone-chin {
+    width: 24%;
+    height: 3px;
+    background: #2a3a54;
+    border-radius: 999px;
+    margin: 5px auto 0;
+  }
+
+  /* スクリーンショットギャラリー */
+  .ss-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 12px;
+    margin-top: 40px;
+    align-items: start;
+  }
+
+  .ss-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ss-img {
+    width: 100%;
+    max-width: 160px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+    display: block;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .ss-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
   /* 機能グリッド */
   .features-grid {
     display: grid;
@@ -386,6 +732,9 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
     border-radius: 16px;
     padding: 28px 24px;
     transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 
   .feature-card:hover {
@@ -409,6 +758,19 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
     font-size: 0.88rem;
     color: var(--text-muted);
     line-height: 1.7;
+  }
+
+  .feature-link-hint {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    transition: color 0.2s;
+  }
+
+  .feature-card:hover .feature-link-hint {
+    color: var(--accent);
   }
 
   /* 楽天連携 */
@@ -637,6 +999,40 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
     .feature-card p {
       font-size: 0.78rem;
       line-height: 1.6;
+    }
+
+    /* 機能詳細：1列のまま（内部レイアウトのみ縮小） */
+    .fd-grid {
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .fd-inner {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fd-phone {
+      flex-direction: row;
+      justify-content: center;
+      padding: 0 14px 14px;
+      gap: 10px;
+    }
+
+    .fd-phone .phone-frame {
+      width: 110px;
+      max-width: 110px;
+    }
+
+    /* スクリーンショット：3列 */
+    .ss-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px 10px;
+      margin-top: 24px;
+    }
+
+    .ss-img {
+      max-width: 100%;
     }
 
     /* 楽天連携 */
