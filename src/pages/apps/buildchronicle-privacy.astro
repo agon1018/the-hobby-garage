@@ -46,7 +46,7 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
 
         <section class="legal-section">
           <h2>第3条　広告配信（Google AdMob）</h2>
-          <p>本アプリは広告配信のため Google AdMob を使用しています。AdMob は広告配信の最適化を目的として、端末識別子・IPアドレスなどの情報を収集することがあります。詳細は Google のプライバシーポリシーをご参照ください。</p>
+          <p>本アプリは広告配信のため Google AdMob を使用しています。AdMob は広告配信の最適化を目的として、端末識別子・IPアドレスなどの情報を収集することがあります。詳細は<a class="ext-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Googleのプライバシーポリシー</a>をご参照ください。</p>
           <p>なお、広告非表示オプション（¥300）を購入いただくと、本アプリ内での広告表示はすべて停止されます。</p>
         </section>
 
@@ -55,13 +55,13 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
           <p>本アプリは以下のアフィリエイトプログラムに参加しています。商品リンクをタップして外部サービスで購入が成立した場合、開発者に報酬が支払われる場合があります。</p>
           <ul>
             <li><strong>楽天アフィリエイト</strong>　楽天市場の商品リンクを掲載しています。</li>
-            <li><strong>バリューコマース（Yahoo!ショッピング・Amazon）</strong>　Yahoo!ショッピング・Amazon の商品リンクを掲載しています。</li>
+            <li><strong>バリューコマース（Yahoo!ショッピング・Amazon）</strong>　Yahoo!ショッピング・Amazon の商品リンクを掲載しています。詳細は<a class="ext-link" href="https://www.valuecommerce.co.jp/privacy_policy/" target="_blank" rel="noopener noreferrer">バリューコマース プライバシーポリシー</a>をご参照ください。また、Yahoo!ショッピングについては<a class="ext-link" href="https://www.lycorp.co.jp/ja/company/privacypolicy/" target="_blank" rel="noopener noreferrer">LINEヤフー プライバシーポリシー</a>をご参照ください。</li>
           </ul>
         </section>
 
         <section class="legal-section">
           <h2>第5条　Google Play / Microsoft Store 課金</h2>
-          <p>本アプリ内の有料機能の購入は Google Play Store または Microsoft Store の決済機能を使用します。クレジットカード情報等の支払い情報は開発者には渡らず、各ストアが管理します。</p>
+          <p>本アプリ内の有料機能の購入は Google Play Store または Microsoft Store の決済機能を使用します。クレジットカード情報等の支払い情報は開発者には渡らず、各ストアが管理します。詳細は<a class="ext-link" href="https://support.microsoft.com/ja-jp" target="_blank" rel="noopener noreferrer">Microsoft サポート</a>をご参照ください。</p>
         </section>
 
         <section class="legal-section">
@@ -77,7 +77,7 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
         <section class="legal-section contact-section">
           <h2>お問い合わせ</h2>
           <p>本ポリシーに関するご質問は以下までお問い合わせください。</p>
-          <p><strong>開発者：</strong>BuildChronicle 開発者</p>
+          <p><strong>開発者：</strong>The Hobby Garage（agon1018）</p>
           <p><strong>メール：</strong><a href="mailto:agon1018.studio@gmail.com">agon1018.studio@gmail.com</a></p>
         </section>
 
@@ -173,6 +173,14 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
   }
 
   .legal-back a:hover { text-decoration: underline; }
+
+  .ext-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ext-link:hover { text-decoration: underline; }
 
   .legal-body {
     display: flex;
