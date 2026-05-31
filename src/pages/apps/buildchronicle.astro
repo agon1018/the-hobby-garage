@@ -123,7 +123,7 @@ const allScreenshots: ScreenshotItem[] = [
         <p class="sub-tagline">工程管理・カラー記録・写真ギャラリー・ウィッシュリストを一括管理</p>
         <div class="badge-area">
           <span class="badge">開発中</span>
-          <span class="badge platform">Android / iOS 対応予定</span>
+          <span class="badge platform">Android / iOS / Windows 対応予定</span>
         </div>
       </div>
     </section>
@@ -135,9 +135,10 @@ const allScreenshots: ScreenshotItem[] = [
         <li><a href="#features">主な機能</a></li>
         <li><a href="#feature-detail">各機能の詳細</a></li>
         <li><a href="#screenshots">スクリーンショット</a></li>
-        <li><a href="#rakuten">楽天市場との連携</a></li>
+        <li><a href="#rakuten">提携ショッピングサービス</a></li>
         <li><a href="#target">こんな方におすすめ</a></li>
         <li><a href="#info">開発情報</a></li>
+        <li><a href="#legal">規約・ポリシー</a></li>
       </ul>
     </nav>
 
@@ -237,28 +238,35 @@ const allScreenshots: ScreenshotItem[] = [
       </div>
     </section>
 
-    <!-- 楽天ウィッシュリスト連携 -->
+    <!-- ショッピングサービス連携 -->
     <section class="section" id="rakuten">
       <div class="container">
-        <h2 class="section-title">楽天市場との連携</h2>
-        <div class="rakuten-section">
-          <div class="rakuten-content">
-            <p>
-              BuildChronicle のウィッシュリスト機能は、<strong>楽天アフィリエイト</strong>と連携しています。<br />
-              欲しい塗料・ツールを登録する際に楽天市場の商品ページ URL を紐付けることができ、<br />
-              アプリ内から直接商品ページへ遷移して購入できます。
-            </p>
-            <ul class="rakuten-list">
-              <li>塗料・ツールの商品ページをウィッシュリストに登録</li>
-              <li>楽天アフィリエイトリンクをアプリ内ブラウザで開く</li>
-              <li>購入済みフラグで管理状況を把握</li>
-              <li>カラーマスター・ツールマスターと連動した自動登録</li>
-            </ul>
+        <h2 class="section-title">提携ショッピングサービス</h2>
+        <p class="section-desc" style="margin-bottom:0">
+          ウィッシュリスト機能は以下の3サービスと連携しています。<br />
+          欲しい塗料・ツールを登録する際に各ショッピングサービスの商品ページ URL を紐付けることができ、<br />
+          アプリ内から直接商品ページへ遷移して購入できます。
+        </p>
+        <div class="affiliate-cards">
+          <div class="affiliate-card">
+            <span class="affiliate-badge" style="background:linear-gradient(135deg,#bf0000,#e00000)">楽天市場</span>
+            <p>楽天アフィリエイトプログラムを通じて商品リンクを掲載しています。</p>
           </div>
-          <div class="rakuten-badge">
-            <span class="r-badge">楽天アフィリエイト<br />連携対応</span>
+          <div class="affiliate-card">
+            <span class="affiliate-badge" style="background:linear-gradient(135deg,#ff8c00,#ff6600)">Yahoo! ショッピング</span>
+            <p>バリューコマース経由で Yahoo! ショッピングの商品リンクを掲載しています。</p>
+          </div>
+          <div class="affiliate-card">
+            <span class="affiliate-badge" style="background:linear-gradient(135deg,#1a4a7a,#232f3e)">Amazon</span>
+            <p>バリューコマース経由で Amazon の商品リンクを掲載しています。</p>
           </div>
         </div>
+        <ul class="rakuten-list" style="margin-top:28px">
+          <li>塗料・ツールの商品ページをウィッシュリストに登録</li>
+          <li>各サービスのアフィリエイトリンクをアプリ内ブラウザで開く</li>
+          <li>購入済みフラグで管理状況を把握</li>
+          <li>カラーマスター・ツールマスターと連動した自動登録</li>
+        </ul>
       </div>
     </section>
 
@@ -307,7 +315,7 @@ const allScreenshots: ScreenshotItem[] = [
             </tr>
             <tr>
               <th>対応OS</th>
-              <td>Android / iOS（開発中）</td>
+              <td>Android / iOS（未定）/ Windows（開発中）</td>
             </tr>
             <tr>
               <th>開発環境</th>
@@ -321,14 +329,53 @@ const allScreenshots: ScreenshotItem[] = [
               <th>ステータス</th>
               <td>開発中</td>
             </tr>
+            <tr>
+              <th>リリース予定</th>
+              <td>2026年夏</td>
+            </tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- 規約・ポリシーリンク -->
+    <section class="section section-alt" id="legal">
+      <div class="container">
+        <h2 class="section-title">規約・ポリシー・開発者情報</h2>
+        <div class="legal-cards">
+          <a class="legal-card" href="/apps/buildchronicle-privacy">
+            <span class="legal-icon">🔒</span>
+            <div>
+              <h3>プライバシーポリシー</h3>
+              <p>個人情報の取り扱いについて</p>
+            </div>
+            <span class="legal-arrow">→</span>
+          </a>
+          <a class="legal-card" href="/apps/buildchronicle-terms">
+            <span class="legal-icon">📄</span>
+            <div>
+              <h3>利用規約</h3>
+              <p>アプリご利用の条件について</p>
+            </div>
+            <span class="legal-arrow">→</span>
+          </a>
+        </div>
+        <div class="developer-info">
+          <h3>開発者情報</h3>
+          <p>開発者：BuildChronicle 開発者</p>
+          <p>お問い合わせ：<a href="mailto:agon1018.studio@gmail.com">agon1018.studio@gmail.com</a></p>
+        </div>
       </div>
     </section>
 
     <!-- フッター -->
     <footer class="footer">
       <p>© 2025 BuildChronicle. All rights reserved.</p>
+      <p class="footer-links">
+        <a href="/apps/buildchronicle-privacy">プライバシーポリシー</a>
+        <span>|</span>
+        <a href="/apps/buildchronicle-terms">利用規約</a>
+      </p>
     </footer>
   </main>
   </RoomSidebar>
@@ -771,6 +818,145 @@ const allScreenshots: ScreenshotItem[] = [
 
   .feature-card:hover .feature-link-hint {
     color: var(--accent);
+  }
+
+  /* 楽天連携 */
+  .affiliate-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .affiliate-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .affiliate-badge {
+    display: inline-block;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-radius: 8px;
+    padding: 6px 14px;
+    align-self: flex-start;
+  }
+
+  .affiliate-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* 規約・ポリシー */
+  .legal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .legal-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .legal-card:hover {
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .legal-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .legal-card h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 0 0 4px;
+  }
+
+  .legal-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .legal-arrow {
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .developer-info {
+    margin-top: 28px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .developer-info h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+  }
+
+  .developer-info p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 4px 0;
+  }
+
+  .developer-info a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .developer-info a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-links {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: underline;
+  }
+
+  .footer-links span {
+    opacity: 0.4;
   }
 
   /* 楽天連携 */

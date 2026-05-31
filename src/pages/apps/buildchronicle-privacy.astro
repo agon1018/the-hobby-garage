@@ -1,0 +1,269 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RoomSidebar from '../../components/RoomSidebar.astro';
+---
+
+<Layout title="プライバシーポリシー - BuildChronicle">
+  <RoomSidebar
+    currentPath="/apps/buildchronicle"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/apps', label: 'アプリの部屋' },
+      { href: '/apps/buildchronicle', label: 'BuildChronicle' },
+      { label: 'プライバシーポリシー' },
+    ]}
+  >
+  <main class="legal-main">
+    <div class="legal-container">
+      <header class="legal-header">
+        <div class="legal-app-badge">BC</div>
+        <div>
+          <h1>プライバシーポリシー</h1>
+          <p class="legal-meta">BuildChronicle &nbsp;|&nbsp; 最終更新日：2025年7月1日</p>
+        </div>
+      </header>
+
+      <nav class="legal-back">
+        <a href="/apps/buildchronicle">← BuildChronicle 紹介ページに戻る</a>
+      </nav>
+
+      <div class="legal-body">
+
+        <section class="legal-section">
+          <h2>第1条　基本方針</h2>
+          <p>BuildChronicle（以下「本アプリ」）は、ユーザーの個人情報保護を重要事項と考え、以下のプライバシーポリシーに従って適切に取り扱います。</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>第2条　収集する情報</h2>
+          <ul>
+            <li>本アプリは、ユーザーの個人情報（氏名・住所・メールアドレス等）を一切収集・取得しません。</li>
+            <li>本アプリで作成・入力したデータ（プロジェクト・工程・写真・カラーメモ等）はすべてお使いの端末内（ローカル）にのみ保存され、開発者を含む第三者がアクセスすることはありません。</li>
+            <li>バーコードスキャン・写真撮影・カメラ機能はプロジェクトの工程記録のためにのみ使用し、撮影した画像や読み取ったデータを外部サーバーへ送信することはありません。</li>
+            <li>ただし、アフィリエイトリンク（Amazon・楽天・Yahoo!ショッピング）をタップした場合、各アフィリエイトサービス（バリューコマース・楽天アフィリエイト）の仕組みによりクリック情報等がそれぞれのサーバーへ送信されることがあります。詳細は各サービスのプライバシーポリシーをご確認ください。</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>第3条　広告配信（Google AdMob）</h2>
+          <p>本アプリは広告配信のため Google AdMob を使用しています。AdMob は広告配信の最適化を目的として、端末識別子・IPアドレスなどの情報を収集することがあります。詳細は Google のプライバシーポリシーをご参照ください。</p>
+          <p>なお、広告非表示オプション（¥300）を購入いただくと、本アプリ内での広告表示はすべて停止されます。</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>第4条　アフィリエイトプログラム</h2>
+          <p>本アプリは以下のアフィリエイトプログラムに参加しています。商品リンクをタップして外部サービスで購入が成立した場合、開発者に報酬が支払われる場合があります。</p>
+          <ul>
+            <li><strong>楽天アフィリエイト</strong>　楽天市場の商品リンクを掲載しています。</li>
+            <li><strong>バリューコマース（Yahoo!ショッピング・Amazon）</strong>　Yahoo!ショッピング・Amazon の商品リンクを掲載しています。</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>第5条　Google Play / Microsoft Store 課金</h2>
+          <p>本アプリ内の有料機能の購入は Google Play Store または Microsoft Store の決済機能を使用します。クレジットカード情報等の支払い情報は開発者には渡らず、各ストアが管理します。</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>第6条　外部リンク</h2>
+          <p>本アプリからリンク先の外部サービス（Amazon・楽天市場・Yahoo!ショッピング等）へ遷移した場合、その後の情報取り扱いはリンク先サービスのプライバシーポリシーに従います。本アプリは責任を負いません。</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>第7条　ポリシーの変更</h2>
+          <p>本プライバシーポリシーは予告なく変更する場合があります。変更後はアプリのアップデート時またはアプリ内のプライバシーポリシーページに最新版を掲載します。</p>
+        </section>
+
+        <section class="legal-section contact-section">
+          <h2>お問い合わせ</h2>
+          <p>本ポリシーに関するご質問は以下までお問い合わせください。</p>
+          <p><strong>開発者：</strong>BuildChronicle 開発者</p>
+          <p><strong>メール：</strong><a href="mailto:agon1018.studio@gmail.com">agon1018.studio@gmail.com</a></p>
+        </section>
+
+      </div>
+
+      <div class="legal-footer-links">
+        <a href="/apps/buildchronicle-terms">利用規約を見る →</a>
+        <a href="/apps/buildchronicle">← BuildChronicle に戻る</a>
+      </div>
+    </div>
+  </main>
+  </RoomSidebar>
+</Layout>
+
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --accent: #f59e0b;
+    --bg: #f8fafc;
+    --bg-alt: #e8f0fe;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .legal-main {
+    padding: 40px 20px 60px;
+  }
+
+  .legal-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .legal-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #7c3aed 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 28px 28px;
+    margin-bottom: 20px;
+  }
+
+  .legal-app-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 14px;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+  }
+
+  .legal-header h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .legal-meta {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .legal-back {
+    margin-bottom: 28px;
+  }
+
+  .legal-back a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .legal-back a:hover { text-decoration: underline; }
+
+  .legal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .legal-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 14px;
+  }
+
+  .legal-section h2 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bg-alt);
+  }
+
+  .legal-section p {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 8px;
+  }
+
+  .legal-section p:last-child { margin-bottom: 0; }
+
+  .legal-section ul {
+    padding-left: 1.4em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .legal-section li {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .contact-section {
+    background: #fffbf0;
+    border-color: #f59e0b44;
+  }
+
+  .contact-section a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .contact-section a:hover { text-decoration: underline; }
+
+  .legal-footer-links {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .legal-footer-links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .legal-footer-links a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .legal-main { padding: 20px 14px 40px; }
+
+    .legal-header {
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px 18px;
+      text-align: center;
+    }
+
+    .legal-header h1 { font-size: 1.2rem; }
+
+    .legal-section {
+      padding: 18px 16px;
+    }
+  }
+</style>
