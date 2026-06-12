@@ -338,9 +338,32 @@ import { isFriendKit, plamoKits } from '../../data/plamoKits';
 
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 480px) {
     .kit-grid {
-      grid-template-columns: 1fr;
+      gap: 0.45rem;
+    }
+
+    .kit-card-body {
+      padding: 0.42rem 0.42rem 1.45rem;
+    }
+
+    .kit-card h2 {
+      font-size: 0.76rem;
+    }
+
+    .meta {
+      font-size: 0.65rem;
+    }
+
+    .go {
+      font-size: 0.62rem;
+      line-height: 1.4rem;
+    }
+
+    .kit-card::after {
+      width: 1.35rem;
+      height: 1.35rem;
+      font-size: 0.72rem;
     }
   }
 </style>
