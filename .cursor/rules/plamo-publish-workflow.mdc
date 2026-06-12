@@ -1,0 +1,65 @@
+---
+description: プラモの部屋の写真掲載ワークフロー（変換・kit.json・plamoKits.ts更新）
+alwaysApply: true
+---
+
+# プラモ写真掲載ワークフロー
+
+ユーザーが「掲載して」「変換して」「kit.jsonを作って」等と指示したら、この手順で実行する。
+
+## フォルダ構成（Git外）
+
+```
+D:/PlamoArchive/kits/{キットフォルダ}/
+  kit.json       ← キット基本情報（ユーザー提供の情報で作成）
+  元画像/        ← 元写真（Git管理しない）
+```
+
+- 元画像は **絶対に Git に入れない**
+- 加工済みがあれば `加工した写真/` も可（変換ツールが優先使用）
+
+## 設定
+
+- `scripts/plamo-config.json` の `sourceDir` は `D:/PlamoArchive/kits`
+- 未作成なら `scripts/plamo-config.example.json` をコピーして作成
+
+## 変換ツール（既存・AI不要）
+
+```bash
+npm run plamo:convert -- --dry-run   # 確認
+npm run plamo:convert                # 本番変換
+npm run plamo:convert -- --force     # 同名ファイル上書き
+```
+
+- スクリプト: `scripts/convert-plamo-images.mjs`
+- 出力先: `public/images/plamo/{slug}/`（WebP、ギャラリー1200px、カバー600px）
+- `scripts/plamo-import-manifest.json` は自動生成。ユーザーは編集不要
+
+## kit.json の内容
+
+```json
+{
+  "name": "機体名",
+  "scale": "1/72",
+  "era": "時代・作品",
+  "summary": "作品説明",
+  "status": "完成",
+  "note": "補足"
+}
+```
+
+ユーザーがキット情報を伝えたら `D:/PlamoArchive/kits/{フォルダ}/kit.json` を作成する。
+
+## サイト更新
+
+- キット一覧: `src/data/plamoKits.ts`（`kits.json` は使わない）
+- マニフェストと kit.json をもとに `plamoKits.ts` を更新
+- ギャラリーページ: `src/pages/plamo/kits/[slug].astro`
+- 変換後 `npm run dev` で表示確認
+- **コミット・プッシュはユーザーが依頼したときのみ**
+
+## やらないこと
+
+- AI による画像処理
+- タスクスケジューラー等の自動化
+- 元画像の Git 管理

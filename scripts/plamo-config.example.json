@@ -1,0 +1,9 @@
+{
+  "sourceDir": "D:/path/to/old-hp/img",
+  "outputDir": "public/images/plamo",
+  "preferProcessed": true,
+  "galleryMaxSize": 1200,
+  "coverMaxSize": 600,
+  "quality": 82,
+  "skipExisting": true
+}

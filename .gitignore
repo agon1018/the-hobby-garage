@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# ローカル変換設定（パスがマシン固有のため）
+scripts/plamo-config.json
