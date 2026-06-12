@@ -1,39 +1,52 @@
 ---
-description: プラモの部屋の写真掲載ワークフロー（変換・kit.json・plamoKits.ts更新）
+description: プラモの部屋の写真掲載ワークフロー（リネーム・変換・kit.json・plamoKits.ts更新）
 alwaysApply: true
 ---
 
 # プラモ写真掲載ワークフロー
 
-ユーザーが「掲載して」「変換して」「kit.jsonを作って」等と指示したら、この手順で実行する。
+ユーザーが「掲載して」「変換して」「リネームして」「kit.jsonを作って」等と指示したら、この手順で実行する。
 
 ## フォルダ構成（Git外）
 
 ```
-D:/PlamoArchive/kits/{キットフォルダ}/
-  kit.json       ← キット基本情報（ユーザー提供の情報で作成）
-  元画像/        ← 元写真（Git管理しない）
+D:/プラモ写真/{キットフォルダ}/
+  001_{キットフォルダ名}.jpg   ← リネーム後の写真
+  kit.json                     ← キット基本情報（ユーザー提供の情報で作成）
 ```
 
 - 元画像は **絶対に Git に入れない**
-- 加工済みがあれば `加工した写真/` も可（変換ツールが優先使用）
+- 写真はキットフォルダ直下、または `元画像/` / `加工した写真/` に配置
 
 ## 設定
 
-- `scripts/plamo-config.json` の `sourceDir` は `D:/PlamoArchive/kits`
+- `scripts/plamo-config.json` の `sourceDir` は `D:/プラモ写真`
 - 未作成なら `scripts/plamo-config.example.json` をコピーして作成
 
-## 変換ツール（既存・AI不要）
+## 掲載準備コマンド（AI不要）
 
 ```bash
-npm run plamo:convert -- --dry-run   # 確認
-npm run plamo:convert                # 本番変換
-npm run plamo:convert -- --force     # 同名ファイル上書き
+npm run plamo:rename -- --dry-run   # リネーム確認
+npm run plamo:rename                # 001_{フォルダ名}.jpg に一括リネーム
+npm run plamo:convert -- --dry-run  # 変換確認
+npm run plamo:convert               # WebP変換
+npm run plamo:prepare -- --dry-run  # リネーム+変換の確認
+npm run plamo:prepare               # リネーム→変換を連続実行（掲載準備）
 ```
 
-- スクリプト: `scripts/convert-plamo-images.mjs`
+- リネーム: `scripts/rename-plamo-images.mjs`（命名規則 `001_{フォルダ名}.jpg`、3桁連番）
+- 変換: `scripts/convert-plamo-images.mjs`
 - 出力先: `public/images/plamo/{slug}/`（WebP、ギャラリー1200px、カバー600px）
 - `scripts/plamo-import-manifest.json` は自動生成。ユーザーは編集不要
+- 命名済みフォルダはリネームをスキップ（`--force` で再実行）
+
+## 典型的な依頼への対応
+
+| ユーザーの指示 | 実行内容 |
+|----------------|----------|
+| リネームして | `npm run plamo:rename` |
+| 変換して | `npm run plamo:convert` |
+| 掲載して / 掲載準備して | `npm run plamo:prepare` → `plamoKits.ts` 更新 → 表示確認 |
 
 ## kit.json の内容
 
@@ -41,19 +54,28 @@ npm run plamo:convert -- --force     # 同名ファイル上書き
 {
   "name": "機体名",
   "scale": "1/72",
-  "era": "時代・作品",
-  "summary": "作品説明",
+  "summary": "",
   "status": "完成",
-  "note": "補足"
+  "note": ""
 }
 ```
 
-ユーザーがキット情報を伝えたら `D:/PlamoArchive/kits/{フォルダ}/kit.json` を作成する。
+- `name` はユーザーが指定
+- `scale` はフォルダ名から取得（例: `_1-72` → `1/72`）
+- `summary` / `note` は通常空白、`status` は通常 `完成`
+
+ユーザーがキット情報を伝えたら `D:/プラモ写真/{フォルダ}/kit.json` を作成する。
+
+## 友人の作品（katsu_）
+
+- `D:/プラモ写真` でフォルダ名が `katsu_` で始まるキットは友人の作品
+- `plamoKits.ts` に `sourceFolder` を設定すると、ステータス（完成など）の横にピノキオ風アイコン（`FriendPinocchioMark`）が表示される
+- 判定: `isFriendKit()`（`src/data/plamoKits.ts`）
 
 ## サイト更新
 
 - キット一覧: `src/data/plamoKits.ts`（`kits.json` は使わない）
-- マニフェストと kit.json をもとに `plamoKits.ts` を更新
+- マニフェストと kit.json をもとに `plamoKits.ts` を更新（`sourceFolder` を必ず含める）
 - ギャラリーページ: `src/pages/plamo/kits/[slug].astro`
 - 変換後 `npm run dev` で表示確認
 - **コミット・プッシュはユーザーが依頼したときのみ**

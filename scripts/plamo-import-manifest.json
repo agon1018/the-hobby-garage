@@ -1,0 +1,138 @@
+[
+  {
+    "slug": "97kankou",
+    "sourceFolder": "97kankou_1-72",
+    "isFriend": false,
+    "cover": "/images/plamo/97kankou/cover.webp",
+    "gallery": [
+      {
+        "src": "/images/plamo/97kankou/01-001-97kankou-1-72.webp",
+        "alt": "001 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/02-002-97kankou-1-72.webp",
+        "alt": "002 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/03-003-97kankou-1-72.webp",
+        "alt": "003 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/04-004-97kankou-1-72.webp",
+        "alt": "004 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/05-005-97kankou-1-72.webp",
+        "alt": "005 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/06-006-97kankou-1-72.webp",
+        "alt": "006 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/07-007-97kankou-1-72.webp",
+        "alt": "007 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/08-008-97kankou-1-72.webp",
+        "alt": "008 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/09-009-97kankou-1-72.webp",
+        "alt": "009 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/10-010-97kankou-1-72.webp",
+        "alt": "010 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/11-011-97kankou-1-72.webp",
+        "alt": "011 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/12-012-97kankou-1-72.webp",
+        "alt": "012 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/13-013-97kankou-1-72.webp",
+        "alt": "013 97kankou 1 72"
+      },
+      {
+        "src": "/images/plamo/97kankou/14-014-97kankou-1-72.webp",
+        "alt": "014 97kankou 1 72"
+      }
+    ]
+  },
+  {
+    "slug": "katsu-f4u-corsair",
+    "sourceFolder": "katsu_f4u_corsair_1-72",
+    "isFriend": true,
+    "cover": "/images/plamo/katsu-f4u-corsair/cover.webp",
+    "gallery": [
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/01-001-katsu-f4u-corsair-1-72.webp",
+        "alt": "001 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/02-002-katsu-f4u-corsair-1-72.webp",
+        "alt": "002 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/03-003-katsu-f4u-corsair-1-72.webp",
+        "alt": "003 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/04-004-katsu-f4u-corsair-1-72.webp",
+        "alt": "004 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/05-005-katsu-f4u-corsair-1-72.webp",
+        "alt": "005 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/06-006-katsu-f4u-corsair-1-72.webp",
+        "alt": "006 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/07-007-katsu-f4u-corsair-1-72.webp",
+        "alt": "007 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/08-008-katsu-f4u-corsair-1-72.webp",
+        "alt": "008 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/09-009-katsu-f4u-corsair-1-72.webp",
+        "alt": "009 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/10-010-katsu-f4u-corsair-1-72.webp",
+        "alt": "010 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/11-011-katsu-f4u-corsair-1-72.webp",
+        "alt": "011 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/12-012-katsu-f4u-corsair-1-72.webp",
+        "alt": "012 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/13-013-katsu-f4u-corsair-1-72.webp",
+        "alt": "013 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/14-014-katsu-f4u-corsair-1-72.webp",
+        "alt": "014 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/15-015-katsu-f4u-corsair-1-72.webp",
+        "alt": "015 katsu f4u corsair 1 72"
+      },
+      {
+        "src": "/images/plamo/katsu-f4u-corsair/16-016-katsu-f4u-corsair-1-72.webp",
+        "alt": "016 katsu f4u corsair 1 72"
+      }
+    ]
+  }
+]

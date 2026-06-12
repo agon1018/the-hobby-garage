@@ -1,5 +1,5 @@
 {
-  "sourceDir": "D:/path/to/old-hp/img",
+  "sourceDir": "D:/プラモ写真",
   "outputDir": "public/images/plamo",
   "preferProcessed": true,
   "galleryMaxSize": 1200,

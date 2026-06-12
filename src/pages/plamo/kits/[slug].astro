@@ -1,7 +1,8 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import FriendPinocchioMark from '../../../components/FriendPinocchioMark.astro';
 import RoomSidebar from '../../../components/RoomSidebar.astro';
-import { plamoKits, type KitInfo } from '../../../data/plamoKits';
+import { isFriendKit, plamoKits, type KitInfo } from '../../../data/plamoKits';
 
 export function getStaticPaths() {
   return plamoKits.map((kit) => ({ params: { slug: kit.slug }, props: { kit } }));
@@ -21,19 +22,36 @@ const { kit } = Astro.props as { kit: KitInfo };
   >
   <main class="page">
     <header class="head">
-      <p class="scale">{kit.scale} / {kit.era}</p>
+      <p class="status">
+        <span>{kit.status}</span>
+        {isFriendKit(kit) && <FriendPinocchioMark size="md" />}
+      </p>
+      <p class="scale">{kit.scale}</p>
       <h1>{kit.name}</h1>
-      <p>{kit.summary}</p>
+      {kit.summary && <p>{kit.summary}</p>}
     </header>
 
     <section class="gallery-grid">
-      {kit.gallery.map((label, index) => (
+      {kit.gallery.map((image, index) => (
         <figure class="frame">
-          <div class="dummy-image">PHOTO {index + 1}</div>
-          <figcaption>{label}</figcaption>
+          <button
+            type="button"
+            class="gallery-trigger"
+            aria-label={`${kit.name} ${index + 1} を拡大表示`}
+          >
+            <img
+              src={image.src}
+              alt={image.alt ?? `${kit.name} ${index + 1}`}
+            />
+          </button>
         </figure>
       ))}
     </section>
+
+    <dialog id="plamo-lightbox" class="lightbox" aria-label="写真の拡大表示">
+      <button type="button" class="lightbox-close" aria-label="閉じる">×</button>
+      <img class="lightbox-image" src="" alt="" />
+    </dialog>
   </main>
   </RoomSidebar>
 </Layout>
@@ -54,6 +72,18 @@ const { kit } = Astro.props as { kit: KitInfo };
     border: 1px solid #d5def5;
     border-radius: 1rem;
     padding: 1.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .status {
+    margin: 0 0 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: #2f7e62;
+    font-weight: 700;
   }
 
   .scale {
@@ -87,18 +117,113 @@ const { kit } = Astro.props as { kit: KitInfo };
     overflow: hidden;
   }
 
-  .dummy-image {
-    aspect-ratio: 4 / 3;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(135deg, #dae5ff, #f1f5ff);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #51648f;
+  .gallery-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: zoom-in;
+    font: inherit;
+    color: inherit;
   }
 
-  figcaption {
-    padding: 0.7rem;
-    font-size: 0.9rem;
+  .gallery-trigger:focus-visible {
+    outline: 3px solid #5ea2bb;
+    outline-offset: -3px;
+  }
+
+  .gallery-trigger img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: #f1f5ff;
+  }
+
+  .lightbox {
+    margin: auto;
+    padding: 0;
+    border: none;
+    background: transparent;
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .lightbox::backdrop {
+    background: rgba(15, 23, 42, 0.88);
+  }
+
+  .lightbox-image {
+    display: block;
+    max-width: min(96vw, 1200px);
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 0.85rem;
+    right: 0.85rem;
+    z-index: 1;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f2f36;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .lightbox-close:focus-visible {
+    outline: 3px solid #5ea2bb;
+    outline-offset: 2px;
   }
 </style>
+
+<script>
+  function initPlamoLightbox() {
+    const dialog = document.getElementById('plamo-lightbox');
+    if (!dialog || dialog.dataset.bound === 'true') return;
+
+    const lightboxImage = dialog.querySelector('.lightbox-image');
+    const closeButton = dialog.querySelector('.lightbox-close');
+    if (!lightboxImage || !closeButton) return;
+
+    dialog.dataset.bound = 'true';
+
+    document.querySelectorAll('.gallery-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const img = trigger.querySelector('img');
+        if (!img) return;
+
+        lightboxImage.src = img.currentSrc || img.src;
+        lightboxImage.alt = img.alt;
+        dialog.showModal();
+      });
+    });
+
+    closeButton.addEventListener('click', () => dialog.close());
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('close', () => {
+      lightboxImage.removeAttribute('src');
+      lightboxImage.alt = '';
+    });
+  }
+
+  initPlamoLightbox();
+</script>

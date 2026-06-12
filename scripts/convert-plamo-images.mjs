@@ -1,60 +1,27 @@
 /**
- * 旧HPのプラモ画像フォルダを一括で Web 用に変換するツール
+ * プラモ画像を Web 用 WebP に一括変換
  *
- * 使い方:
- *   1. scripts/plamo-config.example.json をコピーして plamo-config.json を作成
- *   2. sourceDir に旧 img フォルダのパスを設定
- *   3. npm run plamo:convert
+ * npm run plamo:convert
+ * npm run plamo:convert -- --dry-run
+ * npm run plamo:convert -- --source "D:/プラモ写真"
+ * npm run plamo:convert -- --force
  *
- * オプション:
- *   npm run plamo:convert -- --dry-run          変換せずに対象だけ表示
- *   npm run plamo:convert -- --source D:/img   設定ファイルより優先
- *   npm run plamo:convert -- --force            既存ファイルも上書き
+ * リネーム込みの掲載準備: npm run plamo:prepare
  */
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import {
+  findImageDir,
+  listSubdirs,
+  loadConfig,
+  parseCommonArgs,
+  toSlug,
+} from './plamo-lib.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
-const CONFIG_PATH = path.join(__dirname, 'plamo-config.json');
-
-const PROCESSED_DIRS = ['加工した写真', 'processed', '加工'];
-const ORIGINAL_DIRS = ['元画像', '元の写真', 'original'];
-const IMAGE_RE = /\.(jpe?g|png|webp|gif|bmp|tiff?)$/i;
-
-const DEFAULT_CONFIG = {
-  sourceDir: '',
-  outputDir: 'public/images/plamo',
-  preferProcessed: true,
-  galleryMaxSize: 1200,
-  coverMaxSize: 600,
-  quality: 82,
-  skipExisting: true,
-};
-
-function parseArgs(argv) {
-  const args = {
-    dryRun: false,
-    force: false,
-    source: null,
-    output: null,
-    help: false,
-  };
-
-  for (let i = 0; i < argv.length; i += 1) {
-    const arg = argv[i];
-    if (arg === '--dry-run') args.dryRun = true;
-    else if (arg === '--force') args.force = true;
-    else if (arg === '--help' || arg === '-h') args.help = true;
-    else if (arg === '--source') args.source = argv[++i];
-    else if (arg === '--output') args.output = argv[++i];
-  }
-
-  return args;
-}
 
 function printHelp() {
   console.log(`
@@ -62,87 +29,15 @@ function printHelp() {
 
 npm run plamo:convert
 npm run plamo:convert -- --dry-run
-npm run plamo:convert -- --source "D:/old-hp/img" --output "public/images/plamo"
+npm run plamo:convert -- --source "D:/プラモ写真"
 npm run plamo:convert -- --force
+
+掲載準備（リネーム→変換）:
+npm run plamo:prepare
 
 設定ファイル: scripts/plamo-config.json
 マニフェスト出力: scripts/plamo-import-manifest.json
 `);
-}
-
-async function loadConfig(cli) {
-  let config = { ...DEFAULT_CONFIG };
-
-  try {
-    const raw = await fs.readFile(CONFIG_PATH, 'utf8');
-    config = { ...config, ...JSON.parse(raw) };
-  } catch {
-    // 設定ファイルがなくても CLI 引数で実行可能
-  }
-
-  if (cli.source) config.sourceDir = cli.source;
-  if (cli.output) config.outputDir = cli.output;
-  if (cli.force) config.skipExisting = false;
-
-  config.outputDir = path.resolve(ROOT, config.outputDir);
-  config.sourceDir = path.resolve(config.sourceDir);
-
-  return config;
-}
-
-function toSlug(folderName) {
-  return folderName
-    .toLowerCase()
-    .normalize('NFKC')
-    .replace(/_\d+[-/]\d+$/i, '')
-    .replace(/_/g, '-')
-    .replace(/[^a-z0-9-]+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function isImage(fileName) {
-  return IMAGE_RE.test(fileName);
-}
-
-function sortImages(files) {
-  return [...files].sort((a, b) => a.localeCompare(b, 'ja'));
-}
-
-async function listSubdirs(dir) {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
-  return entries.filter((e) => e.isDirectory()).map((e) => e.name);
-}
-
-async function listImages(dir) {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
-  return sortImages(entries.filter((e) => e.isFile() && isImage(e.name)).map((e) => e.name));
-}
-
-async function findImageDir(kitDir, preferProcessed) {
-  const entries = await fs.readdir(kitDir, { withFileTypes: true });
-  const dirNames = new Set(entries.filter((e) => e.isDirectory()).map((e) => e.name));
-
-  const searchOrder = preferProcessed
-    ? [...PROCESSED_DIRS, ...ORIGINAL_DIRS]
-    : [...ORIGINAL_DIRS, ...PROCESSED_DIRS];
-
-  for (const name of searchOrder) {
-    if (dirNames.has(name)) {
-      const imageDir = path.join(kitDir, name);
-      const images = await listImages(imageDir);
-      if (images.length > 0) {
-        return { imageDir, images, sourceType: name };
-      }
-    }
-  }
-
-  const rootImages = entries.filter((e) => e.isFile() && isImage(e.name)).map((e) => e.name);
-  if (rootImages.length > 0) {
-    return { imageDir: kitDir, images: sortImages(rootImages), sourceType: 'root' };
-  }
-
-  return null;
 }
 
 async function convertOne(inputPath, outputPath, maxSize, quality, skipExisting) {
@@ -257,7 +152,7 @@ function formatBytes(bytes) {
 }
 
 async function main() {
-  const cli = parseArgs(process.argv.slice(2));
+  const cli = parseCommonArgs(process.argv.slice(2));
   if (cli.help) {
     printHelp();
     return;
@@ -309,6 +204,7 @@ async function main() {
     manifest.push({
       slug: result.slug,
       sourceFolder: result.kitFolderName,
+      isFriend: result.kitFolderName.toLowerCase().startsWith('katsu_'),
       sourceType: result.sourceType,
       cover: `/images/plamo/${result.slug}/${result.cover}`,
       gallery: result.gallery.map((file) => ({

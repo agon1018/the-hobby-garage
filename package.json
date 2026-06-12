@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "plamo:convert": "node scripts/convert-plamo-images.mjs"
+    "plamo:rename": "node scripts/rename-plamo-images.mjs",
+    "plamo:convert": "node scripts/convert-plamo-images.mjs",
+    "plamo:prepare": "node scripts/prepare-plamo-images.mjs"
   },
   "dependencies": {
     "astro": "^6.1.8"
