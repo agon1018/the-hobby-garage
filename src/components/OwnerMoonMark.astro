@@ -1,0 +1,46 @@
+---
+interface Props {
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { size = 'sm', class: className } = Astro.props;
+---
+
+<span
+  class:list={['owner-moon', `owner-moon--${size}`, className]}
+  aria-hidden="true"
+>
+  <img
+    src="/images/plamo/owner-moon-48.png"
+    alt=""
+    decoding="async"
+  />
+</span>
+
+<style>
+  .owner-moon {
+    display: inline-flex;
+    line-height: 0;
+    flex-shrink: 0;
+    vertical-align: middle;
+    filter: drop-shadow(0 1px 1px rgba(60, 48, 100, 0.25));
+  }
+
+  .owner-moon img {
+    display: block;
+    max-width: none;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .owner-moon--sm img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .owner-moon--md img {
+    width: 30px;
+    height: 30px;
+  }
+</style>

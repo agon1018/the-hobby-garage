@@ -1,6 +1,7 @@
 ﻿---
 import Layout from '../../layouts/Layout.astro';
 import FriendPinocchioMark from '../../components/FriendPinocchioMark.astro';
+import OwnerMoonMark from '../../components/OwnerMoonMark.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
 import { isFriendKit, plamoKits } from '../../data/plamoKits';
 ---
@@ -25,10 +26,12 @@ import { isFriendKit, plamoKits } from '../../data/plamoKits';
         <a class="kit-card" href={`/plamo/kits/${kit.slug}`}>
           <img class="cover-bg" src={kit.cover} alt="" loading="lazy" decoding="async" />
           <div class="cover-overlay" aria-hidden="true"></div>
+          <span class="kit-mark-corner">
+            {isFriendKit(kit) ? <FriendPinocchioMark /> : <OwnerMoonMark />}
+          </span>
           <div class="kit-card-body">
             <p class="status">
               <span>{kit.status}</span>
-              {isFriendKit(kit) && <FriendPinocchioMark />}
             </p>
             <h2>{kit.name}</h2>
             <p class="meta">スケール: {kit.scale}</p>
@@ -154,6 +157,14 @@ import { isFriendKit, plamoKits } from '../../data/plamoKits';
         rgba(255, 255, 255, 0.22) 100%
       );
     transition: background 200ms ease;
+  }
+
+  .kit-mark-corner {
+    position: absolute;
+    z-index: 4;
+    top: 0.45rem;
+    right: 0.45rem;
+    line-height: 0;
   }
 
   .kit-card-body {
@@ -316,6 +327,11 @@ import { isFriendKit, plamoKits } from '../../data/plamoKits';
       padding: 0.5rem 0.5rem 1.6rem;
     }
 
+    .kit-mark-corner {
+      top: 0.38rem;
+      right: 0.38rem;
+    }
+
     .go {
       left: 0.5rem;
       bottom: 0.45rem;
@@ -354,6 +370,11 @@ import { isFriendKit, plamoKits } from '../../data/plamoKits';
 
     .kit-card-body {
       padding: 0.42rem 0.42rem 1.45rem;
+    }
+
+    .kit-mark-corner {
+      top: 0.32rem;
+      right: 0.32rem;
     }
 
     .kit-card h2 {
