@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://the-hobby-garage.vercel.app/sitemap-index.xml
