@@ -121,9 +121,27 @@ const allScreenshots: ScreenshotItem[] = [
         <h1>BuildChronicle</h1>
         <p class="tagline">プラモデル製作をもっと楽しく、もっと丁寧に記録しよう</p>
         <p class="sub-tagline">工程管理・カラー記録・写真ギャラリー・ウィッシュリストを一括管理</p>
+        <div class="store-badges" aria-label="ストアへのリンク">
+          <a
+            class="store-badge"
+            href="https://play.google.com/store/apps/details?id=com.agon1018.buildchronicle"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/images/badges/google-play-ja.png"
+              alt="Google Play で手に入れよう"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <div class="store-badge is-disabled" aria-disabled="true" title="Windows版は後日公開予定です">
+            <span class="store-badge-label">Windows版（後日）</span>
+          </div>
+        </div>
         <div class="badge-area">
-          <span class="badge">開発中</span>
-          <span class="badge platform">Android / iOS / Windows 対応予定</span>
+          <span class="badge released">Google Play 公開中</span>
+          <span class="badge platform">iOS・Windows は対応予定</span>
         </div>
       </div>
     </section>
@@ -315,7 +333,7 @@ const allScreenshots: ScreenshotItem[] = [
             </tr>
             <tr>
               <th>対応OS</th>
-              <td>Android / iOS（未定）/ Windows（開発中）</td>
+              <td>Android（公開中）/ iOS（未定）/ Windows（開発中）</td>
             </tr>
             <tr>
               <th>開発環境</th>
@@ -327,11 +345,11 @@ const allScreenshots: ScreenshotItem[] = [
             </tr>
             <tr>
               <th>ステータス</th>
-              <td>開発中</td>
+              <td>Android版 公開中</td>
             </tr>
             <tr>
-              <th>リリース予定</th>
-              <td>2026年夏</td>
+              <th>Android リリース</th>
+              <td>2026年7月</td>
             </tr>
           </tbody>
         </table>
@@ -463,6 +481,58 @@ const allScreenshots: ScreenshotItem[] = [
     flex-wrap: wrap;
   }
 
+  .store-badges {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .store-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+
+  .store-badge img {
+    height: 54px;
+    width: auto;
+    display: block;
+  }
+
+  a.store-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+  }
+
+  a.store-badge:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
+  }
+
+  .store-badge.is-disabled {
+    height: 54px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  .store-badge-label {
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
   .badge {
     background: rgba(245, 158, 11, 0.9);
     color: white;
@@ -475,6 +545,10 @@ const allScreenshots: ScreenshotItem[] = [
   .badge.platform {
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .badge.released {
+    background: rgba(34, 197, 94, 0.95);
   }
 
   .quick-jump {
@@ -1116,6 +1190,25 @@ const allScreenshots: ScreenshotItem[] = [
     .badge {
       font-size: 0.75rem;
       padding: 4px 12px;
+    }
+
+    .store-badges {
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .store-badge img {
+      height: 44px;
+    }
+
+    .store-badge.is-disabled {
+      height: 44px;
+      padding: 0 12px;
+      border-radius: 10px;
+    }
+
+    .store-badge-label {
+      font-size: 0.82rem;
     }
 
     .quick-jump {
