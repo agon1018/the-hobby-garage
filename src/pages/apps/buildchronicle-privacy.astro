@@ -19,7 +19,7 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
         <div class="legal-app-badge">BC</div>
         <div>
           <h1>プライバシーポリシー</h1>
-          <p class="legal-meta">BuildChronicle &nbsp;|&nbsp; 最終更新日：2025年7月1日</p>
+          <p class="legal-meta">BuildChronicle &nbsp;|&nbsp; 最終更新日：2026年7月17日</p>
         </div>
       </header>
 
@@ -39,15 +39,20 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
           <ul>
             <li>本アプリは、ユーザーの個人情報（氏名・住所・メールアドレス等）を一切収集・取得しません。</li>
             <li>本アプリで作成・入力したデータ（プロジェクト・工程・写真・カラーメモ等）はすべてお使いの端末内（ローカル）にのみ保存され、開発者を含む第三者がアクセスすることはありません。</li>
-            <li>バーコードスキャン・写真撮影・カメラ機能はプロジェクトの工程記録のためにのみ使用し、撮影した画像や読み取ったデータを外部サーバーへ送信することはありません。</li>
+            <li>
+              写真撮影・カメラ機能はプロジェクトの工程記録のためにのみ使用し、撮影した画像を外部サーバーへ送信することはありません。<br />
+              ・Android版：バーコードスキャン機能を使用します。読み取ったデータを外部サーバーへ送信することはありません。<br />
+              ・Windows版：バーコードスキャン機能は使用しません。写真はファイル選択から取り込みます。
+            </li>
             <li>ただし、アフィリエイトリンク（Amazon・楽天・Yahoo!ショッピング）をタップした場合、各アフィリエイトサービス（バリューコマース・楽天アフィリエイト）の仕組みによりクリック情報等がそれぞれのサーバーへ送信されることがあります。詳細は各サービスのプライバシーポリシーをご確認ください。</li>
           </ul>
         </section>
 
         <section class="legal-section">
           <h2>第3条　広告配信（Google AdMob）</h2>
-          <p>本アプリは広告配信のため Google AdMob を使用しています。AdMob は広告配信の最適化を目的として、端末識別子・IPアドレスなどの情報を収集することがあります。詳細は<a class="ext-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Googleのプライバシーポリシー</a>をご参照ください。</p>
-          <p>なお、広告非表示オプション（¥300）を購入いただくと、本アプリ内での広告表示はすべて停止されます。</p>
+          <div class="note-box">📱 この条項は Android版のみ該当します。Windows版には広告はありません。</div>
+          <p>Android版は広告配信のため Google AdMob を使用しています。AdMob は広告配信の最適化を目的として、端末識別子・IPアドレスなどの情報を収集することがあります。詳細は<a class="ext-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Googleのプライバシーポリシー</a>をご参照ください。</p>
+          <p>なお、広告非表示オプション（¥300）を購入いただくと、Android版アプリ内での広告表示はすべて停止されます。</p>
         </section>
 
         <section class="legal-section">
@@ -61,7 +66,11 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
 
         <section class="legal-section">
           <h2>第5条　Google Play / Microsoft Store 課金</h2>
-          <p>本アプリ内の有料機能の購入は Google Play Store または Microsoft Store の決済機能を使用します。クレジットカード情報等の支払い情報は開発者には渡らず、各ストアが管理します。詳細は<a class="ext-link" href="https://support.microsoft.com/ja-jp" target="_blank" rel="noopener noreferrer">Microsoft サポート</a>をご参照ください。</p>
+          <p>本アプリ内の有料機能の購入は各プラットフォームのストア決済機能を使用します。クレジットカード情報等の支払い情報は開発者には渡らず、各ストアが管理します。</p>
+          <ul>
+            <li><strong>Android版</strong>　Google Play Store の決済機能を使用します。詳細は<a class="ext-link" href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener noreferrer">Google Play サポート</a>をご参照ください。</li>
+            <li><strong>Windows版</strong>　アプリ本体購入およびアプリ内有料機能の購入は Microsoft Store の決済機能を使用します。Windows版には広告および広告非表示課金はありません。詳細は<a class="ext-link" href="https://support.microsoft.com/ja-jp" target="_blank" rel="noopener noreferrer">Microsoft サポート</a>をご参照ください。</li>
+          </ul>
         </section>
 
         <section class="legal-section">
@@ -225,6 +234,19 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
     font-size: 0.92rem;
     color: var(--text);
     line-height: 1.8;
+  }
+
+  .note-box {
+    margin-top: 14px;
+    margin-bottom: 10px;
+    background: #fffbf0;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b5318;
+    line-height: 1.65;
   }
 
   .contact-section {
