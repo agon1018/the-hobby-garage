@@ -1,0 +1,285 @@
+---
+import CommentList from '../../components/horse/CommentList.astro';
+import HorseRoomGate from '../../components/horse/HorseRoomGate.astro';
+import RaceTable from '../../components/horse/RaceTable.astro';
+import WorkoutTable from '../../components/horse/WorkoutTable.astro';
+import RoomSidebar from '../../components/RoomSidebar.astro';
+import { formatDam, formatRecord, horses } from '../../data/horses';
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return horses.map((horse) => ({
+    params: { slug: horse.slug },
+  }));
+}
+
+const horse = horses.find((item) => item.slug === Astro.params.slug);
+if (!horse) {
+  throw new Error(`Horse not found: ${Astro.params.slug}`);
+}
+---
+
+<Layout title={`${horse.name} | 競馬の部屋`} noindex>
+  <HorseRoomGate>
+  <RoomSidebar
+    currentPath="/horse"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/horse', label: '競馬の部屋' },
+      { href: '/horse/list', label: '所有馬' },
+      { label: horse.name },
+    ]}
+  >
+    <main class="page">
+      <section class="profile">
+        <div class="photo">
+          <img src={horse.photo} alt={`${horse.name}の写真`} />
+          <span class="status">{horse.status}</span>
+        </div>
+        <div class="facts">
+          <p class="label">Horse Profile</p>
+          <h1>{horse.name}</h1>
+          <p class="lead">{horse.sex}　{horse.birthYear}年生まれ</p>
+          <dl>
+            <div>
+              <dt>毛色</dt>
+              <dd>{horse.coatColor}</dd>
+            </div>
+            <div>
+              <dt>父</dt>
+              <dd>{horse.sire}</dd>
+            </div>
+            <div>
+              <dt>母</dt>
+              <dd>{formatDam(horse)}</dd>
+            </div>
+            <div>
+              <dt>厩舎</dt>
+              <dd>{horse.stable}</dd>
+            </div>
+            <div>
+              <dt>募集価格</dt>
+              <dd>{horse.offeringPrice}</dd>
+            </div>
+            <div>
+              <dt>1口価格</dt>
+              <dd>{horse.sharePrice}</dd>
+            </div>
+            <div>
+              <dt>戦績</dt>
+              <dd>{formatRecord(horse)}</dd>
+            </div>
+            <div class="origin">
+              <dt>馬名の由来</dt>
+              <dd>{horse.nameOrigin}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <nav class="jump" aria-label="詳細の項目">
+        <a href="#comments">状態コメント</a>
+        <a href="#workouts">調教情報</a>
+        <a href="#races">レース情報</a>
+      </nav>
+
+      <CommentList comments={horse.comments} />
+
+      <WorkoutTable workouts={horse.workouts} />
+      <RaceTable races={horse.races} />
+    </main>
+  </RoomSidebar>
+  </HorseRoomGate>
+</Layout>
+
+<style>
+  .page {
+    --horse-palette-1: #16824a;
+    --horse-palette-2: #e85c1a;
+    --horse-palette-3: #0e5c34;
+    --horse-silks: linear-gradient(
+      90deg,
+      #e85c1a 0%,
+      #e85c1a 14%,
+      #ffffff 14%,
+      #ffffff 28%,
+      #16824a 28%,
+      #16824a 72%,
+      #ffffff 72%,
+      #ffffff 86%,
+      #e85c1a 86%,
+      #e85c1a 100%
+    );
+
+    min-height: 100vh;
+    background:
+      linear-gradient(155deg, rgba(22, 130, 74, 0.12) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(335deg, rgba(232, 92, 26, 0.08) 0%, rgba(255, 255, 255, 0) 38%),
+      #f6fbf7;
+    color: #1c2e24;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    padding: 2rem 1.2rem 3.2rem;
+  }
+
+  .profile,
+  .jump {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .profile {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    gap: 1rem;
+    background: #fff;
+    border: 1px solid #c9e2d3;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 12px 24px rgba(14, 92, 52, 0.08);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .profile::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 6px;
+    background: var(--horse-silks);
+  }
+
+  .photo {
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #dceee3;
+    min-height: 180px;
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .status {
+    position: absolute;
+    top: 0.55rem;
+    left: 0.55rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--horse-palette-3);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  .facts {
+    min-width: 0;
+    padding-top: 0.35rem;
+  }
+
+  .label {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--horse-palette-1);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    margin: 0.25rem 0 0.35rem;
+    color: var(--horse-palette-3);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+  }
+
+  .lead {
+    margin: 0 0 0.75rem;
+    font-weight: 800;
+    color: var(--horse-palette-1);
+  }
+
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 0.38rem;
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 5.8rem minmax(0, 1fr);
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  dt {
+    color: #4d735c;
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+    color: #1c2e24;
+    overflow-wrap: anywhere;
+  }
+
+  .origin dd {
+    line-height: 1.7;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.32rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #c9e2d3;
+    background: #fff;
+    color: var(--horse-palette-1);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .jump a:hover,
+  .jump a:focus-visible {
+    border-color: var(--horse-palette-2);
+    background: #eef8f1;
+    outline: none;
+  }
+
+  @media (max-width: 700px) {
+    .page {
+      padding: 1rem 0.8rem 2rem;
+    }
+
+    .profile {
+      grid-template-columns: 1fr;
+      padding: 0.8rem;
+      border-radius: 0.85rem;
+      gap: 0.75rem;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+    }
+
+    dl div {
+      font-size: 0.82rem;
+      grid-template-columns: 5.2rem minmax(0, 1fr);
+    }
+  }
+</style>

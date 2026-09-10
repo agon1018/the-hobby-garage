@@ -1,0 +1,232 @@
+---
+import HorseCard from '../../components/horse/HorseCard.astro';
+import HorseRoomGate from '../../components/horse/HorseRoomGate.astro';
+import HorseSectionNav from '../../components/horse/HorseSectionNav.astro';
+import RoomSidebar from '../../components/RoomSidebar.astro';
+import { horsesByStatus } from '../../data/horses';
+import Layout from '../../layouts/Layout.astro';
+
+const activeHorses = horsesByStatus('現役');
+const retiredHorses = horsesByStatus('引退');
+---
+
+<Layout title="所有馬 | 競馬の部屋" noindex>
+  <HorseRoomGate>
+  <RoomSidebar
+    currentPath="/horse"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/horse', label: '競馬の部屋' },
+      { label: '所有馬' },
+    ]}
+  >
+    <main class="page">
+      <header class="title-head">
+        <div class="title-row">
+          <div>
+            <p class="label">Horses</p>
+            <h1>所有馬</h1>
+          </div>
+          <HorseSectionNav current="horses" />
+        </div>
+        <nav class="jump" aria-label="馬の区分">
+          <a href="#active">現役馬 {activeHorses.length}</a>
+          <a href="#retired">引退馬 {retiredHorses.length}</a>
+        </nav>
+      </header>
+
+      <section class="group" id="active">
+        <h2>現役馬</h2>
+        {activeHorses.length === 0 ? (
+          <p class="empty">現役馬はまだいません。</p>
+        ) : (
+          <div class="horse-grid">
+            {activeHorses.map((horse) => (
+              <HorseCard horse={horse} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section class="group" id="retired">
+        <h2>引退馬</h2>
+        {retiredHorses.length === 0 ? (
+          <p class="empty">引退馬はまだいません。</p>
+        ) : (
+          <div class="horse-grid retired-grid" style={`--retired-rows: ${Math.ceil(retiredHorses.length / 2)}`}>
+            {retiredHorses.map((horse) => (
+              <HorseCard horse={horse} />
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
+  </RoomSidebar>
+  </HorseRoomGate>
+</Layout>
+
+<style>
+  .page {
+    --horse-palette-1: #16824a;
+    --horse-palette-2: #e85c1a;
+    --horse-palette-3: #0e5c34;
+    --horse-silks: linear-gradient(
+      90deg,
+      #e85c1a 0%,
+      #e85c1a 14%,
+      #ffffff 14%,
+      #ffffff 28%,
+      #16824a 28%,
+      #16824a 72%,
+      #ffffff 72%,
+      #ffffff 86%,
+      #e85c1a 86%,
+      #e85c1a 100%
+    );
+
+    min-height: 100vh;
+    background:
+      linear-gradient(155deg, rgba(22, 130, 74, 0.12) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(335deg, rgba(232, 92, 26, 0.08) 0%, rgba(255, 255, 255, 0) 38%),
+      #f6fbf7;
+    color: #1c2e24;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    padding: 2rem 1.2rem 3.2rem;
+  }
+
+  .title-head,
+  .group {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .title-head {
+    border: 1px solid #c9e2d3;
+    border-radius: 1.15rem;
+    padding: 1rem 1.15rem 1.05rem;
+    background:
+      radial-gradient(circle at 88% 14%, rgba(22, 130, 74, 0.16), transparent 34%),
+      radial-gradient(circle at 12% 85%, rgba(232, 92, 26, 0.12), transparent 34%),
+      #ffffff;
+    box-shadow: 0 12px 24px rgba(14, 92, 52, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .title-head::after {
+    content: '';
+    position: absolute;
+    inset: auto 14% 0 14%;
+    height: 6px;
+    background: var(--horse-silks);
+  }
+
+  .label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    color: var(--horse-palette-1);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    margin: 0.35rem 0 0;
+    color: var(--horse-palette-3);
+    font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid #c9e2d3;
+    background: #fff;
+    color: var(--horse-palette-1);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .jump a:hover,
+  .jump a:focus-visible {
+    border-color: var(--horse-palette-2);
+    background: #eef8f1;
+    outline: none;
+  }
+
+  .group {
+    margin-top: 1.35rem;
+    scroll-margin-top: 0.8rem;
+  }
+
+  .group h2 {
+    margin: 0 0 0.7rem;
+    font-size: 1.12rem;
+    color: var(--horse-palette-3);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.05em;
+  }
+
+  .empty {
+    margin: 0;
+    padding: 1rem;
+    border: 1px dashed #c9e2d3;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.7);
+    color: #4d735c;
+  }
+
+  .horse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .retired-grid {
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--retired-rows, 1), auto);
+  }
+
+  @media (max-width: 700px) {
+    .page {
+      padding: 1rem 0.8rem 2rem;
+    }
+
+    .title-head {
+      border-radius: 0.9rem;
+      padding: 0.78rem 0.82rem 0.84rem;
+    }
+
+    h1 {
+      font-size: 1.45rem;
+    }
+
+    .horse-grid {
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+    }
+
+    .retired-grid {
+      grid-auto-flow: row;
+      grid-template-rows: none;
+    }
+  }
+</style>

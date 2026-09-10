@@ -1,0 +1,232 @@
+---
+import { formatDam, formatRecord, type Horse } from '../../data/horses';
+
+interface Props {
+  horse: Horse;
+}
+
+const { horse } = Astro.props;
+const isRetired = horse.status === '引退';
+---
+
+<a class:list={['horse-card', { retired: isRetired }]} href={`/horse/${horse.slug}`}>
+  <div class="photo">
+    <img src={horse.photo} alt="" loading="lazy" decoding="async" />
+    <span class="status">{horse.status}</span>
+  </div>
+  <div class="body">
+    <div class="body-head">
+      <h3>{horse.name}</h3>
+      <p class="updated"><span>更新</span>{horse.updatedAt}</p>
+    </div>
+    <p class="lead">{horse.sex}　{horse.birthYear}年</p>
+    <dl>
+      <div>
+        <dt>父</dt>
+        <dd>{horse.sire}</dd>
+      </div>
+      <div>
+        <dt>母</dt>
+        <dd>{formatDam(horse)}</dd>
+      </div>
+      <div>
+        <dt>厩舎</dt>
+        <dd>{horse.stable}</dd>
+      </div>
+      <div>
+        <dt>戦績</dt>
+        <dd>{formatRecord(horse)}</dd>
+      </div>
+    </dl>
+    <span class="go">詳細を見る</span>
+  </div>
+</a>
+
+<style>
+  .horse-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid #c9e2d3;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(14, 92, 52, 0.07);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .horse-card::before {
+    content: '';
+    flex: 0 0 5px;
+    width: 5px;
+    background: linear-gradient(
+      180deg,
+      #e85c1a 0%,
+      #e85c1a 14%,
+      #ffffff 14%,
+      #ffffff 28%,
+      #16824a 28%,
+      #16824a 72%,
+      #ffffff 72%,
+      #ffffff 86%,
+      #e85c1a 86%,
+      #e85c1a 100%
+    );
+  }
+
+  .horse-card:hover,
+  .horse-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--horse-palette-2);
+    box-shadow: 0 12px 22px rgba(14, 92, 52, 0.16);
+  }
+
+  .horse-card:focus-visible {
+    outline: 3px solid var(--horse-palette-2);
+    outline-offset: 2px;
+  }
+
+  .photo {
+    position: relative;
+    flex: 0 0 9rem;
+    width: 9rem;
+    background: #dceee3;
+    overflow: hidden;
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 280ms ease;
+  }
+
+  .horse-card:hover .photo img {
+    transform: scale(1.04);
+  }
+
+  .status {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--horse-palette-3);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 10px rgba(14, 92, 52, 0.12);
+  }
+
+  .retired .status {
+    color: #4d735c;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    padding: 0.55rem 0.7rem 0.5rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .body-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.3;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+    color: #1c2e24;
+    min-width: 0;
+  }
+
+  .updated {
+    margin: 0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.02rem;
+    color: var(--horse-palette-2);
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .updated span {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #4d735c;
+  }
+
+  .lead {
+    margin: 0 0 0.18rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--horse-palette-1);
+  }
+
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 3.8rem minmax(0, 1fr);
+    gap: 0.28rem;
+    align-items: start;
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  dt {
+    color: #4d735c;
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+    color: #1c2e24;
+    overflow-wrap: anywhere;
+  }
+
+  .go {
+    margin-top: 0.28rem;
+    align-self: flex-end;
+    color: var(--horse-palette-3);
+    font-size: 0.7rem;
+    font-weight: 800;
+  }
+
+  @media (max-width: 700px) {
+    .photo {
+      flex-basis: 6.6rem;
+      width: 6.6rem;
+    }
+
+    h3 {
+      font-size: 0.9rem;
+    }
+
+    dl div {
+      font-size: 0.68rem;
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+    }
+  }
+</style>

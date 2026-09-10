@@ -1,0 +1,66 @@
+---
+import HorseRoomGate from '../../../components/horse/HorseRoomGate.astro';
+import LedgerYearView from '../../../components/horse/LedgerYearView.astro';
+import RoomSidebar from '../../../components/RoomSidebar.astro';
+import { getLedgerBook, getLedgerYear, latestLedgerYear } from '../../../data/horseLedger';
+import Layout from '../../../layouts/Layout.astro';
+
+const book = getLedgerBook('6');
+const ledger = book ? getLedgerYear(book.id, latestLedgerYear(book.id)) : undefined;
+if (!book || !ledger) {
+  throw new Error('Ledger year not found');
+}
+---
+
+<Layout title={`${book.label} ${ledger.year}年の収支 | 競馬の部屋`} noindex>
+  <HorseRoomGate>
+  <RoomSidebar
+    currentPath="/horse"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/horse', label: '競馬の部屋' },
+      { label: '収支' },
+    ]}
+  >
+    <main class="page">
+      <LedgerYearView book={book} ledger={ledger} />
+    </main>
+  </RoomSidebar>
+  </HorseRoomGate>
+</Layout>
+
+<style>
+  .page {
+    --horse-palette-1: #16824a;
+    --horse-palette-2: #e85c1a;
+    --horse-palette-3: #0e5c34;
+    --horse-silks: linear-gradient(
+      90deg,
+      #e85c1a 0%,
+      #e85c1a 14%,
+      #ffffff 14%,
+      #ffffff 28%,
+      #16824a 28%,
+      #16824a 72%,
+      #ffffff 72%,
+      #ffffff 86%,
+      #e85c1a 86%,
+      #e85c1a 100%
+    );
+
+    min-height: 100vh;
+    background:
+      linear-gradient(155deg, rgba(22, 130, 74, 0.12) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(335deg, rgba(232, 92, 26, 0.08) 0%, rgba(255, 255, 255, 0) 38%),
+      #f6fbf7;
+    color: #1c2e24;
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    padding: 2rem 1.2rem 3.2rem;
+  }
+
+  @media (max-width: 700px) {
+    .page {
+      padding: 1rem 0.8rem 2rem;
+    }
+  }
+</style>

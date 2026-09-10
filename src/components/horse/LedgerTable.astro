@@ -1,0 +1,148 @@
+---
+import { formatLedgerValue, type LedgerYear } from '../../data/horseLedger';
+
+interface Props {
+  ledger: LedgerYear;
+}
+
+const { ledger } = Astro.props;
+---
+
+<div class="table-wrap">
+  <table>
+    <caption class="visually-hidden">{ledger.year}年の収支</caption>
+    <thead>
+      <tr>
+        <th class="item">項目</th>
+        {ledger.months.map((month) => (
+          <th>{month}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {ledger.rows.map((row) => (
+        <tr class={row.kind} data-depth={row.depth}>
+          <th class="item" scope="row">{row.label}</th>
+          {row.values.map((value) => (
+            <td
+              class:list={[
+                'num',
+                value === null ? 'empty' : value < 0 ? 'neg' : value > 0 ? 'pos' : '',
+              ]}
+            >
+              {formatLedgerValue(value)}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 980px;
+    font-size: 0.78rem;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid #d5eadc;
+    padding: 0.42rem 0.35rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  thead th {
+    color: #3d6b4e;
+    font-weight: 800;
+    background: #e8f6ee;
+  }
+
+  .item {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    min-width: 10.5rem;
+    max-width: 12.5rem;
+    white-space: nowrap;
+    background: #fff;
+    font-weight: 700;
+    color: #1c2e24;
+    padding-left: 0.7rem;
+    z-index: 1;
+  }
+
+  thead .item {
+    z-index: 2;
+    background: #e8f6ee;
+  }
+
+  tr.section .item,
+  tr.section td {
+    background: #e8f6ee;
+    font-weight: 800;
+    color: var(--horse-palette-3);
+  }
+
+  tr.total .item,
+  tr.total td {
+    background: #fff4ec;
+    font-weight: 800;
+  }
+
+  tr.child .item {
+    font-weight: 600;
+    color: #4d735c;
+    padding-left: 1.55rem;
+  }
+
+  tr[data-depth='2'] .item {
+    padding-left: 2.15rem;
+  }
+
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+    color: #1c2e24;
+  }
+
+  .num.neg {
+    color: var(--horse-palette-2);
+  }
+
+  .num.pos {
+    color: var(--horse-palette-3);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 700px) {
+    table {
+      font-size: 0.7rem;
+      min-width: 860px;
+    }
+
+    .item {
+      min-width: 8.2rem;
+    }
+  }
+</style>

@@ -12,13 +12,15 @@
     "astro": "astro",
     "plamo:rename": "node scripts/rename-plamo-images.mjs",
     "plamo:convert": "node scripts/convert-plamo-images.mjs",
-    "plamo:prepare": "node scripts/prepare-plamo-images.mjs"
+    "plamo:prepare": "node scripts/prepare-plamo-images.mjs",
+    "horse:ledger": "node scripts/import-horse-ledger.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.1.8"
   },
   "devDependencies": {
+    "exceljs": "^4.4.0",
     "sharp": "^0.34.5"
   }
 }

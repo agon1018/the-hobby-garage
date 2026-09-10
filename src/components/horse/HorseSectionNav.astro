@@ -1,0 +1,113 @@
+---
+import { ledgerPath } from '../../data/horseLedger';
+
+interface Props {
+  current: 'horses' | 'ledger';
+}
+
+const { current } = Astro.props;
+const toHorses = current === 'ledger';
+---
+
+<a
+  class="sibling"
+  href={toHorses ? '/horse/list' : ledgerPath('6')}
+  aria-label={toHorses ? '所有馬一覧へ' : '収支表へ'}
+>
+  <span class="kicker">{toHorses ? 'Horses' : 'Ledger'}</span>
+  <span class="name">{toHorses ? '所有馬' : '収支'}</span>
+  <span class="arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .sibling {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 0.7rem;
+    row-gap: 0.08rem;
+    align-items: center;
+    min-width: 10.2rem;
+    padding: 0.58rem 0.7rem 0.58rem 0.95rem;
+    border-radius: 0.9rem;
+    border: 1px solid #c9e2d3;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(14, 92, 52, 0.1);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .sibling::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    background: var(--horse-silks);
+  }
+
+  .sibling:hover,
+  .sibling:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--horse-palette-2);
+    box-shadow: 0 12px 20px rgba(14, 92, 52, 0.16);
+    outline: none;
+  }
+
+  .kicker {
+    grid-column: 1;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--horse-palette-1);
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .name {
+    grid-column: 1;
+    color: var(--horse-palette-3);
+    font-size: 1.12rem;
+    font-weight: 700;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .arrow {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 999px;
+    background: var(--horse-palette-2);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  @media (max-width: 700px) {
+    .sibling {
+      min-width: 0;
+      padding: 0.48rem 0.55rem 0.48rem 0.82rem;
+      column-gap: 0.5rem;
+    }
+
+    .name {
+      font-size: 1rem;
+    }
+
+    .arrow {
+      width: 1.65rem;
+      height: 1.65rem;
+      font-size: 0.88rem;
+    }
+  }
+</style>

@@ -1,0 +1,245 @@
+---
+import type { Workout } from '../../data/horses';
+
+interface Props {
+  workouts: Workout[];
+}
+
+const PAGE_SIZE = 5;
+const { workouts } = Astro.props;
+const total = workouts.length;
+const needsPager = total > PAGE_SIZE;
+---
+
+<section class="block" id="workouts" data-workout-section data-page-size={PAGE_SIZE}>
+  <div class="head">
+    <h2>調教情報</h2>
+    {total > 0 && (
+      <p class="count">
+        <span data-shown>{Math.min(PAGE_SIZE, total)}</span> / {total}件
+      </p>
+    )}
+  </div>
+  {total === 0 ? (
+    <p class="empty">調教情報はまだありません。</p>
+  ) : (
+    <>
+      <div class="table-wrap">
+        <table>
+          <caption class="visually-hidden">調教タイム一覧</caption>
+          <thead>
+            <tr>
+              <th>調教日</th>
+              <th>騎乗者</th>
+              <th>コース・馬場</th>
+              <th>タイム・コメント</th>
+              <th>脚色<br /><span>(回り場)</span></th>
+            </tr>
+          </thead>
+          <tbody data-paged-list>
+            {workouts.map((workout, index) => (
+              <tr tabindex="-1" hidden={index >= PAGE_SIZE}>
+                <td>
+                  <span class="stack">
+                    <b>{workout.date}</b>
+                    <small>({workout.weekday})</small>
+                  </span>
+                </td>
+                <td>{workout.rider}</td>
+                <td>{workout.course}・{workout.going}</td>
+                <td>
+                  <span class="stack">
+                    <b>{workout.times}</b>
+                    {workout.comment && <small>{workout.comment}</small>}
+                  </span>
+                </td>
+                <td>
+                  <span class="stack">
+                    <b>{workout.manner}</b>
+                    <small>({workout.around})</small>
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {needsPager && (
+        <div class="pager" data-pager>
+          <button type="button" data-more>もっと見る（5件）</button>
+          <button type="button" data-all>すべて表示</button>
+          <button type="button" data-reset hidden>5件に戻す</button>
+        </div>
+      )}
+    </>
+  )}
+</section>
+
+<script>
+  import { initPagedSection } from '../../scripts/pagedSection';
+
+  initPagedSection('[data-workout-section]', '[data-paged-list] > tr');
+</script>
+
+<style>
+  .block {
+    max-width: 980px;
+    margin: 1rem auto 0;
+    background: #fff;
+    border: 1px solid #c9e2d3;
+    border-radius: 1rem;
+    padding: 1rem 1.05rem 1.1rem;
+    scroll-margin-top: 0.8rem;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--horse-palette-3);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+  }
+
+  .count {
+    margin: 0;
+    color: #4d735c;
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .empty {
+    margin: 0;
+    color: #4d735c;
+    line-height: 1.7;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+    font-size: 0.82rem;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid #d5eadc;
+    padding: 0.55rem 0.45rem;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+
+  th {
+    color: #3d6b4e;
+    font-weight: 800;
+    background: #e8f6ee;
+    white-space: nowrap;
+  }
+
+  th span {
+    font-weight: 700;
+    font-size: 0.72rem;
+  }
+
+  td {
+    color: #1c2e24;
+  }
+
+  tbody tr[hidden] {
+    display: none;
+  }
+
+  tbody tr:focus-visible {
+    outline: 2px solid var(--horse-palette-2);
+    outline-offset: -2px;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.08rem;
+  }
+
+  .stack b {
+    font-weight: 700;
+  }
+
+  .stack small {
+    color: #5a7a66;
+    font-size: 0.74rem;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .pager {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .pager button {
+    font: inherit;
+    cursor: pointer;
+    padding: 0.38rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid #c9e2d3;
+    background: #fff;
+    color: var(--horse-palette-1);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .pager button[data-more],
+  .pager button[data-all] {
+    background: #eef8f1;
+    border-color: var(--horse-palette-2);
+  }
+
+  .pager button:hover,
+  .pager button:focus-visible {
+    border-color: var(--horse-palette-2);
+    background: #e5f3ea;
+    outline: none;
+  }
+
+  .pager button:focus-visible {
+    outline: 3px solid var(--horse-palette-2);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 700px) {
+    .block {
+      padding: 0.85rem 0.75rem;
+      border-radius: 0.85rem;
+    }
+
+    table {
+      font-size: 0.74rem;
+      min-width: 560px;
+    }
+  }
+</style>

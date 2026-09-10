@@ -1,8 +1,9 @@
 ---
 interface Props {
   title?: string;
+  noindex?: boolean;
 }
-const { title = 'My Website' } = Astro.props;
+const { title = 'My Website', noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,6 +14,7 @@ const { title = 'My Website' } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
 		<title>{title}</title>
 	</head>
 	<body>

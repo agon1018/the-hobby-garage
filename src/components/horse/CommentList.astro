@@ -1,0 +1,203 @@
+---
+import type { ConditionComment } from '../../data/horses';
+
+interface Props {
+  comments: ConditionComment[];
+}
+
+const PAGE_SIZE = 5;
+const { comments } = Astro.props;
+const total = comments.length;
+const needsPager = total > PAGE_SIZE;
+---
+
+<section class="comments" id="comments" data-comment-section data-page-size={PAGE_SIZE}>
+  <div class="head">
+    <h2>状態コメント</h2>
+    {total > 0 && (
+      <p class="count">
+        <span data-shown>{Math.min(PAGE_SIZE, total)}</span> / {total}件
+      </p>
+    )}
+  </div>
+
+  {total === 0 ? (
+    <p class="empty">状態コメントはまだありません。</p>
+  ) : (
+    <>
+      <ol data-paged-list>
+        {comments.map((comment, index) => (
+          <li tabindex="-1" hidden={index >= PAGE_SIZE}>
+            <p class="meta">
+              <time>{comment.date}</time>
+              <span>{comment.location}</span>
+            </p>
+            {comment.summary && <p class="summary">{comment.summary}</p>}
+            {comment.quote && (
+              <p class="quote">
+                「{comment.quote}」
+                {comment.source && <span>（{comment.source}）</span>}
+              </p>
+            )}
+          </li>
+        ))}
+      </ol>
+
+      {needsPager && (
+        <div class="pager" data-pager>
+          <button type="button" data-more>もっと見る（5件）</button>
+          <button type="button" data-all>すべて表示</button>
+          <button type="button" data-reset hidden>5件に戻す</button>
+        </div>
+      )}
+    </>
+  )}
+</section>
+
+<script>
+  import { initPagedSection } from '../../scripts/pagedSection';
+
+  initPagedSection('[data-comment-section]', '[data-paged-list] > li');
+</script>
+
+<style>
+  .comments {
+    max-width: 980px;
+    margin: 1rem auto 0;
+    scroll-margin-top: 0.8rem;
+    background: #fff;
+    border: 1px solid #c9e2d3;
+    border-radius: 1rem;
+    padding: 1rem 1.05rem 0.85rem;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 0.85rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--horse-palette-3);
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+  }
+
+  .count {
+    margin: 0;
+    color: #4d735c;
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .empty {
+    margin: 0;
+    color: #4d735c;
+    line-height: 1.7;
+  }
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ol li {
+    padding: 0 0 1rem;
+    margin: 0 0 1rem;
+    border-bottom: 1px solid #d5eadc;
+  }
+
+  ol li[hidden] {
+    display: none;
+  }
+
+  ol li:focus-visible {
+    outline: 2px solid var(--horse-palette-2);
+    outline-offset: 3px;
+    border-radius: 0.35rem;
+  }
+
+  .meta {
+    margin: 0 0 0.45rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    font-weight: 800;
+    color: var(--horse-palette-1);
+  }
+
+  .summary,
+  .quote {
+    margin: 0;
+    line-height: 1.85;
+    font-size: 0.92rem;
+  }
+
+  .summary {
+    margin-bottom: 0.35rem;
+  }
+
+  .quote span {
+    white-space: nowrap;
+  }
+
+  .pager {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.15rem;
+  }
+
+  .pager button {
+    font: inherit;
+    cursor: pointer;
+    padding: 0.38rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid #c9e2d3;
+    background: #fff;
+    color: var(--horse-palette-1);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .pager button[data-more],
+  .pager button[data-all] {
+    background: #eef8f1;
+    border-color: var(--horse-palette-2);
+  }
+
+  .pager button:hover,
+  .pager button:focus-visible {
+    border-color: var(--horse-palette-2);
+    background: #e5f3ea;
+    outline: none;
+  }
+
+  .pager button:focus-visible {
+    outline: 3px solid var(--horse-palette-2);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 700px) {
+    .comments {
+      padding: 0.85rem 0.75rem 0.75rem;
+      border-radius: 0.85rem;
+    }
+
+    .summary,
+    .quote {
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    .quote span {
+      white-space: normal;
+    }
+  }
+</style>

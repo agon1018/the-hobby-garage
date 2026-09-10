@@ -1,9 +1,14 @@
 ﻿---
-import Layout from '../../layouts/Layout.astro';
+import HorseRoomGate from '../../components/horse/HorseRoomGate.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
+import { ledgerPath } from '../../data/horseLedger';
+import Layout from '../../layouts/Layout.astro';
+
+const ledgerHref = ledgerPath('6');
 ---
 
-<Layout title="競馬の部屋">
+<Layout title="競馬の部屋" noindex>
+  <HorseRoomGate>
   <RoomSidebar
     currentPath="/horse"
     breadcrumbs={[
@@ -11,94 +16,192 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
       { label: '競馬の部屋' },
     ]}
   >
-  <main class="page">
-    <div class="panel">
-      <p class="label">Horse Room</p>
-      <h1>競馬の部屋</h1>
-      <p>
-        このページは今後、閲覧制限付きで公開予定です。<br />
-        馬ごとの成績・メモ・注目ポイントを整理できる形で実装します。
-      </p>
-      <p class="note">現在は準備中です。</p>
-    </div>
-  </main>
+    <main class="page">
+      <header class="title-head">
+        <p class="label">Horse Room</p>
+        <h1>競馬の部屋</h1>
+        <p>カードから行き先を選んでください。ここにはこれからカードを足していきます。</p>
+      </header>
+
+      <nav class="hub" aria-label="競馬の部屋のメニュー">
+        <a class="hub-card" href="/horse/list">
+          <p class="kicker">Horses</p>
+          <h2>所有馬</h2>
+          <p>プロフィール、状態コメント、調教、レース結果を馬ごとに見られます。</p>
+          <span class="go">一覧へ進む</span>
+        </a>
+        <a class="hub-card" href={ledgerHref}>
+          <p class="kicker">Ledger</p>
+          <h2>収支</h2>
+          <p>一口馬主の年ごとの収支表です。6人分と3人分を切り替えられます。</p>
+          <span class="go">表を見る</span>
+        </a>
+      </nav>
+    </main>
   </RoomSidebar>
+  </HorseRoomGate>
 </Layout>
 
 <style>
   .page {
-    --horse-palette-1: #7c592d;
-    --horse-palette-2: #c7a26e;
-    --horse-palette-3: #9a4d22;
+    --horse-palette-1: #16824a;
+    --horse-palette-2: #e85c1a;
+    --horse-palette-3: #0e5c34;
+    --horse-silks: linear-gradient(
+      90deg,
+      #e85c1a 0%,
+      #e85c1a 14%,
+      #ffffff 14%,
+      #ffffff 28%,
+      #16824a 28%,
+      #16824a 72%,
+      #ffffff 72%,
+      #ffffff 86%,
+      #e85c1a 86%,
+      #e85c1a 100%
+    );
 
     min-height: 100vh;
-    background: #f9f8f4;
-    color: #302822;
+    background:
+      linear-gradient(155deg, rgba(22, 130, 74, 0.12) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(335deg, rgba(232, 92, 26, 0.08) 0%, rgba(255, 255, 255, 0) 38%),
+      #f6fbf7;
+    color: #1c2e24;
     font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
-    padding: 2rem 1.2rem;
+    padding: 2rem 1.2rem 3.2rem;
   }
 
-  .panel {
-    max-width: 760px;
+  .title-head,
+  .hub {
+    max-width: 980px;
     margin: 0 auto;
-    background: #fff;
-    border: 1px solid #e2d8ca;
-    border-radius: 1rem;
-    padding: 1.2rem;
+  }
+
+  .title-head {
+    border: 1px solid #c9e2d3;
+    border-radius: 1.15rem;
+    padding: 1rem 1.15rem 1.05rem;
+    background:
+      radial-gradient(circle at 88% 14%, rgba(22, 130, 74, 0.16), transparent 34%),
+      radial-gradient(circle at 12% 85%, rgba(232, 92, 26, 0.12), transparent 34%),
+      #ffffff;
+    box-shadow: 0 12px 24px rgba(14, 92, 52, 0.08);
     position: relative;
     overflow: hidden;
   }
 
-  .panel::before {
+  .title-head::after {
     content: '';
     position: absolute;
-    inset: 0 0 auto 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--horse-palette-1), var(--horse-palette-2), var(--horse-palette-3));
+    inset: auto 14% 0 14%;
+    height: 6px;
+    background: var(--horse-silks);
   }
 
   .label {
-    margin: 0;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
     color: var(--horse-palette-1);
     font-weight: 700;
-    letter-spacing: 0.06em;
   }
 
   h1 {
-    margin: 0.4rem 0 0.8rem;
+    margin: 0.35rem 0 0.8rem;
     color: var(--horse-palette-3);
+    font-size: clamp(1.75rem, 3.5vw, 2.6rem);
     font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
   }
 
-  p {
+  .title-head p {
+    line-height: 1.7;
+    font-size: 0.95rem;
     margin: 0;
-    line-height: 1.8;
   }
 
-  .note {
+  .hub {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+    gap: 0.7rem;
     margin-top: 1rem;
-    font-weight: 700;
-    color: var(--horse-palette-3);
   }
 
-  .accent-link {
+  .hub-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #c9e2d3;
+    border-radius: 1rem;
+    padding: 1rem 1.1rem 1.05rem;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(14, 92, 52, 0.07);
+    position: relative;
+    overflow: hidden;
+    min-height: 13.5rem;
+  }
+
+  .hub-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 6px;
+    background: var(--horse-silks);
+  }
+
+  a.hub-card {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  a.hub-card:hover,
+  a.hub-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--horse-palette-2);
+    box-shadow: 0 12px 22px rgba(14, 92, 52, 0.16);
+    outline: none;
+  }
+
+  .kicker {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--horse-palette-1);
+    font-size: 0.75rem;
+    font-weight: 800;
   }
 
-  .accent-link-secondary {
+  .hub-card h2 {
+    margin: 0.28rem 0 0.45rem;
     color: var(--horse-palette-3);
+    font-size: 1.55rem;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    letter-spacing: 0.04em;
+  }
+
+  .hub-card p {
+    margin: 0;
+    line-height: 1.65;
+    font-size: 0.9rem;
+    color: #3d5c49;
+  }
+
+  .go {
+    margin-top: auto;
+    padding-top: 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--horse-palette-2);
   }
 
   @media (max-width: 700px) {
     .page {
-      padding: 1rem 0.8rem;
+      padding: 1rem 0.8rem 2rem;
     }
 
-    .panel {
+    .title-head {
       border-radius: 0.9rem;
-      padding: 0.82rem;
+      padding: 0.78rem 0.82rem 0.84rem;
     }
 
     .label {
@@ -106,17 +209,25 @@ import RoomSidebar from '../../components/RoomSidebar.astro';
     }
 
     h1 {
-      font-size: 1.42rem;
-      margin: 0.25rem 0 0.52rem;
+      font-size: 1.45rem;
+      margin: 0.22rem 0 0.48rem;
     }
 
-    p {
-      font-size: 0.82rem;
-      line-height: 1.55;
+    .title-head p {
+      font-size: 0.83rem;
+      line-height: 1.5;
     }
 
-    .note {
-      margin-top: 0.65rem;
+    .hub {
+      grid-template-columns: 1fr;
+    }
+
+    .hub-card {
+      min-height: 0;
+    }
+
+    .hub-card h2 {
+      font-size: 1.28rem;
     }
   }
 </style>
