@@ -145,9 +145,15 @@ const { ledger } = Astro.props;
     }
 
     .item {
-      width: 5.33rem;
-      min-width: 5.33rem;
-      max-width: 5.33rem;
+      width: 3.93rem;
+      min-width: 3.93rem;
+      max-width: 3.93rem;
+      padding-left: 0.35rem;
+    }
+
+    tr.child .item,
+    tr[data-depth='2'] .item {
+      padding-left: 0.75rem;
     }
   }
 </style>
