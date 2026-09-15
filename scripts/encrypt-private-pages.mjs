@@ -64,6 +64,7 @@ for (const room of privateRooms) {
         dirname(htmlFile),
         '--remember',
         '30',
+        '--short',
         '--template-title',
         room.title,
         '--template-instructions',
