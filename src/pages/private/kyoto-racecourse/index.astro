@@ -1,0 +1,817 @@
+---
+import RoomSidebar from '../../../components/RoomSidebar.astro';
+import Layout from '../../../layouts/Layout.astro';
+
+/* ----------------------------------------------------------------
+   スケジュールデータ
+   status: 'confirmed' = 確定  |  'pending' = 未定・後日決定
+   badge:  '確定' | '目安' | '未定' | '当日'
+---------------------------------------------------------------- */
+type ScheduleItem = {
+  time: string;
+  badge: '確定' | '目安' | '未定' | '当日';
+  title: string;
+  body: string;
+  status: 'confirmed' | 'pending';
+};
+
+// ── 10月17日（土） ────────────────────────────────────────────
+const day1: ScheduleItem[] = [
+  {
+    time: '07:00',
+    badge: '確定',
+    title: '富山IC 出発',
+    body: '富山から京都方面へ自家用車で出発。高速道路を利用して南下する。',
+    status: 'confirmed',
+  },
+  {
+    time: '道中',
+    badge: '当日',
+    title: '休憩・昼食（道中）',
+    body: 'SAやPAで適宜休憩。昼食も道中で当日に決定する。',
+    status: 'pending',
+  },
+  {
+    time: '11:00〜12:00頃',
+    badge: '目安',
+    title: '京都到着',
+    body: '道路状況によって前後する可能性あり。京都駅周辺の駐車場へ車を停める。この時点ではホテルへは向かわず、京都駅周辺を起点に行動する。',
+    status: 'confirmed',
+  },
+  {
+    time: '昼',
+    badge: '未定',
+    title: '昼食',
+    body: '京都駅周辺で昼食。店舗は後日決定する。',
+    status: 'pending',
+  },
+  {
+    time: '午後',
+    badge: '確定',
+    title: 'ショッピング・観光',
+    body: '京都市内でショッピング・観光。衣類・雑貨などの買い物を中心に、若者向け・現代的なショップが多いエリアを優先する。具体的な店舗・ルートは後日決定。',
+    status: 'confirmed',
+  },
+  {
+    time: '15:00頃',
+    badge: '目安',
+    title: 'ホテルへ移動・チェックイン',
+    body: 'インザグリーン京都・伏見へ移動してチェックイン。ホテル駐車場を利用する。チェックイン時刻に合わせて前後調整可能。',
+    status: 'confirmed',
+  },
+  {
+    time: '夕方〜夜',
+    badge: '未定',
+    title: '夕食',
+    body: 'ホテル周辺または京都市内で夕食。店舗は友人と相談して後日決定する。',
+    status: 'pending',
+  },
+  {
+    time: '夜',
+    badge: '確定',
+    title: 'ホテルへ戻り就寝',
+    body: '夕食後はホテルへ戻り宿泊。翌日の秋華賞に備える。',
+    status: 'confirmed',
+  },
+];
+
+// ── 10月18日（日） ────────────────────────────────────────────
+const day2: ScheduleItem[] = [
+  {
+    time: '朝',
+    badge: '未定',
+    title: '朝食',
+    body: '朝食は未定。ホテル内または周辺で検討する。',
+    status: 'pending',
+  },
+  {
+    time: 'チェックアウト後',
+    badge: '確定',
+    title: '車をホテルに置いて出発',
+    body: 'チェックアウト後、車はホテル駐車場に置いたまま。公共交通機関で京都競馬場へ向かう。',
+    status: 'confirmed',
+  },
+  {
+    time: '出発時刻 未定',
+    badge: '未定',
+    title: 'ホテル → 最寄り駅へ移動',
+    body: 'ホテルから最寄り駅までの具体的な移動方法・出発時刻は後日調整。',
+    status: 'pending',
+  },
+  {
+    time: '午前',
+    badge: '確定',
+    title: '電車で京阪「淀駅」へ',
+    body: '京阪「淀駅」から徒歩約2分で京都競馬場へ到着。午前中から入場して競馬を楽しむ。',
+    status: 'confirmed',
+  },
+  {
+    time: '昼',
+    badge: '当日',
+    title: '競馬場内で昼食',
+    body: '昼食・競馬場内での食事は当日に決定する。',
+    status: 'pending',
+  },
+  {
+    time: '午後',
+    badge: '確定',
+    title: 'GⅠ 秋華賞 観戦',
+    body: 'メインレース「秋華賞」（牝馬三冠の最終戦）を観戦。その後も12Rまで全レースを楽しむ。',
+    status: 'confirmed',
+  },
+  {
+    time: '12R終了後',
+    badge: '確定',
+    title: '競馬場でゆっくり過ごす',
+    body: '12R終了後すぐには帰らない。競馬場内で少しゆっくり過ごし、混雑が落ち着いてから淀駅へ移動する。',
+    status: 'confirmed',
+  },
+  {
+    time: '夕方',
+    badge: '確定',
+    title: '淀駅 → ホテル方面へ',
+    body: '淀駅から電車でホテル方面へ戻り、ホテルで車を回収する。',
+    status: 'confirmed',
+  },
+  {
+    time: '夕方〜夜',
+    badge: '未定',
+    title: '夕食',
+    body: '夕食場所は友人と相談して後日決定する。食事を済ませてから富山へ出発する。',
+    status: 'pending',
+  },
+  {
+    time: '夜（未定）',
+    badge: '確定',
+    title: '富山へ帰宅',
+    body: '京都から富山方面へ自家用車で帰宅。「21時着」を目標とせず、競馬場でゆっくり過ごし、夕食後に安全に帰ることを優先する。',
+    status: 'confirmed',
+  },
+];
+
+// ── 未決定項目一覧 ────────────────────────────────────────────
+const pendingList = [
+  { day: '10/17', label: '昼食（店舗）' },
+  { day: '10/17', label: '京都でのショッピング店舗・詳細観光ルート' },
+  { day: '10/17', label: '夕食（店舗）' },
+  { day: '10/18', label: '朝食' },
+  { day: '10/18', label: 'ホテルから淀駅までの具体的な移動方法・出発時刻' },
+  { day: '10/18', label: '競馬場での昼食' },
+  { day: '10/18', label: '競馬終了後の休憩時間の目安' },
+  { day: '10/18', label: '夕食（店舗）' },
+  { day: '両日', label: '富山到着時刻' },
+];
+---
+
+<Layout title="京都競馬場旅行しおり — プライベートの部屋" noindex>
+  <RoomSidebar
+    currentPath="/private/kyoto-racecourse"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/private', label: 'プライベートの部屋' },
+      { label: '京都競馬場旅行' },
+    ]}
+  >
+    <main class="page">
+
+      {/* ── ヘッダー ── */}
+      <header class="title-head">
+        <p class="label">Travel · 2026</p>
+        <h1>京都競馬場旅行</h1>
+        <p class="subtitle">2026年10月17日（土）〜18日（日）｜2名｜富山出発</p>
+      </header>
+
+      {/* ── 旅行概要カード ── */}
+      <section class="overview-section">
+        <h2 class="section-title"><span>旅行概要</span></h2>
+        <div class="overview-grid">
+          <div class="ov-item">
+            <span class="ov-key">日程</span>
+            <span class="ov-val">10月17日（土）〜18日（日）1泊2日</span>
+          </div>
+          <div class="ov-item">
+            <span class="ov-key">参加者</span>
+            <span class="ov-val">2名</span>
+          </div>
+          <div class="ov-item">
+            <span class="ov-key">出発地</span>
+            <span class="ov-val">富山</span>
+          </div>
+          <div class="ov-item">
+            <span class="ov-key">移動手段</span>
+            <span class="ov-val">自家用車（競馬当日は電車）</span>
+          </div>
+          <div class="ov-item">
+            <span class="ov-key">宿泊先</span>
+            <span class="ov-val">インザグリーン京都・伏見</span>
+          </div>
+          <div class="ov-item ov-item--highlight">
+            <span class="ov-key">メインイベント</span>
+            <span class="ov-val">GⅠ 秋華賞（10月18日・京都競馬場）</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 凡例 ── */}
+      <div class="legend">
+        <span class="legend-item"><span class="badge badge--confirmed">確定</span>確定した予定</span>
+        <span class="legend-item"><span class="badge badge--estimate">目安</span>おおよその時刻</span>
+        <span class="legend-item"><span class="badge badge--pending">未定</span>後日決定する予定</span>
+        <span class="legend-item"><span class="badge badge--today">当日</span>当日に決定する予定</span>
+      </div>
+
+      {/* ── DAY 1 ── */}
+      <section class="day-section">
+        <div class="day-header day-header--1">
+          <div class="day-badge">DAY 1</div>
+          <div class="day-info">
+            <p class="day-date">10月17日（土）</p>
+            <p class="day-theme">京都観光・ショッピング</p>
+          </div>
+        </div>
+
+        <ol class="timeline">
+          {day1.map((item) => (
+            <li class={`tl-item tl-item--${item.status}`}>
+              <div class="tl-time">
+                <span class="tl-time-text">{item.time}</span>
+                <span class={`badge badge--${
+                  item.badge === '確定' ? 'confirmed' :
+                  item.badge === '目安' ? 'estimate' :
+                  item.badge === '当日' ? 'today' : 'pending'
+                }`}>{item.badge}</span>
+              </div>
+              <div class="tl-line" aria-hidden="true">
+                <span class="tl-dot"></span>
+              </div>
+              <div class="tl-card">
+                <h3 class="tl-title">{item.title}</h3>
+                <p class="tl-body">{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* ── DAY 2 ── */}
+      <section class="day-section">
+        <div class="day-header day-header--2">
+          <div class="day-badge">DAY 2</div>
+          <div class="day-info">
+            <p class="day-date">10月18日（日）</p>
+            <p class="day-theme">京都競馬場 · GⅠ 秋華賞</p>
+          </div>
+        </div>
+
+        <ol class="timeline">
+          {day2.map((item) => (
+            <li class={`tl-item tl-item--${item.status}`}>
+              <div class="tl-time">
+                <span class="tl-time-text">{item.time}</span>
+                <span class={`badge badge--${
+                  item.badge === '確定' ? 'confirmed' :
+                  item.badge === '目安' ? 'estimate' :
+                  item.badge === '当日' ? 'today' : 'pending'
+                }`}>{item.badge}</span>
+              </div>
+              <div class="tl-line" aria-hidden="true">
+                <span class="tl-dot"></span>
+              </div>
+              <div class="tl-card">
+                <h3 class="tl-title">{item.title}</h3>
+                <p class="tl-body">{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* ── 未決定一覧 ── */}
+      <section class="pending-section">
+        <h2 class="section-title"><span>後日決定する項目</span></h2>
+        <ul class="pending-list">
+          {pendingList.map((item) => (
+            <li class="pending-item">
+              <span class="pending-day">{item.day}</span>
+              <span class="pending-label">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+    </main>
+  </RoomSidebar>
+</Layout>
+
+<style>
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ページ基盤
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .page {
+    --teal:      #39869b;
+    --teal-mid:  #8ec6d4;
+    --teal-lt:   #cfdee1;
+    --gold:      #da9444;
+    --gold-lt:   #f0d09a;
+    --ink:       #273044;
+    --ink-mid:   #3e5560;
+    --ink-lt:    #6b8594;
+    --bg:        #f8faf9;
+    --card-bg:   #ffffff;
+    --pend-bg:   #f5f8f9;
+
+    min-height: 100vh;
+    padding: 2rem 1.2rem 4rem;
+    color: var(--ink);
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    background:
+      radial-gradient(circle at 90% 12%, rgba(57, 134, 155, 0.13), transparent 38%),
+      radial-gradient(circle at 10% 88%, rgba(218, 148, 68, 0.11), transparent 36%),
+      var(--bg);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ヘッダー
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .title-head {
+    max-width: 980px;
+    margin: 0 auto 1.2rem;
+    padding: 1.05rem 1.2rem 1.15rem;
+    border: 1px solid var(--teal-lt);
+    border-radius: 1.15rem;
+    background: var(--card-bg);
+    box-shadow: 0 12px 26px rgba(39, 48, 68, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .title-head::after {
+    content: '';
+    position: absolute;
+    inset: auto 12% 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+  }
+
+  .label {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  h1 {
+    margin: 0.3rem 0 0.5rem;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    letter-spacing: 0.04em;
+    color: #204f5b;
+  }
+
+  .subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     セクション共通
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .overview-section,
+  .day-section,
+  .pending-section {
+    max-width: 980px;
+    margin: 0 auto 1.6rem;
+  }
+
+  .section-title {
+    margin: 0 0 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-title::before,
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--teal-lt);
+  }
+
+  .section-title::before { max-width: 1.4rem; flex: 0 0 1.4rem; }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     旅行概要グリッド
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .ov-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--teal-lt);
+    border-radius: 0.8rem;
+    background: var(--card-bg);
+    box-shadow: 0 4px 10px rgba(39, 48, 68, 0.05);
+  }
+
+  .ov-item--highlight {
+    border-color: var(--gold-lt);
+    background: linear-gradient(135deg, #fffdf7, #fff9ee);
+    box-shadow: 0 4px 12px rgba(218, 148, 68, 0.12);
+  }
+
+  .ov-key {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+    text-transform: uppercase;
+  }
+
+  .ov-item--highlight .ov-key { color: #b87630; }
+
+  .ov-val {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     バッジ
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .badge {
+    display: inline-block;
+    padding: 0.12em 0.52em;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .badge--confirmed {
+    background: #daf0f5;
+    color: #1d6a7d;
+  }
+
+  .badge--estimate {
+    background: #ddf0e6;
+    color: #1d6845;
+  }
+
+  .badge--pending {
+    background: #fde8d0;
+    color: #935c18;
+  }
+
+  .badge--today {
+    background: #e8e4f8;
+    color: #4c3a96;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     凡例
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .legend {
+    max-width: 980px;
+    margin: 0 auto 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.2rem;
+    padding: 0.7rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--teal-lt);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(39, 48, 68, 0.04);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    font-size: 0.8rem;
+    color: var(--ink-mid);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     日付ヘッダー
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.95rem;
+    border: 1px solid var(--teal-lt);
+    background: var(--card-bg);
+    box-shadow: 0 6px 16px rgba(39, 48, 68, 0.07);
+  }
+
+  .day-badge {
+    flex-shrink: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.7rem;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .day-header--1 .day-badge {
+    background: linear-gradient(135deg, var(--teal), #2a6a7e);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(57, 134, 155, 0.3);
+  }
+
+  .day-header--2 .day-badge {
+    background: linear-gradient(135deg, var(--gold), #b8742a);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(218, 148, 68, 0.3);
+  }
+
+  .day-date {
+    margin: 0 0 0.18rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    color: #204f5b;
+    letter-spacing: 0.03em;
+  }
+
+  .day-theme {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--ink-lt);
+    font-weight: 600;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     タイムライン
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 7.2rem 1.6rem 1fr;
+    gap: 0 0;
+    position: relative;
+  }
+
+  /* 時刻エリア */
+  .tl-time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    padding: 0.85rem 0.7rem 0.85rem 0;
+    padding-top: 0.95rem;
+  }
+
+  .tl-time-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-mid);
+    text-align: right;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  /* ライン＋ドット */
+  .tl-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .tl-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--teal-lt);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tl-item:last-child .tl-line::before {
+    bottom: 50%;
+  }
+
+  .tl-dot {
+    position: relative;
+    z-index: 1;
+    margin-top: 1.05rem;
+    flex-shrink: 0;
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 999px;
+    border: 2px solid var(--teal-mid);
+    background: var(--card-bg);
+    transition: transform 200ms ease;
+  }
+
+  .tl-item--confirmed .tl-dot {
+    background: var(--teal);
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(57, 134, 155, 0.18);
+  }
+
+  .tl-item--pending .tl-dot {
+    background: #e8f3f6;
+    border-color: #aecdd5;
+  }
+
+  /* カード */
+  .tl-card {
+    margin: 0.5rem 0 0.6rem 0.8rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.75rem;
+    border: 1px solid transparent;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .tl-item--confirmed .tl-card {
+    background: var(--card-bg);
+    border-color: var(--teal-lt);
+    border-left: 3px solid var(--teal);
+    box-shadow: 0 4px 12px rgba(39, 48, 68, 0.06);
+  }
+
+  .tl-item--pending .tl-card {
+    background: var(--pend-bg);
+    border: 1px dashed #b8d4db;
+    border-left: 3px dashed #b8d4db;
+  }
+
+  .tl-title {
+    margin: 0 0 0.3rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .tl-item--pending .tl-title {
+    color: var(--ink-lt);
+  }
+
+  .tl-body {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    color: var(--ink-mid);
+  }
+
+  .tl-item--pending .tl-body {
+    color: #7fa0ac;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     未決定一覧
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  .pending-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .pending-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.6rem 0.95rem;
+    background: var(--card-bg);
+    border: 1px dashed #b8d4db;
+    border-radius: 0.65rem;
+    font-size: 0.88rem;
+  }
+
+  .pending-day {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #b87630;
+    background: #fde8d0;
+    padding: 0.1em 0.55em;
+    border-radius: 999px;
+  }
+
+  .pending-label {
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     レスポンシブ
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  @media (max-width: 700px) {
+    .page {
+      padding: 1rem 0.8rem 2.5rem;
+    }
+
+    .title-head {
+      padding: 0.8rem 0.9rem 0.95rem;
+      border-radius: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 1.45rem; margin: 0.25rem 0 0.4rem; }
+    .subtitle { font-size: 0.82rem; }
+
+    .overview-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .legend {
+      gap: 0.4rem 0.8rem;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .day-header {
+      padding: 0.7rem 0.85rem;
+      border-radius: 0.8rem;
+      gap: 0.75rem;
+    }
+
+    .day-badge {
+      width: 2.7rem;
+      height: 2.7rem;
+      font-size: 0.65rem;
+    }
+
+    .day-date { font-size: 0.95rem; }
+
+    /* タイムライン：時刻列を縮小 */
+    .tl-item {
+      grid-template-columns: 5.2rem 1.4rem 1fr;
+    }
+
+    .tl-time {
+      padding: 0.75rem 0.5rem 0.75rem 0;
+    }
+
+    .tl-time-text {
+      font-size: 0.72rem;
+    }
+
+    .tl-card {
+      margin: 0.45rem 0 0.5rem 0.6rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.65rem;
+    }
+
+    .tl-title { font-size: 0.88rem; }
+    .tl-body  { font-size: 0.8rem; }
+
+    .pending-item {
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .overview-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tl-item {
+      grid-template-columns: 4.5rem 1.3rem 1fr;
+    }
+
+    .tl-time-text { font-size: 0.67rem; }
+  }
+</style>

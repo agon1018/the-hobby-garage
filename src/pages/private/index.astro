@@ -18,10 +18,13 @@ import Layout from '../../layouts/Layout.astro';
         <p>旅行のしおりをはじめ、さまざまな個人的な記録をまとめる鍵付きの部屋です。</p>
       </header>
 
-      <section class="empty">
-        <p class="kicker">Private Notes</p>
-        <h2>最初の記録を準備中です</h2>
-        <p>ここにテーマごとのページや記録を追加していきます。</p>
+      <section class="card-grid">
+        <a class="entry-card" href="/private/kyoto-racecourse">
+          <p class="entry-tag">旅行</p>
+          <h2>京都競馬場旅行</h2>
+          <p>京都競馬場へのお出かけ記録。しおりや写真など。</p>
+          <span class="entry-go">記録を見る →</span>
+        </a>
       </section>
     </main>
   </RoomSidebar>
@@ -82,25 +85,86 @@ import Layout from '../../layouts/Layout.astro';
     letter-spacing: 0.04em;
   }
 
-  .title-head > p:last-child,
-  .empty p:last-child {
+  .title-head > p:last-child {
     margin: 0;
     line-height: 1.7;
   }
 
-  .empty {
+  .card-grid {
     margin-top: 1rem;
-    padding: 1.2rem;
-    border: 1px solid #cfdee1;
-    border-radius: 1rem;
-    background: #fff;
-    box-shadow: 0 8px 16px rgba(39, 48, 68, 0.06);
+    max-width: 980px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.85rem;
   }
 
-  .empty h2 {
-    margin: 0.3rem 0 0.5rem;
+  .entry-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border: 1px solid #cfdee1;
+    border-radius: 1rem;
+    padding: 1.05rem 1.1rem 1.05rem;
+    box-shadow: 0 8px 18px rgba(39, 48, 68, 0.06);
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .entry-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, #39869b, #da9444);
+  }
+
+  .entry-card:hover {
+    transform: translateY(-4px);
+    border-color: #8ec6d4;
+    box-shadow: 0 14px 28px rgba(57, 134, 155, 0.18);
+  }
+
+  .entry-card:focus-visible {
+    outline: 3px solid #39869b;
+    outline-offset: 2px;
+    transform: translateY(-4px);
+  }
+
+  .entry-tag {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #da9444;
+    text-transform: uppercase;
+  }
+
+  .entry-card h2 {
+    margin: 0;
+    font-size: 1.1rem;
     color: #204f5b;
     font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    line-height: 1.4;
+  }
+
+  .entry-card p:not(.entry-tag) {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #3e5560;
+    flex: 1;
+  }
+
+  .entry-go {
+    margin-top: 0.4rem;
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: #32798c;
   }
 
   @media (max-width: 700px) {
@@ -118,10 +182,23 @@ import Layout from '../../layouts/Layout.astro';
       font-size: 1.45rem;
     }
 
-    .title-head > p:last-child,
-    .empty p:last-child {
+    .title-head > p:last-child {
       font-size: 0.85rem;
       line-height: 1.55;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+    }
+
+    .entry-card {
+      border-radius: 0.85rem;
+      padding: 0.85rem 0.9rem 0.9rem;
+    }
+
+    .entry-card h2 {
+      font-size: 1rem;
     }
   }
 </style>
