@@ -7,7 +7,9 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/encrypt-private-pages.mjs",
+    "build:plain": "astro build",
+    "encrypt:private": "node scripts/encrypt-private-pages.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "plamo:rename": "node scripts/rename-plamo-images.mjs",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "exceljs": "^4.4.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "staticrypt": "^3.5.4"
   }
 }

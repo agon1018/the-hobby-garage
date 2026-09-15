@@ -44,3 +44,16 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## 鍵付きページ
+
+`/horse` と `/private` 以下のHTMLは、通常の本番ビルド時にStaticryptで暗号化されます。
+
+1. `.env.example` を参考に、ローカルの `.env` とVercelの環境変数へ
+   `STATICRYPT_HORSE_PASSWORD` と `STATICRYPT_PRIVATE_PASSWORD` を設定する
+2. 16文字以上の、辞書にない十分長いパスワードを使用する
+3. `npm run build` でAstroのビルドと暗号化を続けて実行する
+
+`npm run dev` と `npm run build:plain` は編集確認用のため暗号化されません。本番公開には
+必ず `npm run build` を使用してください。`.staticrypt.json` は複数ページで「記憶する」を
+共有するために必要なので削除しないでください。

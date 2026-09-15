@@ -1,5 +1,4 @@
 ﻿---
-import HorseRoomGate from '../../components/horse/HorseRoomGate.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
 import { ledgerPath } from '../../data/horseLedger';
 import Layout from '../../layouts/Layout.astro';
@@ -8,7 +7,6 @@ const ledgerHref = ledgerPath('6');
 ---
 
 <Layout title="競馬の部屋" noindex>
-  <HorseRoomGate>
   <RoomSidebar
     currentPath="/horse"
     breadcrumbs={[
@@ -39,7 +37,6 @@ const ledgerHref = ledgerPath('6');
       </nav>
     </main>
   </RoomSidebar>
-  </HorseRoomGate>
 </Layout>
 
 <style>

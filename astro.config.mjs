@@ -5,5 +5,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://the-hobby-garage.vercel.app',
-	integrations: [sitemap()],
+	integrations: [
+		sitemap({
+			filter: (page) => !page.includes('/horse/') && !page.includes('/private/'),
+		}),
+	],
 });

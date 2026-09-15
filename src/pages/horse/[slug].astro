@@ -1,6 +1,5 @@
 ---
 import CommentList from '../../components/horse/CommentList.astro';
-import HorseRoomGate from '../../components/horse/HorseRoomGate.astro';
 import RaceTable from '../../components/horse/RaceTable.astro';
 import WorkoutTable from '../../components/horse/WorkoutTable.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
@@ -20,7 +19,6 @@ if (!horse) {
 ---
 
 <Layout title={`${horse.name} | 競馬の部屋`} noindex>
-  <HorseRoomGate>
   <RoomSidebar
     currentPath="/horse"
     breadcrumbs={[
@@ -89,7 +87,6 @@ if (!horse) {
       <RaceTable races={horse.races} />
     </main>
   </RoomSidebar>
-  </HorseRoomGate>
 </Layout>
 
 <style>

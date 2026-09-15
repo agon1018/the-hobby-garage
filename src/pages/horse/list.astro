@@ -1,6 +1,5 @@
 ---
 import HorseCard from '../../components/horse/HorseCard.astro';
-import HorseRoomGate from '../../components/horse/HorseRoomGate.astro';
 import HorseSectionNav from '../../components/horse/HorseSectionNav.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
 import { horsesByStatus } from '../../data/horses';
@@ -11,7 +10,6 @@ const retiredHorses = horsesByStatus('引退');
 ---
 
 <Layout title="所有馬 | 競馬の部屋" noindex>
-  <HorseRoomGate>
   <RoomSidebar
     currentPath="/horse"
     breadcrumbs={[
@@ -62,7 +60,6 @@ const retiredHorses = horsesByStatus('引退');
       </section>
     </main>
   </RoomSidebar>
-  </HorseRoomGate>
 </Layout>
 
 <style>

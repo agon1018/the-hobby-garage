@@ -1,5 +1,4 @@
 ---
-import HorseRoomGate from '../../../components/horse/HorseRoomGate.astro';
 import LedgerYearView from '../../../components/horse/LedgerYearView.astro';
 import RoomSidebar from '../../../components/RoomSidebar.astro';
 import { getLedgerBook, getLedgerYear, latestLedgerYear } from '../../../data/horseLedger';
@@ -13,7 +12,6 @@ if (!book || !ledger) {
 ---
 
 <Layout title={`${book.label} ${ledger.year}年の収支 | 競馬の部屋`} noindex>
-  <HorseRoomGate>
   <RoomSidebar
     currentPath="/horse"
     breadcrumbs={[
@@ -26,7 +24,6 @@ if (!book || !ledger) {
       <LedgerYearView book={book} ledger={ledger} />
     </main>
   </RoomSidebar>
-  </HorseRoomGate>
 </Layout>
 
 <style>
