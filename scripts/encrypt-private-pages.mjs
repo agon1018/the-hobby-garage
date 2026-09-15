@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = join(rootDir, 'dist');
+const rememberDurationInDays = 30;
 const privateRooms = [
   {
     directory: join(distDir, 'horse'),
@@ -63,7 +64,7 @@ for (const room of privateRooms) {
         '--directory',
         dirname(htmlFile),
         '--remember',
-        '30',
+        String(rememberDurationInDays),
         '--short',
         '--template-title',
         room.title,
@@ -76,7 +77,7 @@ for (const room of privateRooms) {
         '--template-error',
         'パスワードが違います。',
         '--template-remember',
-        'この端末で30日間記憶する',
+        'この端末で最終アクセスから30日間記憶する',
         '--template-toggle-show',
         'パスワードを表示',
         '--template-toggle-hide',
@@ -100,7 +101,23 @@ for (const room of privateRooms) {
 
     const encryptedHtml = readFileSync(htmlFile, 'utf8')
       .replaceAll('staticrypt_expiration', `${room.storagePrefix}_expiration`)
-      .replaceAll('staticrypt_passphrase', `${room.storagePrefix}_passphrase`);
+      .replaceAll('staticrypt_passphrase', `${room.storagePrefix}_passphrase`)
+      .replace(
+        'id="staticrypt-remember" type="checkbox" name="remember" />',
+        'id="staticrypt-remember" type="checkbox" name="remember" checked />',
+      )
+      .replace(
+        'const { isSuccessful } = await staticrypt.handleDecryptOnLoad();',
+        `const { isSuccessful } = await staticrypt.handleDecryptOnLoad();
+
+                // Extend the remembered login from the latest successful access.
+                if (isSuccessful) {
+                    localStorage.setItem(
+                        "${room.storagePrefix}_expiration",
+                        (Date.now() + ${rememberDurationInDays} * 24 * 60 * 60 * 1000).toString()
+                    );
+                }`,
+      );
     writeFileSync(
       htmlFile,
       encryptedHtml.replace(
