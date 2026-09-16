@@ -19,10 +19,18 @@ import Layout from '../../layouts/Layout.astro';
       </header>
 
       <section class="card-grid">
+        <a class="entry-card" href="/private/hakusan-daishoten">
+          <p class="entry-tag">競馬観戦</p>
+          <p class="entry-date">2026年9月22日（火・休日）</p>
+          <h2>白山大賞典 観戦</h2>
+          <p>金沢競馬場でGⅢ白山大賞典を観戦。友人3人で日帰り遠征。</p>
+          <span class="entry-go">記録を見る →</span>
+        </a>
         <a class="entry-card" href="/private/kyoto-racecourse">
           <p class="entry-tag">旅行</p>
+          <p class="entry-date">2026年10月17日〜18日</p>
           <h2>京都競馬場旅行</h2>
-          <p>京都競馬場へのお出かけ記録。しおりや写真など。</p>
+          <p>京都競馬場でGⅠ秋華賞を観戦。1泊2日の京都旅行。</p>
           <span class="entry-go">記録を見る →</span>
         </a>
       </section>
@@ -142,6 +150,14 @@ import Layout from '../../layouts/Layout.astro';
     letter-spacing: 0.08em;
     color: #da9444;
     text-transform: uppercase;
+  }
+
+  .entry-date {
+    margin: 0.1rem 0 0;
+    font-size: 0.78rem;
+    color: #6b8594;
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
 
   .entry-card h2 {
