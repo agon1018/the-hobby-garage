@@ -6,13 +6,28 @@ import Layout from '../../../layouts/Layout.astro';
    スケジュールデータ
    status: 'confirmed' = 確定  |  'pending' = 未定・後日決定
    badge:  '確定' | '目安' | '未定' | '当日'
+   links:  { label, href, icon? } の配列（任意）
 ---------------------------------------------------------------- */
+type Link = {
+  label: string;
+  href: string;
+  icon: 'map' | 'web' | 'train';
+};
+
+type HotelCandidate = {
+  name: string;
+  web: string;
+  map: string;
+};
+
 type ScheduleItem = {
   time: string;
   badge: '確定' | '目安' | '未定' | '当日';
   title: string;
   body: string;
   status: 'confirmed' | 'pending';
+  links?: Link[];
+  hotels?: HotelCandidate[];
 };
 
 // ── 10月17日（土） ────────────────────────────────────────────
@@ -23,6 +38,13 @@ const day1: ScheduleItem[] = [
     title: '富山IC 出発',
     body: '富山から京都方面へ自家用車で出発。高速道路を利用して南下する。',
     status: 'confirmed',
+    links: [
+      {
+        label: 'Google マップで経路を確認',
+        href: 'https://www.google.com/maps/dir/?api=1&origin=富山インターチェンジ,富山県&destination=京都駅,京都府&travelmode=driving',
+        icon: 'map',
+      },
+    ],
   },
   {
     time: '道中',
@@ -54,16 +76,33 @@ const day1: ScheduleItem[] = [
   },
   {
     time: '15:00頃',
-    badge: '目安',
-    title: 'ホテルへ移動・チェックイン',
-    body: 'インザグリーン京都・伏見へ移動してチェックイン。ホテル駐車場を利用する。チェックイン時刻に合わせて前後調整可能。',
-    status: 'confirmed',
+    badge: '未定',
+    title: 'ホテルへ移動・チェックイン（候補3件）',
+    body: 'いずれかのホテルへ移動してチェックイン。ホテル駐車場を利用する。チェックイン時刻に合わせて前後調整可能。',
+    status: 'pending',
+    hotels: [
+      {
+        name: 'インザグリーン京都・伏見',
+        web: 'https://kyoto-inthegreen.com/',
+        map: 'https://www.google.com/maps/search/?api=1&query=インザグリーン京都伏見,京都市伏見区竹田西小屋ノ内町1',
+      },
+      {
+        name: '京都プラザホテル近鉄十条',
+        web: 'https://kph-jujo.com/',
+        map: 'https://www.google.com/maps/search/?api=1&query=京都プラザホテル近鉄十条,京都府京都市南区西九条菅田町1-1',
+      },
+      {
+        name: 'ヴィアインプライム京都駅八条口',
+        web: 'https://www.viainn.com/kyoto-h/',
+        map: 'https://www.google.com/maps/search/?api=1&query=ヴィアインプライム京都駅八条口',
+      },
+    ],
   },
   {
     time: '夕方〜夜',
     badge: '未定',
     title: '夕食',
-    body: 'ホテル周辺または京都市内で夕食。店舗は友人と相談して後日決定する。',
+    body: '伏見周辺が候補エリア。店舗は友人と相談して後日決定する。',
     status: 'pending',
   },
   {
@@ -94,9 +133,21 @@ const day2: ScheduleItem[] = [
   {
     time: '出発時刻 未定',
     badge: '未定',
-    title: 'ホテル → 最寄り駅へ移動',
-    body: 'ホテルから最寄り駅までの具体的な移動方法・出発時刻は後日調整。',
+    title: 'ホテル → 丹波橋駅 or 伏見桃山駅',
+    body: 'ホテルから最寄り駅（丹波橋駅 or 伏見桃山駅）への具体的な移動方法・出発時刻は後日調整。丹波橋駅から京阪本線で淀駅へ向かう。',
     status: 'pending',
+    links: [
+      {
+        label: '丹波橋駅（Google マップ）',
+        href: 'https://www.google.com/maps/search/?api=1&query=丹波橋駅,京都',
+        icon: 'train',
+      },
+      {
+        label: '伏見桃山駅（Google マップ）',
+        href: 'https://www.google.com/maps/search/?api=1&query=伏見桃山駅,京都',
+        icon: 'train',
+      },
+    ],
   },
   {
     time: '午前',
@@ -104,12 +155,19 @@ const day2: ScheduleItem[] = [
     title: '電車で京阪「淀駅」へ',
     body: '京阪「淀駅」から徒歩約2分で京都競馬場へ到着。午前中から入場して競馬を楽しむ。',
     status: 'confirmed',
+    links: [
+      {
+        label: '淀駅（Google マップ）',
+        href: 'https://www.google.com/maps/search/?api=1&query=淀駅,京都',
+        icon: 'train',
+      },
+    ],
   },
   {
     time: '昼',
     badge: '当日',
     title: '競馬場内で昼食',
-    body: '昼食・競馬場内での食事は当日に決定する。',
+    body: '昼食・競馬場内での食事は当日決定する。',
     status: 'pending',
   },
   {
@@ -118,6 +176,13 @@ const day2: ScheduleItem[] = [
     title: 'GⅠ 秋華賞 観戦',
     body: 'メインレース「秋華賞」（牝馬三冠の最終戦）を観戦。その後も12Rまで全レースを楽しむ。',
     status: 'confirmed',
+    links: [
+      {
+        label: '京都競馬場（JRA公式）',
+        href: 'https://www.jra.go.jp/facilities/race/kyoto/',
+        icon: 'web',
+      },
+    ],
   },
   {
     time: '12R終了後',
@@ -144,18 +209,26 @@ const day2: ScheduleItem[] = [
     time: '夜（未定）',
     badge: '確定',
     title: '富山へ帰宅',
-    body: '京都から富山方面へ自家用車で帰宅。「21時着」を目標とせず、競馬場でゆっくり過ごし、夕食後に安全に帰ることを優先する。',
+    body: '京都南ICから高速道路で富山方面へ帰宅。富山到着時刻は未定。「21時着」を目標とせず、競馬場でゆっくり過ごし、夕食後に安全に帰ることを優先する。',
     status: 'confirmed',
+    links: [
+      {
+        label: 'Google マップで経路を確認',
+        href: 'https://www.google.com/maps/dir/?api=1&origin=京都南インターチェンジ,京都府&destination=富山インターチェンジ,富山県&travelmode=driving',
+        icon: 'map',
+      },
+    ],
   },
 ];
 
 // ── 未決定項目一覧 ────────────────────────────────────────────
 const pendingList = [
+  { day: '10/17', label: '宿泊ホテルの決定（インザグリーン京都・伏見 / 京都プラザホテル近鉄十条 / ヴィアインプライム京都駅八条口）' },
   { day: '10/17', label: '昼食（店舗）' },
   { day: '10/17', label: '京都でのショッピング店舗・詳細観光ルート' },
-  { day: '10/17', label: '夕食（店舗）' },
+  { day: '10/17', label: '夕食（店舗）※伏見周辺が候補' },
   { day: '10/18', label: '朝食' },
-  { day: '10/18', label: 'ホテルから淀駅までの具体的な移動方法・出発時刻' },
+  { day: '10/18', label: 'ホテルから最寄り駅までの移動方法・出発時刻' },
   { day: '10/18', label: '競馬場での昼食' },
   { day: '10/18', label: '競馬終了後の休憩時間の目安' },
   { day: '10/18', label: '夕食（店舗）' },
@@ -203,7 +276,7 @@ const pendingList = [
           </div>
           <div class="ov-item">
             <span class="ov-key">宿泊先</span>
-            <span class="ov-val">インザグリーン京都・伏見</span>
+            <span class="ov-val">候補3件で検討中</span>
           </div>
           <div class="ov-item ov-item--highlight">
             <span class="ov-key">メインイベント</span>
@@ -247,6 +320,50 @@ const pendingList = [
               <div class="tl-card">
                 <h3 class="tl-title">{item.title}</h3>
                 <p class="tl-body">{item.body}</p>
+                {item.hotels && item.hotels.length > 0 && (
+                  <ul class="hotel-list">
+                    {item.hotels.map((hotel) => (
+                      <li class="hotel-row">
+                        <span class="hotel-name">{hotel.name}</span>
+                        <span class="hotel-btns">
+                          <a class="tl-link tl-link--web" href={hotel.web} target="_blank" rel="noopener noreferrer">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            公式
+                          </a>
+                          <a class="tl-link tl-link--map" href={hotel.map} target="_blank" rel="noopener noreferrer">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            地図
+                          </a>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {item.links && item.links.length > 0 && (
+                  <ul class="tl-links">
+                    {item.links.map((link) => (
+                      <li>
+                        <a
+                          class={`tl-link tl-link--${link.icon}`}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {link.icon === 'map' && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                          )}
+                          {link.icon === 'web' && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                          )}
+                          {link.icon === 'train' && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="16" rx="3"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 19l-2 2"/><path d="M16 19l2 2"/></svg>
+                          )}
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </li>
           ))}
@@ -280,6 +397,50 @@ const pendingList = [
               <div class="tl-card">
                 <h3 class="tl-title">{item.title}</h3>
                 <p class="tl-body">{item.body}</p>
+                {item.hotels && item.hotels.length > 0 && (
+                  <ul class="hotel-list">
+                    {item.hotels.map((hotel) => (
+                      <li class="hotel-row">
+                        <span class="hotel-name">{hotel.name}</span>
+                        <span class="hotel-btns">
+                          <a class="tl-link tl-link--web" href={hotel.web} target="_blank" rel="noopener noreferrer">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            公式
+                          </a>
+                          <a class="tl-link tl-link--map" href={hotel.map} target="_blank" rel="noopener noreferrer">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            地図
+                          </a>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {item.links && item.links.length > 0 && (
+                  <ul class="tl-links">
+                    {item.links.map((link) => (
+                      <li>
+                        <a
+                          class={`tl-link tl-link--${link.icon}`}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {link.icon === 'map' && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                          )}
+                          {link.icon === 'web' && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                          )}
+                          {link.icon === 'train' && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="16" rx="3"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 19l-2 2"/><path d="M16 19l2 2"/></svg>
+                          )}
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </li>
           ))}
@@ -694,6 +855,105 @@ const pendingList = [
     color: #7fa0ac;
   }
 
+  /* ── リンク ── */
+  .tl-links {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.28em 0.7em;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+    white-space: nowrap;
+  }
+
+  .tl-link svg {
+    flex-shrink: 0;
+  }
+
+  .tl-link--map {
+    color: #1a5f75;
+    background: #e0f3f8;
+    border-color: #b8dfe8;
+  }
+
+  .tl-link--map:hover {
+    background: #c8eaf4;
+    border-color: #7ec8db;
+  }
+
+  .tl-link--web {
+    color: #5a3b9a;
+    background: #ede9f8;
+    border-color: #cec4ec;
+  }
+
+  .tl-link--web:hover {
+    background: #ddd6f4;
+    border-color: #a99fd6;
+  }
+
+  .tl-link--train {
+    color: #1a6a50;
+    background: #e0f4ee;
+    border-color: #b8e0d4;
+  }
+
+  .tl-link--train:hover {
+    background: #c8eadf;
+    border-color: #7eceb8;
+  }
+
+  /* ── ホテル候補リスト ── */
+  .hotel-list {
+    list-style: none;
+    margin: 0.65rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.38rem;
+  }
+
+  .hotel-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .hotel-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--ink-mid);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hotel-btns {
+    display: flex;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  /* 未定カードのリンクは少し薄く */
+  .tl-item--pending .tl-link--map  { color: #3a7f94; background: #ecf6fa; border-color: #cde6ed; }
+  .tl-item--pending .tl-link--train { color: #2d7a5e; background: #ebf7f2; border-color: #c4dfd6; }
+
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      未決定一覧
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -796,6 +1056,8 @@ const pendingList = [
 
     .tl-title { font-size: 0.88rem; }
     .tl-body  { font-size: 0.8rem; }
+
+    .tl-link  { font-size: 0.72rem; padding: 0.24em 0.6em; }
 
     .pending-item {
       flex-wrap: wrap;
