@@ -13,12 +13,6 @@ type Link = {
   icon: 'map' | 'web' | 'train';
 };
 
-type HotelCandidate = {
-  name: string;
-  web: string;
-  map: string;
-};
-
 type ScheduleItem = {
   time: string;
   badge: '確定' | '目安' | '未定' | '当日';
@@ -26,130 +20,55 @@ type ScheduleItem = {
   body: string;
   status: 'confirmed' | 'pending';
   links?: Link[];
-  hotels?: HotelCandidate[];
 };
 
 const schedule: ScheduleItem[] = [
   {
-    time: '09:30',
-    badge: '確定',
-    title: '集合・富山IC 出発',
-    body: '09:30集合、富山ICから出発。北陸自動車道を利用して金沢方面へ。金沢東ICから競馬場まで約6分。',
-    status: 'confirmed',
+    time: '08:00', badge: '確定', title: '💧 泉お迎え',
+    body: '泉をお迎えに行く。', status: 'confirmed',
+    links: [{ label: '行きのルート（地図）', href: 'https://maps.app.goo.gl/wYPTJxadZuZo4beP7', icon: 'map' }],
+  },
+  { time: '08:30', badge: '確定', title: '⭐ 星お迎え', body: '星をお迎えに行く。', status: 'confirmed' },
+  {
+    time: '09:00', badge: '確定', title: '星乃珈琲でモーニング',
+    body: '星乃珈琲 高岡熊野店でモーニングを楽しむ。', status: 'confirmed',
+    links: [{ label: '星乃珈琲 高岡熊野店（地図）', href: 'https://www.google.co.jp/maps/place/%E6%98%9F%E4%B9%83%E7%8F%88%E7%90%B2%E9%AB%98%E5%B2%A1%E7%86%8A%E9%87%8E%E5%BA%97/@36.7093387,137.0306153,13z/data=!4m10!1m2!2m1!1z5pif5LmD54-I55Cy!3m6!1s0x5ff79d579a300001:0xe38a46def75b3650!8m2!3d36.76061!4d137.0181635!15sCgzmmJ_kuYPnj4jnkLIiA4gBAVoPIg3mmJ_kuYMg54-I55CykgEEY2FmZZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VOdWMwbHROMXBuRUFF4AEA-gEECAAQFQ!16s%2Fg%2F11c57w9580?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D', icon: 'map' }],
+  },
+  {
+    time: '11:00', badge: '確定', title: '金沢競馬場到着',
+    body: '金沢競馬場に到着。⭐ 星、三連複万馬券Get！！', status: 'confirmed',
     links: [
-      {
-        label: 'Google マップで経路を確認',
-        href: 'https://www.google.com/maps/dir/?api=1&origin=富山インターチェンジ,富山県&destination=金沢東インターチェンジ,石川県&travelmode=driving',
-        icon: 'map',
-      },
+      { label: '金沢競馬場（公式）', href: 'https://www.kanazawakeiba.com/', icon: 'web' },
+      { label: '金沢競馬場（地図）', href: 'https://www.google.com/maps/search/?api=1&query=金沢競馬場,石川県金沢市八田町西1', icon: 'map' },
     ],
   },
+  { time: '14:00', badge: '確定', title: 'お昼やきそば＆たこ焼き', body: '競馬場でやきそばとたこ焼きを食べる。', status: 'confirmed' },
   {
-    time: '11:00',
-    badge: '確定',
-    title: '金沢競馬場 開場・入場',
-    body: '11時開場に合わせて金沢競馬場へ入場。午前のレースから観戦をスタートする。',
-    status: 'confirmed',
+    time: '18:00', badge: '確定', title: '白山大賞典観戦',
+    body: 'GⅢ白山大賞典を観戦。⭐ 星ワイド的中！ 最終レースまで観戦してから帰宅する。', status: 'confirmed',
     links: [
-      {
-        label: '金沢競馬場（公式）',
-        href: 'https://www.kanazawakeiba.com/',
-        icon: 'web',
-      },
-      {
-        label: '金沢競馬場（地図）',
-        href: 'https://www.google.com/maps/search/?api=1&query=金沢競馬場,石川県金沢市八田町西1',
-        icon: 'map',
-      },
+      { label: '白山大賞典 2026（公式）', href: 'https://www.keiba.go.jp/dirtgraderace/2026/0922_hakusandaishoten/introduction.html', icon: 'web' },
+      { label: '帰りのルート（地図）', href: 'https://maps.app.goo.gl/8s8h5MJtM6dYGHko7', icon: 'map' },
     ],
   },
   {
-    time: '昼',
-    badge: '確定',
-    title: '昼食（競馬場内）',
-    body: '競馬場内で昼食を食べる。メニューは当日に決定する。',
-    status: 'confirmed',
+    time: '19:00', badge: '確定', title: 'トレジャーランド福久店でおかしゲット！',
+    body: 'トレジャーランド福久店でおかしをゲットする。', status: 'confirmed',
+    links: [{ label: 'トレジャーランド福久店（地図）', href: 'https://www.google.co.jp/maps/place/%E3%83%88%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E7%A6%8F%E4%B9%85%E5%BA%97/@36.6175615,136.6823567,20z/data=!3m1!5s0x5ff9cd56ee3dd807:0x240c2ed3e4f07421!4m9!1m2!2m1!1z44Op44O844Oh44Oz!3m5!1s0x5ff9cde327eb74b3:0xc29ffc221488980!8m2!3d36.618148!4d136.6837107!16s%2Fg%2F11xncnjw6z?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D', icon: 'map' }],
   },
   {
-    time: '昼〜夕方',
-    badge: '確定',
-    title: '競馬観戦',
-    body: '各レースを楽しみながら過ごす。メインレース「白山大賞典」は17時台に発走予定。当日は入場無料・来場者プレゼント・ガラポン抽選会・トークショーなどイベント盛りだくさん。',
-    status: 'confirmed',
-    links: [
-      {
-        label: '白山大賞典イベント情報（金沢競馬公式）',
-        href: 'https://www.kanazawakeiba.com/event/info-38107/',
-        icon: 'web',
-      },
-    ],
+    time: '20:00', badge: '確定', title: 'ラーメン寳龍 福久店で味噌ラーメン',
+    body: 'ラーメン寳龍 福久店で味噌ラーメンを食べる。', status: 'confirmed',
+    links: [{ label: 'ラーメン寳龍 福久店（地図）', href: 'https://www.google.co.jp/maps/place/%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E5%AF%B3%E9%BE%8D+%E7%A6%8F%E4%B9%85%E5%BA%97/@36.6175615,136.6823567,20z/data=!4m10!1m2!2m1!1z44Op44O844Oh44Oz!3m6!1s0x5ff9cd75400b9e87:0x90c37ba83f89b885!8m2!3d36.6175616!4d136.6829521!15sCgzjg6njg7zjg6Hjg7NaDiIM44Op44O844Oh44OzkgEQcmFtZW5fcmVzdGF1cmFudJoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQydDB0Wk5GRnRjRVpPV0dNelZsaG5NbUZJUW1waU1Vb3pVVmRPU2xkc1JSQULgAQD6AQQIGBAV!16s%2Fg%2F11m_63kprd?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D', icon: 'map' }],
   },
   {
-    time: '17時台',
-    badge: '確定',
-    title: 'GⅢ 白山大賞典 発走',
-    body: 'メインレース「白山大賞典」GⅢ（ダート右回り2100m）を観戦。金沢競馬場唯一のダートグレード競走。',
-    status: 'confirmed',
-    links: [
-      {
-        label: '白山大賞典 2026（公式）',
-        href: 'https://www.keiba.go.jp/dirtgraderace/2026/0922_hakusandaishoten/introduction.html',
-        icon: 'web',
-      },
-    ],
+    time: '22:00', badge: '確定', title: '富山レジャーランド掛尾店で北斗乗り打ち',
+    body: '富山レジャーランド掛尾店で北斗を乗り打ちする。', status: 'confirmed',
+    links: [{ label: '富山レジャーランド掛尾店（地図）', href: 'https://www.google.co.jp/maps/place/%E5%AF%8C%E5%B1%B1%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E6%8E%9B%E5%B0%BE%E5%BA%97/@36.6177516,137.1804833,13z/data=!4m10!1m2!2m1!1z44Os44K444Oj44Op44Oz!3m6!1s0x5ff791001f2e8715:0xc787c797d26fe0c8!8m2!3d36.6660317!4d137.2088901!15sCg_jg6zjgrjjg6Pjg6njg7NaESIP44Os44K444Oj44Op44OzkgEMdmlkZW9fYXJjYWRlmgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0Wk5GRnRjRVpPV0dNelZsaG5NbUZJUW1waU1Vb3pVVmRPU2xkc1JSQULgAQD6AQQIGBAV!16s%2Fg%2F11w3xl83kv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D', icon: 'map' }],
   },
-  {
-    time: '17:30',
-    badge: '確定',
-    title: '金沢競馬場を出発',
-    body: 'レース終了後、競馬場を出発。金沢市内の夕食場所へ向かう。',
-    status: 'confirmed',
-  },
-  {
-    time: '18:00',
-    badge: '確定',
-    title: '夕食（金沢市内）',
-    body: '金沢市内で夕食。18時から食事スタート。店舗は後日決定する。',
-    status: 'pending',
-  },
-  {
-    time: '19:00',
-    badge: '確定',
-    title: '富山へ出発',
-    body: '金沢東ICから北陸自動車道を利用して富山へ向かう。20時頃富山着予定。',
-    status: 'confirmed',
-    links: [
-      {
-        label: 'Google マップで帰路を確認',
-        href: 'https://www.google.com/maps/dir/?api=1&origin=金沢東インターチェンジ,石川県&destination=富山インターチェンジ,富山県&travelmode=driving',
-        icon: 'map',
-      },
-    ],
-  },
-  {
-    time: '20:00頃〜0時',
-    badge: '確定',
-    title: '😏 ニンマリ（⭐ 星と）',
-    body: '20時頃に 💧 泉と解散。⭐ 星と0時まで楽しむ。行き先はレースの結果次第！',
-    status: 'confirmed',
-    hotels: [
-      {
-        name: '🏆 勝ち → ホテルグレース',
-        web: 'https://mshotels-group.com/grace/',
-        map: 'https://www.google.com/maps/search/?api=1&query=ホテルグレース,富山県富山市黒崎410',
-      },
-      {
-        name: '😢 負け → HOTEL FABULAN',
-        web: 'https://hotelfabulan.jp/',
-        map: 'https://www.google.com/maps/search/?api=1&query=DESIGN+HOTEL+FABULAN,富山県富山市島田142-4',
-      },
-    ],
-  },
-];
-
-// ── 未決定項目一覧 ────────────────────────────────────────────
-const pendingList = [
-  { label: '金沢での夕食（店舗）' },
+  { time: '翌0:00', badge: '確定', title: '💧 泉を送る', body: '泉を送る。', status: 'confirmed' },
+  { time: '翌0:30', badge: '確定', title: '⭐ 星とニンマリ', body: '星とニンマリ。', status: 'confirmed' },
+  { time: '翌1:00', badge: '確定', title: '解散', body: '解散。', status: 'confirmed' },
 ];
 ---
 
@@ -197,7 +116,7 @@ const pendingList = [
           </div>
           <div class="ov-item ov-item--highlight">
             <span class="ov-key">メインレース</span>
-            <span class="ov-val">GⅢ 白山大賞典（17時台）ダート2100m</span>
+            <span class="ov-val">GⅢ 白山大賞典（18:00）ダート2100m</span>
           </div>
         </div>
       </section>
@@ -237,25 +156,6 @@ const pendingList = [
               <div class="tl-card">
                 <h3 class="tl-title">{item.title}</h3>
                 <p class="tl-body">{item.body}</p>
-                {item.hotels && item.hotels.length > 0 && (
-                  <ul class="hotel-list">
-                    {item.hotels.map((hotel) => (
-                      <li class="hotel-row">
-                        <span class="hotel-name">{hotel.name}</span>
-                        <span class="hotel-btns">
-                          <a class="tl-link tl-link--web" href={hotel.web} target="_blank" rel="noopener noreferrer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            公式
-                          </a>
-                          <a class="tl-link tl-link--map" href={hotel.map} target="_blank" rel="noopener noreferrer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            地図
-                          </a>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
                 {item.links && item.links.length > 0 && (
                   <ul class="tl-links">
                     {item.links.map((link) => (
@@ -285,19 +185,6 @@ const pendingList = [
             </li>
           ))}
         </ol>
-      </section>
-
-      {/* ── 未決定一覧 ── */}
-      <section class="pending-section">
-        <h2 class="section-title"><span>後日決定する項目</span></h2>
-        <ul class="pending-list">
-          {pendingList.map((item) => (
-            <li class="pending-item">
-              <span class="pending-day">未定</span>
-              <span class="pending-label">{item.label}</span>
-            </li>
-          ))}
-        </ul>
       </section>
 
     </main>
