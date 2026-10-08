@@ -37,7 +37,13 @@ const { races } = Astro.props;
         </thead>
         <tbody>
           {races.map((race) => (
-            <tr>
+            <tr
+              class:list={{
+                'place-first': race.finish === '1',
+                'place-second': race.finish === '2',
+                'place-third': race.finish === '3',
+              }}
+            >
               <td>{race.date}</td>
               <td>{race.venue}</td>
               <td>{race.classLabel}</td>
@@ -145,6 +151,18 @@ const { races } = Astro.props;
 
   td {
     color: #1c2e24;
+  }
+
+  tr.place-first td {
+    background-color: #f8dfe3 !important;
+  }
+
+  tr.place-second td {
+    background-color: #dcecf9 !important;
+  }
+
+  tr.place-third td {
+    background-color: #e3f0df !important;
   }
 
   td.name {
