@@ -1,0 +1,177 @@
+---
+import RoomSidebar from '../../../components/RoomSidebar.astro';
+import Layout from '../../../layouts/Layout.astro';
+
+type Link = { label: string; href: string; icon: 'map' | 'web' };
+type Hotel = { name: string; detail: string; href: string };
+type ScheduleItem = {
+  time: string;
+  badge: '確定' | '目安' | '未定';
+  title: string;
+  body: string;
+  status: 'confirmed' | 'pending';
+  details?: string[];
+  tags?: ('必須' | '史跡' | '食事' | '宿泊' | '任意')[];
+  links?: Link[];
+  hotels?: Hotel[];
+};
+
+const day1: ScheduleItem[] = [
+  { time: '08:30', badge: '確定', title: '自宅を出発', body: '自家用車で出発し、⭐ 星をお迎えに向かう。', status: 'confirmed' },
+  { time: '09:00', badge: '確定', title: '⭐ 星をお迎え', body: '星をお迎えして、高速道路で湖北エリアへ向かう。', status: 'confirmed' },
+  {
+    time: '09:00〜12:30', badge: '目安', title: '小杉IC → 湖北エリアへ移動',
+    body: '小杉ICから北陸自動車道を利用し、小谷城スマートICまたは木之本ICへ向かう。', status: 'confirmed',
+    details: ['朝食・休憩は有磯海SA、女形谷SAなどで適宜とる。'],
+    links: [
+      { label: '小杉IC → 小谷城スマートIC（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=小杉インターチェンジ,富山県&destination=小谷城スマートインターチェンジ,滋賀県&travelmode=driving', icon: 'map' },
+      { label: '小杉IC → 木之本IC（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=小杉インターチェンジ,富山県&destination=木之本インターチェンジ,滋賀県&travelmode=driving', icon: 'map' },
+    ],
+  },
+  {
+    time: '12:30〜13:40', badge: '目安', title: '道の駅 浅井三姉妹の郷で昼食・義と絆館',
+    body: '道の駅内で昼食後、「豊臣博覧会 義と絆館」で浅井三代と織田・豊臣の歴史を予習する。', status: 'confirmed', tags: ['必須', '食事'],
+    details: ['近江牛うどん・丼、自然薯料理などを候補にする。'],
+  },
+  {
+    time: '13:50〜15:20', badge: '目安', title: '小谷城資料館周辺 → 番所跡〜金吾丸〜本丸',
+    body: '小谷城戦国歴史資料館周辺を散策後、追手道林道を車で上り番所跡駐車場へ。', status: 'confirmed', tags: ['必須', '史跡'],
+    details: ['清水神社、追手門跡など麓の屋敷跡・集落跡を散策。', '番所跡 → 御馬屋跡 → 赤尾屋敷跡 → 金吾丸跡 → 本丸跡手前を歩き、番所跡へ戻る。', '大嶽へは登らず、金吾丸〜本丸から虎御前山との距離感を確かめる。'],
+  },
+  {
+    time: '15:30〜16:40', badge: '目安', title: '虎御前山（織田軍最前線包囲陣地群）',
+    body: '小谷城の正面約2kmに位置する高台から、小谷城を封じ込めた監視体制と地形を見学する。', status: 'confirmed', tags: ['史跡'],
+    details: ['織田信長本陣跡、羽柴秀吉陣跡、柴田勝家陣跡、丹羽長秀陣跡が連なる尾根筋を散策する。', '小谷城を見上げる視界と圧迫感を検証する。'],
+  },
+  {
+    time: '17:00〜', badge: '未定', title: 'ホテルチェックイン・夕食',
+    body: '宿泊先は長浜エリアの2候補から決定。夕食は長浜IC周辺または長浜市内の近江牛専門店・ステーキハウスを検討する。', status: 'pending', tags: ['宿泊', '食事'],
+    hotels: [
+      { name: 'HOTEL R9 The Yard 長浜インター', detail: '長浜ICから車で約3分・全44室', href: 'https://hotel-r9.jp/hotels/nagahamainter/' },
+      { name: 'HOTEL R9 The Yard 長浜', detail: '長浜駅から徒歩約12分・全34室', href: 'https://hotel-r9.jp/hotels/nagahama/' },
+    ],
+  },
+];
+
+const day2: ScheduleItem[] = [
+  {
+    time: '10:00〜11:15', badge: '目安', title: '国友鉄砲ミュージアム',
+    body: 'ホテルをゆっくり10:00に出発。姉川の戦いや小谷城攻略で織田軍の火力を支えた、国友鉄砲の生産拠点を見学する。', status: 'confirmed', tags: ['必須'],
+    details: ['当時の火縄銃や鍛冶技術の資料を鑑賞する。'],
+  },
+  {
+    time: '11:25〜13:00', badge: '目安', title: '姉川両軍陣跡・2大古戦場を巡る',
+    body: '国友から南〜東へ、車で数分間隔の史跡を順に巡る。各地点を15〜20分程度で確認する。', status: 'confirmed', tags: ['史跡'],
+    details: ['① 徳川家康陣跡（岡山・陣の山）：姉川南岸の高台に置かれた本陣地。', '② 織田信長本陣跡（陣付山・岡村）：姉川合戦全体を指図した本陣跡。', '③ 姉川決戦地碑（三田町・血原・血川橋）：川幅と渡河距離感を検証する。', '④ 三田村氏館跡：朝倉景健・磯野員昌陣跡。', '⑤ 野村古戦場：浅井長政陣跡、磯野員昌が織田陣を突破した古戦場。'],
+  },
+  { time: '13:15〜14:15', badge: '目安', title: '昼食（長浜市内 または 米原近郊）', body: '移動ルート上または近郊の食堂で、スムーズに昼食をとる。', status: 'confirmed', tags: ['食事'] },
+  {
+    time: '14:30〜15:15', badge: '目安', title: '横山城跡・石田三成生誕地',
+    body: '横山城跡の麓や高台から湖北平野・姉川を見下ろす。', status: 'confirmed', tags: ['史跡'],
+    details: ['信長が奪取し秀吉を城代として置いた、南北を遮断する戦略的立地を検証する。', '石田町の石田三成生誕地（石田三成館・三献の茶の水汲み井戸）も散策する。'],
+  },
+  {
+    time: '15:30〜16:30', badge: '目安', title: '小谷城戦国歴史資料館・長浜城歴史博物館',
+    body: '小谷城出土瓦などの資料を確認後、長浜城で浅井包囲網の結末と近江支配を総括する。', status: 'confirmed', tags: ['必須'],
+    details: ['長浜城は、浅井氏滅亡後に秀吉が築いた最初の居城。'],
+  },
+  {
+    time: '16:30〜20:00', badge: '目安', title: '長浜ICから富山へ帰路',
+    body: '16:30までに現地での屋外視察・検証を完了。長浜ICから小杉ICへ向かい、南条SAなどで休憩・軽食をとる。', status: 'confirmed',
+    links: [{ label: '長浜IC → 小杉IC（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=長浜インターチェンジ,滋賀県&destination=小杉インターチェンジ,富山県&travelmode=driving', icon: 'map' }],
+  },
+  { time: '帰着後', badge: '確定', title: '⭐ 星を送ってから自宅へ帰宅', body: '小杉ICを降りたあと星を送り、最後に自宅へ帰宅する。', status: 'confirmed' },
+];
+
+const pendingList = [
+  '旅行日程の決定（11月13日〜14日 または 11月20日〜21日）',
+  '宿泊先の決定（HOTEL R9 The Yard 長浜インター / 長浜）',
+  '1日目の夕食、2日目の朝食',
+  '各施設の開館日・開館時間と最終入館時間の確認',
+  '姉川5大陣跡の駐車場所・現地の徒歩経路の確認',
+];
+---
+
+<Layout title="浅井包囲網・各将陣跡と姉川決戦 — プライベートの部屋" noindex>
+  <RoomSidebar currentPath="/private/shiga-history" breadcrumbs={[
+    { href: '/', label: '趣味のガレージ' },
+    { href: '/private', label: 'プライベートの部屋' },
+    { label: '浅井包囲網・姉川決戦' },
+  ]}>
+    <main class="page">
+      <header class="title-head">
+        <p class="label">Historical Field Trip · 2026</p>
+        <h1>浅井包囲網・各将陣跡 ＆<br />姉川決戦網羅プラン</h1>
+        <p class="subtitle">日程候補：11月13日（金）〜14日（土）または11月20日（金）〜21日（土）｜発着：富山</p>
+      </header>
+
+      <section class="overview-section">
+        <h2 class="section-title">今回の検証方針・ルート</h2>
+        <div class="overview-grid">
+          <div class="ov-item"><span>主要訪問地</span><strong>小谷城・虎御前山・姉川5大陣跡・国友・横山城・長浜城</strong></div>
+          <div class="ov-item"><span>移動手段</span><strong>自家用車（北陸自動車道経由）</strong></div>
+          <div class="ov-item"><span>除外エリア</span><strong>賤ヶ岳周辺・敦賀・渡岸寺・龍ヶ鼻砦・長浜城下町</strong></div>
+          <div class="ov-item highlight"><span>安全ルール</span><strong>2日目16:30までに屋外の全検証を完了</strong></div>
+        </div>
+      </section>
+
+      <div class="legend">
+        <span><b class="tag target">必須</b>今回の主な見学施設</span>
+        <span><b class="tag spot">史跡</b>城跡・古戦場など</span>
+        <span><b class="tag meal">食事</b>食事の予定</span>
+        <span><b class="tag hotel">宿泊</b>宿泊・ホテル関連</span>
+      </div>
+
+      <section class="day-section">
+        <div class="day-header day1"><b>DAY 1</b><div><strong>湖北進攻・虎御前山包囲陣地検証</strong><small>三姉妹の郷 → 小谷城 → 虎御前山</small></div></div>
+        <ol class="timeline">
+          {day1.map((item) => <li class={`tl-item ${item.status}`}>
+            <div class="time"><strong>{item.time}</strong><b class={`badge ${item.badge === '確定' ? 'confirmed' : item.badge === '目安' ? 'estimate' : 'pending'}`}>{item.badge}</b></div>
+            <div class="line"><i></i></div>
+            <article><h3>{item.title}{item.tags?.map((tag) => <b class={`tag ${tag === '必須' ? 'target' : tag === '史跡' ? 'spot' : tag === '食事' ? 'meal' : tag === '宿泊' ? 'hotel' : 'optional'}`}>{tag}</b>)}</h3><p>{item.body}</p>
+              {item.details && <ul class="details">{item.details.map((detail) => <li>{detail}</li>)}</ul>}
+              {item.hotels && <ul class="hotels">{item.hotels.map((hotel) => <li><div><strong>{hotel.name}</strong><small>{hotel.detail}</small></div><a href={hotel.href} target="_blank" rel="noopener noreferrer">公式サイト ↗</a></li>)}</ul>}
+              {item.links && <ul class="links">{item.links.map((link) => <li><a href={link.href} target="_blank" rel="noopener noreferrer">{link.icon === 'map' ? '⌖' : '◉'} {link.label} ↗</a></li>)}</ul>}
+            </article>
+          </li>)}
+        </ol>
+      </section>
+
+      <section class="day-section">
+        <div class="day-header day2"><b>DAY 2</b><div><strong>兵器・姉川両軍5大陣跡・決戦の結末</strong><small>国友鉄砲 → 姉川決戦地 → 横山城 → 長浜城</small></div></div>
+        <ol class="timeline">
+          {day2.map((item) => <li class={`tl-item ${item.status}`}>
+            <div class="time"><strong>{item.time}</strong><b class={`badge ${item.badge === '確定' ? 'confirmed' : item.badge === '目安' ? 'estimate' : 'pending'}`}>{item.badge}</b></div>
+            <div class="line"><i></i></div>
+            <article><h3>{item.title}{item.tags?.map((tag) => <b class={`tag ${tag === '必須' ? 'target' : tag === '史跡' ? 'spot' : tag === '食事' ? 'meal' : tag === '宿泊' ? 'hotel' : 'optional'}`}>{tag}</b>)}</h3><p>{item.body}</p>
+              {item.details && <ul class="details">{item.details.map((detail) => <li>{detail}</li>)}</ul>}
+              {item.links && <ul class="links">{item.links.map((link) => <li><a href={link.href} target="_blank" rel="noopener noreferrer">⌖ {link.label} ↗</a></li>)}</ul>}
+            </article>
+          </li>)}
+        </ol>
+      </section>
+
+      <section class="pending-section">
+        <h2 class="section-title">後日決定する項目</h2>
+        <ul>{pendingList.map((item) => <li>{item}</li>)}</ul>
+      </section>
+    </main>
+  </RoomSidebar>
+</Layout>
+
+<style>
+  .page { --teal:#39869b; --line:#cfdee1; --ink:#273044; min-height:100vh; padding:2rem 1.2rem 4rem; color:var(--ink); font-family:'BIZ UDPGothic','Noto Sans JP',sans-serif; background:radial-gradient(circle at 88% 14%,rgba(57,134,155,.13),transparent 38%),radial-gradient(circle at 12% 82%,rgba(218,148,68,.11),transparent 36%),#f8faf9; }
+  .title-head,.overview-section,.day-section,.pending-section,.legend { max-width:980px; margin-left:auto; margin-right:auto; }
+  .title-head { margin-bottom:1.2rem; padding:1.05rem 1.2rem 1.15rem; border:1px solid var(--line); border-radius:1.15rem; background:#fff; box-shadow:0 12px 26px rgba(39,48,68,.08); }
+  .label { margin:0; color:var(--teal); font-size:.75rem; font-weight:800; letter-spacing:.1em; } h1 { margin:.3rem 0 .5rem; color:#204f5b; font-family:'Hiragino Mincho ProN','Yu Mincho',serif; font-size:clamp(1.7rem,3.4vw,2.5rem); } .subtitle { margin:0; line-height:1.6; font-size:.9rem; color:#3e5560; }
+  .overview-section,.day-section,.pending-section { margin-bottom:1.6rem; } .section-title { display:flex; align-items:center; gap:.6rem; margin:0 0 .9rem; color:var(--teal); font-size:.8rem; letter-spacing:.1em; } .section-title::after { content:''; height:1px; flex:1; background:var(--line); }
+  .overview-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.6rem; } .ov-item { display:flex; flex-direction:column; gap:.2rem; padding:.75rem .9rem; border:1px solid var(--line); border-radius:.8rem; background:#fff; } .ov-item span { color:var(--teal); font-size:.72rem; font-weight:700; } .ov-item strong { font-size:.92rem; line-height:1.5; } .highlight { border-color:#f0d09a; background:#fffaf0; }
+  .legend { display:flex; flex-wrap:wrap; gap:.55rem 1.2rem; margin-bottom:1.4rem; padding:.7rem 1rem; border:1px solid var(--line); border-radius:.75rem; background:#fff; font-size:.8rem; color:#3e5560; } .badge,.tag { display:inline-block; width:max-content; padding:.12em .52em; border-radius:999px; font-size:.65rem; letter-spacing:.04em; } .confirmed { background:#daf0f5; color:#1d6a7d; } .estimate { background:#ddf0e6; color:#1d6845; } .pending { background:#fde8d0; color:#935c18; } .tag { margin-left:.45rem; color:#fff; vertical-align:middle; } .target { background:#c0392b; } .spot { background:#27885a; } .meal { background:#d35400; } .hotel { background:#2980b9; } .optional { background:#756d61; }
+  .day-header { display:flex; align-items:center; gap:1rem; margin-bottom:.9rem; padding:.85rem 1.1rem; border:1px solid var(--line); border-radius:.95rem; background:#fff; } .day-header>b { display:grid; place-items:center; width:3.2rem; height:3.2rem; border-radius:.7rem; color:#fff; font-size:.72rem; } .day1>b { background:#39869b; } .day2>b { background:#da9444; } .day-header strong,.day-header small { display:block; } .day-header strong { color:#204f5b; font-family:'Hiragino Mincho ProN','Yu Mincho',serif; } .day-header small { margin-top:.18rem; color:#6b8594; }
+  .timeline { margin:0; padding:0; list-style:none; } .tl-item { display:grid; grid-template-columns:7.2rem 1.6rem 1fr; } .time { display:flex; flex-direction:column; align-items:end; gap:.25rem; padding:.95rem .7rem .85rem 0; font-size:.8rem; color:#3e5560; text-align:right; } .line { position:relative; } .line::before { content:''; position:absolute; top:0; bottom:0; left:50%; width:2px; background:var(--line); transform:translateX(-50%); } .tl-item:last-child .line::before { bottom:50%; } .line i { position:relative; z-index:1; display:block; width:.72rem; height:.72rem; margin:1.05rem auto 0; border:2px solid #39869b; border-radius:50%; background:#39869b; box-shadow:0 0 0 3px rgba(57,134,155,.18); } .pending .line i { border-color:#aecdd5; background:#e8f3f6; box-shadow:none; }
+  article { margin:.5rem 0 .6rem .8rem; padding:.75rem .9rem; border:1px solid var(--line); border-left:3px solid var(--teal); border-radius:.75rem; background:#fff; box-shadow:0 4px 12px rgba(39,48,68,.06); } .pending article { border-style:dashed; border-left-style:dashed; background:#f5f8f9; } article h3 { margin:0 0 .3rem; font-size:.95rem; } article p { margin:0; color:#3e5560; font-size:.86rem; line-height:1.7; } .details { margin:.6rem 0 0; padding-left:1.15rem; color:#3e5560; font-size:.84rem; line-height:1.65; } .details li + li { margin-top:.2rem; }
+  .links,.hotels { margin:.6rem 0 0; padding:0; list-style:none; } .links { display:flex; flex-wrap:wrap; gap:.4rem; } .links a,.hotels a { display:inline-flex; padding:.28em .7em; border:1px solid #b8dfe8; border-radius:999px; background:#e0f3f8; color:#1a5f75; font-size:.76rem; font-weight:700; text-decoration:none; } .hotels { display:flex; flex-direction:column; gap:.4rem; } .hotels li { display:flex; align-items:center; justify-content:space-between; gap:.7rem; } .hotels strong,.hotels small { display:block; } .hotels strong { font-size:.84rem; } .hotels small { color:#6b8594; font-size:.76rem; }
+  .pending-section>ul { display:flex; flex-direction:column; gap:.45rem; margin:0; padding:0; list-style:none; } .pending-section li { padding:.6rem .95rem; border:1px dashed #b8d4db; border-radius:.65rem; background:#fff; color:#3e5560; font-size:.88rem; }
+  @media (max-width:700px) { .page { padding:1rem .8rem 2.5rem; } .title-head { padding:.8rem .9rem .95rem; } .subtitle { font-size:.82rem; } .overview-grid { grid-template-columns:1fr 1fr; } .tl-item { grid-template-columns:5.2rem 1.4rem 1fr; } .time { padding-right:.5rem; font-size:.72rem; } article { margin-left:.6rem; padding:.65rem .75rem; } article h3 { font-size:.88rem; } article p { font-size:.8rem; } .hotels li { align-items:flex-start; flex-direction:column; gap:.35rem; } }
+  @media (max-width:440px) { .overview-grid { grid-template-columns:1fr; } .tl-item { grid-template-columns:4.5rem 1.3rem 1fr; } }
+</style>
