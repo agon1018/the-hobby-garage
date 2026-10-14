@@ -14,12 +14,6 @@ type Link = {
   icon: 'map' | 'web' | 'train';
 };
 
-type HotelCandidate = {
-  name: string;
-  web: string;
-  map: string;
-};
-
 type ScheduleItem = {
   time: string;
   badge: '確定' | '目安' | '未定' | '当日';
@@ -27,7 +21,6 @@ type ScheduleItem = {
   body: string;
   status: 'confirmed' | 'pending';
   links?: Link[];
-  hotels?: HotelCandidate[];
 };
 
 // ── 10月17日（土） ────────────────────────────────────────────
@@ -70,43 +63,57 @@ const day1: ScheduleItem[] = [
   {
     time: '午後',
     badge: '確定',
-    title: 'ショッピング・観光',
-    body: '京都市内でショッピング・観光。衣類・雑貨などの買い物を中心に、若者向け・現代的なショップが多いエリアを優先する。具体的な店舗・ルートは後日決定。',
+    title: '観光',
+    body: '京都市内を観光する。行き先・詳細ルートは後日決定。',
     status: 'confirmed',
   },
   {
-    time: '15:00頃',
-    badge: '未定',
-    title: 'ホテルへ移動・チェックイン（候補3件）',
-    body: 'いずれかのホテルへ移動してチェックイン。ホテル駐車場を利用する。チェックイン時刻に合わせて前後調整可能。',
-    status: 'pending',
-    hotels: [
+    time: '17:00頃',
+    badge: '確定',
+    title: '京阪パーキング淀駅前へ移動',
+    body: '京阪パーキング淀駅前（京都府京都市伏見区淀池上町147-2）に車を駐車する。',
+    status: 'confirmed',
+    links: [
       {
-        name: 'インザグリーン京都・伏見',
-        web: 'https://kyoto-inthegreen.com/',
-        map: 'https://www.google.com/maps/search/?api=1&query=インザグリーン京都伏見,京都市伏見区竹田西小屋ノ内町1',
+        label: '京阪パーキング淀駅前（公式）',
+        href: 'https://www.keihan-t.co.jp/kp/parking/search/2020-08-05-101',
+        icon: 'web',
       },
       {
-        name: '京都プラザホテル近鉄十条',
-        web: 'https://kph-jujo.com/',
-        map: 'https://www.google.com/maps/search/?api=1&query=京都プラザホテル近鉄十条,京都府京都市南区西九条菅田町1-1',
-      },
-      {
-        name: 'ヴィアインプライム京都駅八条口',
-        web: 'https://www.viainn.com/kyoto-h/',
-        map: 'https://www.google.com/maps/search/?api=1&query=ヴィアインプライム京都駅八条口',
+        label: '駐車場（Google マップ）',
+        href: 'https://www.google.com/maps/search/?api=1&query=京阪パーキング淀駅前,京都府京都市伏見区淀池上町147-2',
+        icon: 'map',
       },
     ],
   },
   {
-    time: '夕方〜夜',
-    badge: '未定',
-    title: '夕食',
-    body: '伏見周辺が候補エリア。店舗は ⭐ 星と相談して後日決定する。',
-    status: 'pending',
+    time: '17:00頃',
+    badge: '確定',
+    title: '淀キャッスルイン チェックイン',
+    body: '駐車場から淀キャッスルインへ移動してチェックイン。',
+    status: 'confirmed',
+    links: [
+      {
+        label: '淀キャッスルイン（公式）',
+        href: 'https://yodo-castle-inn.com/',
+        icon: 'web',
+      },
+      {
+        label: 'ホテル（Google マップ）',
+        href: 'https://www.google.com/maps/search/?api=1&query=淀キャッスルイン,京都府京都市伏見区淀池上町147-24',
+        icon: 'map',
+      },
+    ],
   },
   {
     time: '夜',
+    badge: '確定',
+    title: '夕食',
+    body: 'チェックイン後に夕食へ出かける。店舗は後日決定する。',
+    status: 'confirmed',
+  },
+  {
+    time: '22:00頃',
     badge: '確定',
     title: 'ホテルへ戻り就寝',
     body: '夕食後はホテルへ戻り宿泊。翌日の秋華賞に備える。',
@@ -117,43 +124,38 @@ const day1: ScheduleItem[] = [
 // ── 10月18日（日） ────────────────────────────────────────────
 const day2: ScheduleItem[] = [
   {
-    time: '朝',
-    badge: '未定',
-    title: '朝食',
-    body: '朝食は未定。ホテル内または周辺で検討する。',
-    status: 'pending',
-  },
-  {
-    time: 'チェックアウト後',
+    time: '07:00頃',
     badge: '確定',
-    title: '車をホテルに置いて出発',
-    body: 'チェックアウト後、車はホテル駐車場に置いたまま。公共交通機関で京都競馬場へ向かう。',
+    title: '起床',
+    body: '起床して出発準備をする。',
     status: 'confirmed',
   },
   {
-    time: '出発時刻 未定',
-    badge: '未定',
-    title: 'ホテル → 丹波橋駅 or 伏見桃山駅',
-    body: 'ホテルから最寄り駅（丹波橋駅 or 伏見桃山駅）への具体的な移動方法・出発時刻は後日調整。丹波橋駅から京阪本線で淀駅へ向かう。',
-    status: 'pending',
+    time: '08:00',
+    badge: '確定',
+    title: 'チェックアウト',
+    body: '淀キャッスルインをチェックアウト。車は京阪パーキング淀駅前に駐車したままにする。',
+    status: 'confirmed',
+  },
+  {
+    time: '08:00頃',
+    badge: '確定',
+    title: '徒歩で京都競馬場へ',
+    body: 'ホテルから徒歩で京都競馬場へ向かい、8時頃の到着を目指す。',
+    status: 'confirmed',
     links: [
       {
-        label: '丹波橋駅（Google マップ）',
-        href: 'https://www.google.com/maps/search/?api=1&query=丹波橋駅,京都',
-        icon: 'train',
-      },
-      {
-        label: '伏見桃山駅（Google マップ）',
-        href: 'https://www.google.com/maps/search/?api=1&query=伏見桃山駅,京都',
-        icon: 'train',
+        label: '京都競馬場（Google マップ）',
+        href: 'https://www.google.com/maps/search/?api=1&query=京都競馬場,京都府京都市伏見区葭島渡場島町32',
+        icon: 'map',
       },
     ],
   },
   {
-    time: '午前',
+    time: '08:00頃',
     badge: '確定',
-    title: '電車で京阪「淀駅」へ',
-    body: '京阪「淀駅」から徒歩約2分で京都競馬場へ到着。午前中から入場して競馬を楽しむ。',
+    title: '京都競馬場 到着',
+    body: '京都競馬場に到着。午前中から入場して競馬を楽しむ。',
     status: 'confirmed',
     links: [
       {
@@ -194,15 +196,15 @@ const day2: ScheduleItem[] = [
   {
     time: '夕方',
     badge: '確定',
-    title: '淀駅 → ホテル方面へ',
-    body: '淀駅から電車でホテル方面へ戻り、ホテルで車を回収する。',
+    title: '京阪パーキング淀駅前へ戻る',
+    body: '徒歩で京阪パーキング淀駅前へ戻り、車を回収する。',
     status: 'confirmed',
   },
   {
     time: '夕方〜夜',
     badge: '未定',
     title: '夕食',
-    body: '夕食場所は ⭐ 星と相談して後日決定する。食事を済ませてから富山へ出発する。',
+    body: '夕食場所は ⭐と相談して後日決定する。食事を済ませてから富山へ出発する。',
     status: 'pending',
   },
   {
@@ -223,12 +225,9 @@ const day2: ScheduleItem[] = [
 
 // ── 未決定項目一覧 ────────────────────────────────────────────
 const pendingList = [
-  { day: '10/17', label: '宿泊ホテルの決定（インザグリーン京都・伏見 / 京都プラザホテル近鉄十条 / ヴィアインプライム京都駅八条口）' },
   { day: '10/17', label: '昼食（店舗）' },
-  { day: '10/17', label: '京都でのショッピング店舗・詳細観光ルート' },
-  { day: '10/17', label: '夕食（店舗）※伏見周辺が候補' },
-  { day: '10/18', label: '朝食' },
-  { day: '10/18', label: 'ホテルから最寄り駅までの移動方法・出発時刻' },
+  { day: '10/17', label: '京都での観光先・詳細ルート' },
+  { day: '10/17', label: '夕食（店舗）' },
   { day: '10/18', label: '競馬場での昼食' },
   { day: '10/18', label: '競馬終了後の休憩時間の目安' },
   { day: '10/18', label: '夕食（店舗）' },
@@ -251,7 +250,7 @@ const pendingList = [
       <header class="title-head">
         <p class="label">Travel · 2026</p>
         <h1>京都競馬場旅行</h1>
-        <p class="subtitle">2026年10月17日（土）〜18日（日）｜2名（⭐ 星）｜富山出発</p>
+        <p class="subtitle">2026年10月17日（土）〜18日（日）｜2名（⭐）｜富山出発</p>
       </header>
 
       {/* ── 旅行概要カード ── */}
@@ -264,7 +263,7 @@ const pendingList = [
           </div>
           <div class="ov-item">
             <span class="ov-key">参加者</span>
-            <span class="ov-val">2名（⭐ 星）</span>
+            <span class="ov-val">2名（⭐）</span>
           </div>
           <div class="ov-item">
             <span class="ov-key">出発地</span>
@@ -272,11 +271,11 @@ const pendingList = [
           </div>
           <div class="ov-item">
             <span class="ov-key">移動手段</span>
-            <span class="ov-val">自家用車（競馬当日は電車）</span>
+            <span class="ov-val">自家用車（競馬場へは徒歩）</span>
           </div>
           <div class="ov-item">
             <span class="ov-key">宿泊先</span>
-            <span class="ov-val">候補3件で検討中</span>
+            <span class="ov-val">淀キャッスルイン</span>
           </div>
           <div class="ov-item ov-item--highlight">
             <span class="ov-key">メインイベント</span>
@@ -320,25 +319,6 @@ const pendingList = [
               <div class="tl-card">
                 <h3 class="tl-title">{item.title}</h3>
                 <p class="tl-body">{item.body}</p>
-                {item.hotels && item.hotels.length > 0 && (
-                  <ul class="hotel-list">
-                    {item.hotels.map((hotel) => (
-                      <li class="hotel-row">
-                        <span class="hotel-name">{hotel.name}</span>
-                        <span class="hotel-btns">
-                          <a class="tl-link tl-link--web" href={hotel.web} target="_blank" rel="noopener noreferrer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            公式
-                          </a>
-                          <a class="tl-link tl-link--map" href={hotel.map} target="_blank" rel="noopener noreferrer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            地図
-                          </a>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
                 {item.links && item.links.length > 0 && (
                   <ul class="tl-links">
                     {item.links.map((link) => (
@@ -397,25 +377,6 @@ const pendingList = [
               <div class="tl-card">
                 <h3 class="tl-title">{item.title}</h3>
                 <p class="tl-body">{item.body}</p>
-                {item.hotels && item.hotels.length > 0 && (
-                  <ul class="hotel-list">
-                    {item.hotels.map((hotel) => (
-                      <li class="hotel-row">
-                        <span class="hotel-name">{hotel.name}</span>
-                        <span class="hotel-btns">
-                          <a class="tl-link tl-link--web" href={hotel.web} target="_blank" rel="noopener noreferrer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            公式
-                          </a>
-                          <a class="tl-link tl-link--map" href={hotel.map} target="_blank" rel="noopener noreferrer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            地図
-                          </a>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
                 {item.links && item.links.length > 0 && (
                   <ul class="tl-links">
                     {item.links.map((link) => (

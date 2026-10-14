@@ -17,8 +17,8 @@ type ScheduleItem = {
 };
 
 const day1: ScheduleItem[] = [
-  { time: '08:30', badge: '確定', title: '自宅を出発', body: '自家用車で出発し、⭐ 星をお迎えに向かう。', status: 'confirmed' },
-  { time: '09:00', badge: '確定', title: '⭐ 星をお迎え', body: '星をお迎えして、高速道路で湖北エリアへ向かう。', status: 'confirmed' },
+  { time: '08:30', badge: '確定', title: '自宅を出発', body: '自家用車で出発し、⭐をお迎えに向かう。', status: 'confirmed' },
+  { time: '09:00', badge: '確定', title: '⭐をお迎え', body: '星をお迎えして、高速道路で湖北エリアへ向かう。', status: 'confirmed' },
   {
     time: '09:00〜12:30', badge: '目安', title: '小杉IC → 湖北エリアへ移動',
     body: '小杉ICから北陸自動車道を利用し、小谷城スマートICまたは木之本ICへ向かう。', status: 'confirmed',
@@ -32,23 +32,25 @@ const day1: ScheduleItem[] = [
     time: '12:30〜13:40', badge: '目安', title: '道の駅 浅井三姉妹の郷で昼食・義と絆館',
     body: '道の駅内で昼食後、「豊臣博覧会 義と絆館」で浅井三代と織田・豊臣の歴史を予習する。', status: 'confirmed', tags: ['必須', '食事'],
     details: ['近江牛うどん・丼、自然薯料理などを候補にする。'],
+    links: [{ label: '道の駅 → 小谷城戦国歴史資料館（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=道の駅+浅井三姉妹の郷,滋賀県&destination=小谷城戦国歴史資料館,滋賀県&travelmode=driving', icon: 'map' }],
   },
   {
     time: '13:50〜15:20', badge: '目安', title: '小谷城資料館周辺 → 番所跡〜金吾丸〜本丸',
     body: '小谷城戦国歴史資料館周辺を散策後、追手道林道を車で上り番所跡駐車場へ。', status: 'confirmed', tags: ['必須', '史跡'],
     details: ['清水神社、追手門跡など麓の屋敷跡・集落跡を散策。', '番所跡 → 御馬屋跡 → 赤尾屋敷跡 → 金吾丸跡 → 本丸跡手前を歩き、番所跡へ戻る。', '大嶽へは登らず、金吾丸〜本丸から虎御前山との距離感を確かめる。'],
+    links: [{ label: '小谷城 → 虎御前山（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=小谷城戦国歴史資料館,滋賀県&destination=虎御前山城跡,滋賀県&travelmode=driving', icon: 'map' }],
   },
   {
     time: '15:30〜16:40', badge: '目安', title: '虎御前山（織田軍最前線包囲陣地群）',
     body: '小谷城の正面約2kmに位置する高台から、小谷城を封じ込めた監視体制と地形を見学する。', status: 'confirmed', tags: ['史跡'],
     details: ['織田信長本陣跡、羽柴秀吉陣跡、柴田勝家陣跡、丹羽長秀陣跡が連なる尾根筋を散策する。', '小谷城を見上げる視界と圧迫感を検証する。'],
+    links: [{ label: '虎御前山 → HOTEL R9 長浜インター（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=虎御前山城跡,滋賀県&destination=HOTEL+R9+The+Yard+長浜インター,滋賀県&travelmode=driving', icon: 'map' }],
   },
   {
-    time: '17:00〜', badge: '未定', title: 'ホテルチェックイン・夕食',
-    body: '宿泊先は長浜エリアの2候補から決定。夕食は長浜IC周辺または長浜市内の近江牛専門店・ステーキハウスを検討する。', status: 'pending', tags: ['宿泊', '食事'],
+    time: '17:00〜', badge: '確定', title: 'ホテルチェックイン・夕食',
+    body: 'HOTEL R9 The Yard 長浜インターにチェックイン。夕食は長浜IC周辺または長浜市内の近江牛専門店・ステーキハウスを検討する。', status: 'confirmed', tags: ['宿泊', '食事'],
     hotels: [
       { name: 'HOTEL R9 The Yard 長浜インター', detail: '長浜ICから車で約3分・全44室', href: 'https://hotel-r9.jp/hotels/nagahamainter/' },
-      { name: 'HOTEL R9 The Yard 長浜', detail: '長浜駅から徒歩約12分・全34室', href: 'https://hotel-r9.jp/hotels/nagahama/' },
     ],
   },
 ];
@@ -58,21 +60,36 @@ const day2: ScheduleItem[] = [
     time: '10:00〜11:15', badge: '目安', title: '国友鉄砲ミュージアム',
     body: 'ホテルをゆっくり10:00に出発。姉川の戦いや小谷城攻略で織田軍の火力を支えた、国友鉄砲の生産拠点を見学する。', status: 'confirmed', tags: ['必須'],
     details: ['当時の火縄銃や鍛冶技術の資料を鑑賞する。'],
+    links: [
+      { label: 'HOTEL R9 長浜インター → 国友（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=HOTEL+R9+The+Yard+長浜インター,滋賀県&destination=国友鉄砲ミュージアム,滋賀県&travelmode=driving', icon: 'map' },
+      { label: '国友 → 徳川家康陣跡（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=国友鉄砲ミュージアム,滋賀県&destination=徳川家康陣跡,滋賀県&travelmode=driving', icon: 'map' },
+    ],
   },
   {
     time: '11:25〜13:00', badge: '目安', title: '姉川両軍陣跡・2大古戦場を巡る',
     body: '国友から南〜東へ、車で数分間隔の史跡を順に巡る。各地点を15〜20分程度で確認する。', status: 'confirmed', tags: ['史跡'],
     details: ['① 徳川家康陣跡（岡山・陣の山）：姉川南岸の高台に置かれた本陣地。', '② 織田信長本陣跡（陣付山・岡村）：姉川合戦全体を指図した本陣跡。', '③ 姉川決戦地碑（三田町・血原・血川橋）：川幅と渡河距離感を検証する。', '④ 三田村氏館跡：朝倉景健・磯野員昌陣跡。', '⑤ 野村古戦場：浅井長政陣跡、磯野員昌が織田陣を突破した古戦場。'],
+    links: [
+      { label: '家康陣跡 → 信長本陣跡（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=徳川家康陣跡,滋賀県&destination=織田信長本陣跡,滋賀県&travelmode=driving', icon: 'map' },
+      { label: '信長本陣跡 → 姉川決戦地碑（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=織田信長本陣跡,滋賀県&destination=姉川古戦場決戦地碑,滋賀県&travelmode=driving', icon: 'map' },
+      { label: '決戦地碑 → 三田村氏館跡（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=姉川古戦場決戦地碑,滋賀県&destination=三田村氏館跡,滋賀県&travelmode=driving', icon: 'map' },
+      { label: '三田村氏館跡 → 野村古戦場（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=三田村氏館跡,滋賀県&destination=野村古戦場,滋賀県&travelmode=driving', icon: 'map' },
+      { label: '野村古戦場 → 昼食エリア（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=野村古戦場,滋賀県&destination=長浜市,滋賀県&travelmode=driving', icon: 'map' },
+    ],
   },
-  { time: '13:15〜14:15', badge: '目安', title: '昼食（長浜市内 または 米原近郊）', body: '移動ルート上または近郊の食堂で、スムーズに昼食をとる。', status: 'confirmed', tags: ['食事'] },
+  {
+    time: '13:15〜14:15', badge: '目安', title: '昼食（長浜市内 または 米原近郊）', body: '移動ルート上または近郊の食堂で、スムーズに昼食をとる。', status: 'confirmed', tags: ['食事'],
+    links: [{ label: '長浜市内 → 横山城跡（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=長浜市,滋賀県&destination=横山城跡,滋賀県&travelmode=driving', icon: 'map' }],
+  },
   {
     time: '14:30〜15:15', badge: '目安', title: '横山城跡・石田三成生誕地',
     body: '横山城跡の麓や高台から湖北平野・姉川を見下ろす。', status: 'confirmed', tags: ['史跡'],
     details: ['信長が奪取し秀吉を城代として置いた、南北を遮断する戦略的立地を検証する。', '石田町の石田三成生誕地（石田三成館・三献の茶の水汲み井戸）も散策する。'],
+    links: [{ label: '横山城跡 → 長浜城歴史博物館（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=横山城跡,滋賀県&destination=長浜城歴史博物館,滋賀県&travelmode=driving', icon: 'map' }],
   },
   {
-    time: '15:30〜16:30', badge: '目安', title: '小谷城戦国歴史資料館・長浜城歴史博物館',
-    body: '小谷城出土瓦などの資料を確認後、長浜城で浅井包囲網の結末と近江支配を総括する。', status: 'confirmed', tags: ['必須'],
+    time: '15:30〜16:30', badge: '目安', title: '長浜城歴史博物館',
+    body: '長浜城で、浅井包囲網の結末と近江支配を総括する。', status: 'confirmed', tags: ['必須'],
     details: ['長浜城は、浅井氏滅亡後に秀吉が築いた最初の居城。'],
   },
   {
@@ -80,12 +97,11 @@ const day2: ScheduleItem[] = [
     body: '16:30までに現地での屋外視察・検証を完了。長浜ICから小杉ICへ向かい、南条SAなどで休憩・軽食をとる。', status: 'confirmed',
     links: [{ label: '長浜IC → 小杉IC（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=長浜インターチェンジ,滋賀県&destination=小杉インターチェンジ,富山県&travelmode=driving', icon: 'map' }],
   },
-  { time: '帰着後', badge: '確定', title: '⭐ 星を送ってから自宅へ帰宅', body: '小杉ICを降りたあと星を送り、最後に自宅へ帰宅する。', status: 'confirmed' },
+  { time: '帰着後', badge: '確定', title: '⭐を送ってから自宅へ帰宅', body: '小杉ICを降りたあと星を送り、最後に自宅へ帰宅する。', status: 'confirmed' },
 ];
 
 const pendingList = [
   '旅行日程の決定（11月13日〜14日 または 11月20日〜21日）',
-  '宿泊先の決定（HOTEL R9 The Yard 長浜インター / 長浜）',
   '1日目の夕食、2日目の朝食',
   '各施設の開館日・開館時間と最終入館時間の確認',
   '姉川5大陣跡の駐車場所・現地の徒歩経路の確認',

@@ -24,11 +24,11 @@ type ScheduleItem = {
 
 const schedule: ScheduleItem[] = [
   {
-    time: '08:00', badge: '確定', title: '💧 泉お迎え',
+    time: '08:00', badge: '確定', title: '💧お迎え',
     body: '泉をお迎えに行く。', status: 'confirmed',
     links: [{ label: '行きのルート（地図）', href: 'https://maps.app.goo.gl/wYPTJxadZuZo4beP7', icon: 'map' }],
   },
-  { time: '08:30', badge: '確定', title: '⭐ 星お迎え', body: '星をお迎えに行く。', status: 'confirmed' },
+  { time: '08:30', badge: '確定', title: '⭐お迎え', body: '星をお迎えに行く。', status: 'confirmed' },
   {
     time: '09:00', badge: '確定', title: '星乃珈琲でモーニング',
     body: '星乃珈琲 高岡熊野店でモーニングを楽しむ。', status: 'confirmed',
@@ -36,7 +36,7 @@ const schedule: ScheduleItem[] = [
   },
   {
     time: '11:00', badge: '確定', title: '金沢競馬場到着',
-    body: '金沢競馬場に到着。⭐ 星、三連複万馬券Get！！', status: 'confirmed',
+    body: '金沢競馬場に到着。⭐、三連複万馬券Get！！', status: 'confirmed',
     links: [
       { label: '金沢競馬場（公式）', href: 'https://www.kanazawakeiba.com/', icon: 'web' },
       { label: '金沢競馬場（地図）', href: 'https://www.google.com/maps/search/?api=1&query=金沢競馬場,石川県金沢市八田町西1', icon: 'map' },
@@ -45,7 +45,7 @@ const schedule: ScheduleItem[] = [
   { time: '14:00', badge: '確定', title: 'お昼やきそば＆たこ焼き', body: '競馬場でやきそばとたこ焼きを食べる。', status: 'confirmed' },
   {
     time: '18:00', badge: '確定', title: '白山大賞典観戦',
-    body: 'GⅢ白山大賞典を観戦。⭐ 星ワイド的中！ 最終レースまで観戦してから帰宅する。', status: 'confirmed',
+    body: 'GⅢ白山大賞典を観戦。⭐ワイド的中！ 最終レースまで観戦してから帰宅する。', status: 'confirmed',
     links: [
       { label: '白山大賞典 2026（公式）', href: 'https://www.keiba.go.jp/dirtgraderace/2026/0922_hakusandaishoten/introduction.html', icon: 'web' },
       { label: '帰りのルート（地図）', href: 'https://maps.app.goo.gl/8s8h5MJtM6dYGHko7', icon: 'map' },
@@ -66,8 +66,8 @@ const schedule: ScheduleItem[] = [
     body: '富山レジャーランド掛尾店で北斗を乗り打ちする。', status: 'confirmed',
     links: [{ label: '富山レジャーランド掛尾店（地図）', href: 'https://www.google.co.jp/maps/place/%E5%AF%8C%E5%B1%B1%E3%83%AC%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89%E6%8E%9B%E5%B0%BE%E5%BA%97/@36.6177516,137.1804833,13z/data=!4m10!1m2!2m1!1z44Os44K444Oj44Op44Oz!3m6!1s0x5ff791001f2e8715:0xc787c797d26fe0c8!8m2!3d36.6660317!4d137.2088901!15sCg_jg6zjgrjjg6Pjg6njg7NaESIP44Os44K444Oj44Op44OzkgEMdmlkZW9fYXJjYWRlmgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0Wk5GRnRjRVpPV0dNelZsaG5NbUZJUW1waU1Vb3pVVmRPU2xkc1JSQULgAQD6AQQIGBAV!16s%2Fg%2F11w3xl83kv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D', icon: 'map' }],
   },
-  { time: '翌0:00', badge: '確定', title: '💧 泉を送る', body: '泉を送る。', status: 'confirmed' },
-  { time: '翌0:30', badge: '確定', title: '⭐ 星とニンマリ', body: '星とニンマリ。', status: 'confirmed' },
+  { time: '翌0:00', badge: '確定', title: '💧を送る', body: '泉を送る。', status: 'confirmed' },
+  { time: '翌0:30', badge: '確定', title: '⭐とニンマリ', body: '星とニンマリ。', status: 'confirmed' },
   { time: '翌1:00', badge: '確定', title: '解散', body: '解散。', status: 'confirmed' },
 ];
 ---
@@ -87,7 +87,7 @@ const schedule: ScheduleItem[] = [
       <header class="title-head">
         <p class="label">Day Trip · 2026</p>
         <h1>白山大賞典 観戦</h1>
-        <p class="subtitle">2026年9月22日（火・休日）｜3名（⭐ 星・💧 泉）｜富山から日帰り</p>
+        <p class="subtitle">2026年9月22日（火・休日）｜3名（⭐・💧）｜富山から日帰り</p>
       </header>
 
       {/* ── 旅行概要カード ── */}
@@ -100,7 +100,7 @@ const schedule: ScheduleItem[] = [
           </div>
           <div class="ov-item">
             <span class="ov-key">参加者</span>
-            <span class="ov-val">3名（⭐ 星・💧 泉）</span>
+            <span class="ov-val">3名（⭐・💧）</span>
           </div>
           <div class="ov-item">
             <span class="ov-key">出発地</span>
