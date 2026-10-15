@@ -27,22 +27,22 @@ export type RaceResult = {
   venue: string;
   classLabel: string;
   raceName: string;
-  weather: string;
-  going: string;
+  weather?: string;
+  going?: string;
   surface: string;
   distance: number;
   raceNumber: number;
-  bracket: number;
-  horseNumber: number;
-  fieldSize: number;
-  popularity: number;
+  bracket?: number;
+  horseNumber?: number;
+  fieldSize?: number;
+  popularity?: number;
   finish: string;
   jockey: string;
   carriedWeight: number;
   time: string;
   margin: string;
   last3f: string;
-  horseWeight: number;
+  horseWeight?: number;
   note?: string;
 };
 
@@ -110,9 +110,23 @@ export const horses: Horse[] = [
       "starts": 14,
       "wins": 3
     },
-    "updatedAt": "26/10/8",
+    "updatedAt": "26/10/15",
     "photo": "/images/horse/canicule/cover.webp",
     "comments": [
+      {
+        "date": "26/10/15",
+        "location": "菊沢厩舎",
+        "summary": "１４日は軽めの調整を行いました。１５日は美浦坂路で追い切りました（５４秒１－３８秒７－２５秒２－１２秒５）。",
+        "quote": "先週の３日間競馬の関係で火曜日が全休日扱いとなりました。カニキュルは日曜日の競馬を予定しているので影響は比較的少ないものの、輸送も控えているなかで木曜日に追い切って日曜日の競馬へ向かうとなると、少し日程に余裕がありません。そのため、週末と今朝の調教を合わせて負荷をかけるイメージで、坂路にて時計を出しています。もともと動ける馬ですし、今朝も無理なく楽に上がってくることができており、問題ない様子を見せてくれていますよ。あとは当日のテンション、そして今回は一気の距離延長になりますので、そこにうまく対応できるかどうかでしょう。ここをこなしてくれれば今後の選択肢も広がるはずですから、何とか頑張ってほしいと思っています。１８日の新潟競馬（新潟牝馬Ｓ・牝馬限定・芝２２００ｍ）に杉原騎手で出走いたします",
+        "source": "菊沢師"
+      },
+      {
+        "date": "26/10/12",
+        "location": "菊沢厩舎",
+        "summary": "１８日の新潟競馬（新潟牝馬Ｓ・牝馬限定・芝２２００ｍ）に特別登録を行いました。同レースはフルゲート１８頭のところ、本馬を含めて１０頭の登録があります。",
+        "quote": "",
+        "source": ""
+      },
       {
         "date": "26/10/8",
         "location": "菊沢厩舎",
@@ -1824,6 +1838,26 @@ export const horses: Horse[] = [
     ],
     "workouts": [
       {
+        "date": "26/10/15",
+        "weekday": "木",
+        "rider": "助手",
+        "course": "美浦坂",
+        "going": "良",
+        "times": "54.1 - 38.7 - 25.2 - 12.5",
+        "manner": "馬ナリ余力",
+        "around": "-"
+      },
+      {
+        "date": "26/10/11",
+        "weekday": "日",
+        "rider": "助手",
+        "course": "美浦坂",
+        "going": "良",
+        "times": "56.0 - 40.6 - 26.5 - 13.2",
+        "manner": "馬ナリ余力",
+        "around": "-"
+      },
+      {
         "date": "26/10/7",
         "weekday": "水",
         "rider": "杉原誠",
@@ -2642,6 +2676,22 @@ export const horses: Horse[] = [
     ],
     "races": [
       {
+        "date": "26/10/18",
+        "venue": "新潟",
+        "classLabel": "国)牝)",
+        "raceName": "新潟牝馬Ｓ-Ｌ",
+        "surface": "芝",
+        "distance": 2200,
+        "raceNumber": 11,
+        "fieldSize": 10,
+        "finish": "出走確定",
+        "jockey": "杉原",
+        "carriedWeight": 55,
+        "time": "15:10",
+        "margin": "",
+        "last3f": ""
+      },
+      {
         "date": "26/8/9",
         "venue": "新潟",
         "classLabel": "混)",
@@ -2969,9 +3019,16 @@ export const horses: Horse[] = [
       "starts": 5,
       "wins": 2
     },
-    "updatedAt": "26/10/6",
+    "updatedAt": "26/10/13",
     "photo": "/images/horse/rogerley-mine/cover.webp",
     "comments": [
+      {
+        "date": "26/10/13",
+        "location": "ＮＦ天栄",
+        "summary": "トレッドミル調整か周回コースで軽めのキャンター調整を行い、日によっては坂路でハロン１４～１５秒のキャンターを取り入れています。",
+        "quote": "大きな問題なく調整を続けることができており、体調面も安定しています。現在は坂路を主体に入念な乗り込みを進めていますが、気配も悪くありません。当初は今開催に組まれている１４００ｍ戦を視野に入れていましたが、若干ながら馬体が立派に映るところもあり、久保田調教師と相談した結果、翌開催まで出走を延ばすことになりました。引き続き状態をよく確認しながら調整を進め、数週の内に無事に送り出せるようにしていきたいと考えています。馬体重は４７１キロです",
+        "source": "天栄担当者"
+      },
       {
         "date": "26/10/6",
         "location": "ＮＦ天栄",

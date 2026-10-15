@@ -34,7 +34,7 @@ const day1: ScheduleItem[] = [
     links: [
       {
         label: 'Google マップで経路を確認',
-        href: 'https://www.google.com/maps/dir/?api=1&origin=富山インターチェンジ,富山県&destination=京都駅,京都府&travelmode=driving',
+        href: 'https://www.google.com/maps/dir/?api=1&origin=富山インターチェンジ,富山県&destination=レンタル着物岡本%20嵐山店,京都府&travelmode=driving',
         icon: 'map',
       },
     ],
@@ -49,29 +49,126 @@ const day1: ScheduleItem[] = [
   {
     time: '11:00〜12:00頃',
     badge: '目安',
-    title: '京都到着',
-    body: '道路状況によって前後する可能性あり。京都駅周辺の駐車場へ車を停める。この時点ではホテルへは向かわず、京都駅周辺を起点に行動する。',
+    title: '嵐山到着・周辺駐車場に駐車',
+    body: '道路状況によって前後する可能性あり。レンタル着物岡本 嵐山店周辺の候補駐車場から選んで車を停める。',
     status: 'confirmed',
-  },
-  {
-    time: '昼',
-    badge: '未定',
-    title: '昼食',
-    body: '京都駅周辺で昼食。店舗は後日決定する。',
-    status: 'pending',
+    links: [
+      {
+        label: 'レンタル着物岡本 嵐山店（Google マップ）',
+        href: 'https://maps.app.goo.gl/UkLd9yvfqrBFhPY76',
+        icon: 'map',
+      },
+      {
+        label: 'コンセプト嵐電嵐山駅北コインパーキング',
+        href: 'https://maps.app.goo.gl/GTF5HS5hR4zdxNs86',
+        icon: 'map',
+      },
+      {
+        label: 'akippa三煌ガレージsg',
+        href: 'https://maps.app.goo.gl/vc8FZ8yUch557Rb89',
+        icon: 'map',
+      },
+      {
+        label: '三井のリパーク 嵐電嵐山駅西駐車場',
+        href: 'https://maps.app.goo.gl/NmzMCF6AUHePietV7',
+        icon: 'map',
+      },
+      {
+        label: 'タイムズ嵯峨天龍寺第2',
+        href: 'https://maps.app.goo.gl/CARnvdJmyLD3pmk18',
+        icon: 'map',
+      },
+      {
+        label: 'コンセプト嵯峨天龍寺コインパーキング',
+        href: 'https://maps.app.goo.gl/gkQWy4qF1tk5xQrZ6',
+        icon: 'map',
+      },
+      {
+        label: '三井のリパーク JR嵯峨嵐山駅南駐車場',
+        href: 'https://maps.app.goo.gl/maqPsCGAyRYwXboU6',
+        icon: 'map',
+      },
+      {
+        label: 'Park1st.阪急嵐山駅前',
+        href: 'https://maps.app.goo.gl/Ekm8at7Hp75eEGu8A',
+        icon: 'map',
+      },
+    ],
   },
   {
     time: '午後',
     badge: '確定',
-    title: '観光',
-    body: '京都市内を観光する。行き先・詳細ルートは後日決定。',
+    title: '着物レンタル・嵐山観光',
+    body: 'レンタル着物岡本 嵐山店で着物をレンタルし、着物姿で嵐山を巡る。',
     status: 'confirmed',
+    links: [
+      {
+        label: 'レンタル着物岡本 嵐山店（公式）',
+        href: 'https://www.okamoto-kimono.com/storeinfo/arashiyama.html',
+        icon: 'web',
+      },
+      {
+        label: '店舗（Google マップ）',
+        href: 'https://maps.app.goo.gl/UkLd9yvfqrBFhPY76',
+        icon: 'map',
+      },
+    ],
+  },
+  {
+    time: '午後',
+    badge: '確定',
+    title: '嵐山で食べ歩き',
+    body: '嵐山で食べ歩きを楽しむ。',
+    status: 'confirmed',
+    links: [
+      {
+        label: '嵐山の食べ歩きマップ23選',
+        href: 'https://www.leafkyoto.net/240814-kyoto-arashiyamafood/',
+        icon: 'web',
+      },
+      {
+        label: '京都・嵐山で食べ歩き！おすすめ12選',
+        href: 'https://media.kepco.co.jp/town-and-life/17762372',
+        icon: 'web',
+      },
+      {
+        label: '嵐山駅周辺の食べ歩きグルメ',
+        href: 'https://tabelog.com/matome/26062/',
+        icon: 'web',
+      },
+    ],
   },
   {
     time: '17:00頃',
     badge: '確定',
-    title: '京阪パーキング淀駅前へ移動',
-    body: '京阪パーキング淀駅前（京都府京都市伏見区淀池上町147-2）に車を駐車する。',
+    title: '嵐山月灯路のチケットを購入',
+    body: '嵐山月灯路の券売所へ行き、チケットを購入する。',
+    status: 'confirmed',
+    links: [
+      {
+        label: '嵐山月灯路（公式）',
+        href: 'https://arashiyama-tsukitouro.jp/',
+        icon: 'web',
+      },
+      {
+        label: '券売所（Google マップ）',
+        href: 'https://maps.app.goo.gl/WDXiNvYiSBduQ32A7',
+        icon: 'map',
+      },
+    ],
+  },
+  {
+    time: '17:00〜20:00頃',
+    badge: '確定',
+    title: '嵐山月灯路を楽しむ',
+    body: '嵐山月灯路を20時頃まで楽しむ。',
+    status: 'confirmed',
+  },
+  {
+    time: '20:00頃',
+    badge: '確定',
+    title: '淀キャッスルインへ移動',
+    body: '嵐山から京阪パーキング淀駅前へ移動して車を駐車し、淀キャッスルインへ向かう。',
     status: 'confirmed',
     links: [
       {
@@ -87,7 +184,7 @@ const day1: ScheduleItem[] = [
     ],
   },
   {
-    time: '17:00頃',
+    time: '到着後',
     badge: '確定',
     title: '淀キャッスルイン チェックイン',
     body: '駐車場から淀キャッスルインへ移動してチェックイン。',
@@ -106,17 +203,10 @@ const day1: ScheduleItem[] = [
     ],
   },
   {
-    time: '夜',
-    badge: '確定',
-    title: '夕食',
-    body: 'チェックイン後に夕食へ出かける。店舗は後日決定する。',
-    status: 'confirmed',
-  },
-  {
     time: '22:00頃',
     badge: '確定',
     title: 'ホテルへ戻り就寝',
-    body: '夕食後はホテルへ戻り宿泊。翌日の秋華賞に備える。',
+    body: 'ホテルで就寝し、翌日の秋華賞に備える。',
     status: 'confirmed',
   },
 ];
@@ -176,7 +266,7 @@ const day2: ScheduleItem[] = [
     time: '午後',
     badge: '確定',
     title: 'GⅠ 秋華賞 観戦',
-    body: 'メインレース「秋華賞」（牝馬三冠の最終戦）を観戦。その後も12Rまで全レースを楽しむ。',
+    body: 'メインレース「秋華賞」（牝馬三冠の最終戦）を観戦。11R終了後に京都競馬場を出発する。',
     status: 'confirmed',
     links: [
       {
@@ -187,31 +277,50 @@ const day2: ScheduleItem[] = [
     ],
   },
   {
-    time: '12R終了後',
-    badge: '確定',
-    title: '競馬場でゆっくり過ごす',
-    body: '12R終了後すぐには帰らない。競馬場内で少しゆっくり過ごし、混雑が落ち着いてから淀駅へ移動する。',
-    status: 'confirmed',
-  },
-  {
-    time: '夕方',
+    time: '11R終了後',
     badge: '確定',
     title: '京阪パーキング淀駅前へ戻る',
     body: '徒歩で京阪パーキング淀駅前へ戻り、車を回収する。',
     status: 'confirmed',
   },
   {
+    time: '夕方',
+    badge: '確定',
+    title: '伏見稲荷大社へ移動',
+    body: '京阪パーキング淀駅前から車で伏見稲荷大社参拝駐車場へ向かう。',
+    status: 'confirmed',
+    links: [
+      {
+        label: '駐車場から伏見稲荷大社への経路',
+        href: 'https://www.google.com/maps/dir/?api=1&origin=京阪パーキング淀駅前,京都府京都市伏見区淀池上町147-2&destination=伏見稲荷大社参拝駐車場,京都府京都市伏見区深草薮之内町68&travelmode=driving',
+        icon: 'map',
+      },
+    ],
+  },
+  {
     time: '夕方〜夜',
-    badge: '未定',
-    title: '夕食',
-    body: '夕食場所は ⭐と相談して後日決定する。食事を済ませてから富山へ出発する。',
-    status: 'pending',
+    badge: '確定',
+    title: '伏見稲荷大社を参拝・ライトアップを楽しむ',
+    body: '伏見稲荷大社を参拝し、ライトアップを楽しむ。',
+    status: 'confirmed',
+    links: [
+      {
+        label: '伏見稲荷大社（公式）',
+        href: 'https://inari.jp/',
+        icon: 'web',
+      },
+      {
+        label: '伏見稲荷大社（Google マップ）',
+        href: 'https://maps.app.goo.gl/G5D34raH15btmGWBA',
+        icon: 'map',
+      },
+    ],
   },
   {
     time: '夜（未定）',
     badge: '確定',
     title: '富山へ帰宅',
-    body: '京都南ICから高速道路で富山方面へ帰宅。富山到着時刻は未定。「21時着」を目標とせず、競馬場でゆっくり過ごし、夕食後に安全に帰ることを優先する。',
+    body: '伏見稲荷大社を出発後、京都南ICから高速道路で富山方面へ帰宅する。富山到着時刻は未定。',
     status: 'confirmed',
     links: [
       {
@@ -225,12 +334,8 @@ const day2: ScheduleItem[] = [
 
 // ── 未決定項目一覧 ────────────────────────────────────────────
 const pendingList = [
-  { day: '10/17', label: '昼食（店舗）' },
-  { day: '10/17', label: '京都での観光先・詳細ルート' },
-  { day: '10/17', label: '夕食（店舗）' },
+  { day: '10/17', label: '嵐山で利用する駐車場の選定' },
   { day: '10/18', label: '競馬場での昼食' },
-  { day: '10/18', label: '競馬終了後の休憩時間の目安' },
-  { day: '10/18', label: '夕食（店舗）' },
   { day: '両日', label: '富山到着時刻' },
 ];
 ---
