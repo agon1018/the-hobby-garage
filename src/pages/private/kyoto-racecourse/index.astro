@@ -28,8 +28,15 @@ const day1: ScheduleItem[] = [
   {
     time: '07:00',
     badge: '確定',
+    title: '⭐に迎えに来てもらう',
+    body: '⭐に迎えに来てもらい、京都旅行へ出発する。',
+    status: 'confirmed',
+  },
+  {
+    time: '07:30',
+    badge: '確定',
     title: '富山IC 出発',
-    body: '富山から京都方面へ自家用車で出発。高速道路を利用して南下する。',
+    body: '富山から嵐山へ自家用車で出発。高速道路を利用して南下する。',
     status: 'confirmed',
     links: [
       {
@@ -47,10 +54,10 @@ const day1: ScheduleItem[] = [
     status: 'pending',
   },
   {
-    time: '11:00〜12:00頃',
-    badge: '目安',
-    title: '嵐山到着・周辺駐車場に駐車',
-    body: '道路状況によって前後する可能性あり。レンタル着物岡本 嵐山店周辺の候補駐車場から選んで車を停める。',
+    time: '13:00',
+    badge: '確定',
+    title: '嵐山到着・駐車',
+    body: '嵐山に到着し、コンセプト嵐電嵐山駅北コインパーキングに車を停める。',
     status: 'confirmed',
     links: [
       {
@@ -61,36 +68,6 @@ const day1: ScheduleItem[] = [
       {
         label: 'コンセプト嵐電嵐山駅北コインパーキング',
         href: 'https://maps.app.goo.gl/GTF5HS5hR4zdxNs86',
-        icon: 'map',
-      },
-      {
-        label: 'akippa三煌ガレージsg',
-        href: 'https://maps.app.goo.gl/vc8FZ8yUch557Rb89',
-        icon: 'map',
-      },
-      {
-        label: '三井のリパーク 嵐電嵐山駅西駐車場',
-        href: 'https://maps.app.goo.gl/NmzMCF6AUHePietV7',
-        icon: 'map',
-      },
-      {
-        label: 'タイムズ嵯峨天龍寺第2',
-        href: 'https://maps.app.goo.gl/CARnvdJmyLD3pmk18',
-        icon: 'map',
-      },
-      {
-        label: 'コンセプト嵯峨天龍寺コインパーキング',
-        href: 'https://maps.app.goo.gl/gkQWy4qF1tk5xQrZ6',
-        icon: 'map',
-      },
-      {
-        label: '三井のリパーク JR嵯峨嵐山駅南駐車場',
-        href: 'https://maps.app.goo.gl/maqPsCGAyRYwXboU6',
-        icon: 'map',
-      },
-      {
-        label: 'Park1st.阪急嵐山駅前',
-        href: 'https://maps.app.goo.gl/Ekm8at7Hp75eEGu8A',
         icon: 'map',
       },
     ],
@@ -118,7 +95,7 @@ const day1: ScheduleItem[] = [
     time: '午後',
     badge: '確定',
     title: '嵐山で食べ歩き',
-    body: '嵐山で食べ歩きを楽しむ。',
+    body: 'あんバターたい焼き、ゆばちーず、京ばあむ、古都芋本舗のみたらし団子のほか、漬物・せんべえ・きなこみたらし団子などを楽しむ。',
     status: 'confirmed',
     links: [
       {
@@ -139,10 +116,29 @@ const day1: ScheduleItem[] = [
     ],
   },
   {
-    time: '17:00頃',
+    time: '夜',
     badge: '確定',
-    title: '嵐山月灯路のチケットを購入',
-    body: '嵐山月灯路の券売所へ行き、チケットを購入する。',
+    title: '夜ご飯：和牛どんぶり家にくに',
+    body: '和牛どんぶり家にくにで夜ご飯を食べる。',
+    status: 'confirmed',
+    links: [
+      {
+        label: '和牛どんぶり家にくに（Instagram）',
+        href: 'https://www.instagram.com/wagyuya_nikuni/',
+        icon: 'web',
+      },
+      {
+        label: '和牛どんぶり家にくに（Google マップ）',
+        href: 'https://maps.app.goo.gl/6VPAoLRcEAq6bxpw7',
+        icon: 'map',
+      },
+    ],
+  },
+  {
+    time: '20:00〜21:00',
+    badge: '確定',
+    title: '嵐山月灯路を楽しむ',
+    body: '嵐山月灯路を20時から21時まで楽しむ。',
     status: 'confirmed',
     links: [
       {
@@ -151,21 +147,14 @@ const day1: ScheduleItem[] = [
         icon: 'web',
       },
       {
-        label: '券売所（Google マップ）',
+        label: '会場（Google マップ）',
         href: 'https://maps.app.goo.gl/WDXiNvYiSBduQ32A7',
         icon: 'map',
       },
     ],
   },
   {
-    time: '17:00〜20:00頃',
-    badge: '確定',
-    title: '嵐山月灯路を楽しむ',
-    body: '嵐山月灯路を20時頃まで楽しむ。',
-    status: 'confirmed',
-  },
-  {
-    time: '20:00頃',
+    time: '21:00頃',
     badge: '確定',
     title: '淀キャッスルインへ移動',
     body: '嵐山から京阪パーキング淀駅前へ移動して車を駐車し、淀キャッスルインへ向かう。',
@@ -184,7 +173,7 @@ const day1: ScheduleItem[] = [
     ],
   },
   {
-    time: '到着後',
+    time: '21:30',
     badge: '確定',
     title: '淀キャッスルイン チェックイン',
     body: '駐車場から淀キャッスルインへ移動してチェックイン。',
@@ -203,10 +192,10 @@ const day1: ScheduleItem[] = [
     ],
   },
   {
-    time: '22:00頃',
+    time: '夜',
     badge: '確定',
-    title: 'ホテルへ戻り就寝',
-    body: 'ホテルで就寝し、翌日の秋華賞に備える。',
+    title: 'むふふな夜',
+    body: 'ホテルでむふふな夜を過ごす。',
     status: 'confirmed',
   },
 ];
@@ -242,85 +231,90 @@ const day2: ScheduleItem[] = [
     ],
   },
   {
-    time: '08:00頃',
+    time: '08:30',
     badge: '確定',
-    title: '京都競馬場 到着',
-    body: '京都競馬場に到着。午前中から入場して競馬を楽しむ。',
+    title: '京都競馬場 到着・朝一のグッズと秋華賞弁当を購入',
+    body: '京都競馬場に到着。朝一でグッズと秋華賞弁当を購入し、朝から秋華賞弁当を食べる。秋華賞弁当はおいしかった。',
     status: 'confirmed',
-    links: [
-      {
-        label: '淀駅（Google マップ）',
-        href: 'https://www.google.com/maps/search/?api=1&query=淀駅,京都',
-        icon: 'train',
-      },
-    ],
+  },
+  {
+    time: '午前',
+    badge: '確定',
+    title: '馬券を購入',
+    body: '秋華賞などの馬券を購入する。',
+    status: 'confirmed',
   },
   {
     time: '昼',
-    badge: '当日',
-    title: '競馬場内で昼食',
-    body: '昼食・競馬場内での食事は当日決定する。',
-    status: 'pending',
+    badge: '確定',
+    title: '昼食：花家',
+    body: '花家で昼食。期待したほどではなかった。',
+    status: 'confirmed',
   },
   {
     time: '午後',
     badge: '確定',
-    title: 'GⅠ 秋華賞 観戦',
-    body: 'メインレース「秋華賞」（牝馬三冠の最終戦）を観戦。11R終了後に京都競馬場を出発する。',
+    title: 'GⅠ 秋華賞 観戦・的中',
+    body: 'メインレース「秋華賞」（牝馬三冠の最終戦）を観戦。⭐と私の二人とも3連単を的中させ、私は200円、⭐は300円を購入。⭐は三連複も的中し、とても良い結果になった。',
     status: 'confirmed',
     links: [
       {
-        label: '京都競馬場（JRA公式）',
-        href: 'https://www.jra.go.jp/facilities/race/kyoto/',
+        label: '2026年秋華賞 結果（JRA）',
+        href: 'https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde1008202604071120261018/CB',
         icon: 'web',
       },
     ],
   },
   {
-    time: '11R終了後',
+    time: '16:30',
     badge: '確定',
-    title: '京阪パーキング淀駅前へ戻る',
-    body: '徒歩で京阪パーキング淀駅前へ戻り、車を回収する。',
+    title: '京都競馬場を出発・京都駅へ',
+    body: '京都競馬場を出発し、京都駅へ向かう。',
     status: 'confirmed',
   },
   {
-    time: '夕方',
+    time: '18:30頃',
     badge: '確定',
-    title: '伏見稲荷大社へ移動',
-    body: '京阪パーキング淀駅前から車で伏見稲荷大社参拝駐車場へ向かう。',
+    title: '京都タワーに上る',
+    body: '京都タワーの展望室に上る。',
     status: 'confirmed',
     links: [
       {
-        label: '駐車場から伏見稲荷大社への経路',
-        href: 'https://www.google.com/maps/dir/?api=1&origin=京阪パーキング淀駅前,京都府京都市伏見区淀池上町147-2&destination=伏見稲荷大社参拝駐車場,京都府京都市伏見区深草薮之内町68&travelmode=driving',
-        icon: 'map',
-      },
-    ],
-  },
-  {
-    time: '夕方〜夜',
-    badge: '確定',
-    title: '伏見稲荷大社を参拝・ライトアップを楽しむ',
-    body: '伏見稲荷大社を参拝し、ライトアップを楽しむ。',
-    status: 'confirmed',
-    links: [
-      {
-        label: '伏見稲荷大社（公式）',
-        href: 'https://inari.jp/',
+        label: '京都タワー（公式）',
+        href: 'https://www.kyoto-tower.jp/',
         icon: 'web',
       },
       {
-        label: '伏見稲荷大社（Google マップ）',
-        href: 'https://maps.app.goo.gl/G5D34raH15btmGWBA',
+        label: '京都タワー（Google マップ）',
+        href: 'https://maps.app.goo.gl/qjesYxayW7U6vrbU8',
         icon: 'map',
       },
     ],
   },
   {
-    time: '夜（未定）',
+    time: '夜',
+    badge: '確定',
+    title: 'The Kitchenで誕生日のお祝い ♥',
+    body: '⭐からThe Kitchenで誕生日のお祝いをしてもらう。',
+    status: 'confirmed',
+    links: [
+      {
+        label: 'The Kitchen Salvatore Cuomo 京都（公式）',
+        href: 'https://www.kitchensalvatore.jp/kyoto/index.html',
+        icon: 'web',
+      },
+      {
+        label: 'The Kitchen Salvatore Cuomo 京都（Google マップ）',
+        href: 'https://maps.app.goo.gl/6RSDSRcmn6ERBcTW6',
+        icon: 'map',
+      },
+    ],
+  },
+  {
+    time: '20:30',
     badge: '確定',
     title: '富山へ帰宅',
-    body: '伏見稲荷大社を出発後、京都南ICから高速道路で富山方面へ帰宅する。富山到着時刻は未定。',
+    body: '京都から富山へ向けて帰路につく。',
     status: 'confirmed',
     links: [
       {
@@ -330,14 +324,17 @@ const day2: ScheduleItem[] = [
       },
     ],
   },
+  {
+    time: '翌01:00頃',
+    badge: '確定',
+    title: '富山到着・自宅へ送ってもらう',
+    body: '富山に到着後、自宅まで送ってもらう。',
+    status: 'confirmed',
+  },
 ];
 
 // ── 未決定項目一覧 ────────────────────────────────────────────
-const pendingList = [
-  { day: '10/17', label: '嵐山で利用する駐車場の選定' },
-  { day: '10/18', label: '競馬場での昼食' },
-  { day: '両日', label: '富山到着時刻' },
-];
+const pendingList: { day: string; label: string }[] = [];
 ---
 
 <Layout title="京都競馬場旅行しおり — プライベートの部屋" noindex>
@@ -514,17 +511,19 @@ const pendingList = [
       </section>
 
       {/* ── 未決定一覧 ── */}
-      <section class="pending-section">
-        <h2 class="section-title"><span>後日決定する項目</span></h2>
-        <ul class="pending-list">
-          {pendingList.map((item) => (
-            <li class="pending-item">
-              <span class="pending-day">{item.day}</span>
-              <span class="pending-label">{item.label}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {pendingList.length > 0 && (
+        <section class="pending-section">
+          <h2 class="section-title"><span>後日決定する項目</span></h2>
+          <ul class="pending-list">
+            {pendingList.map((item) => (
+              <li class="pending-item">
+                <span class="pending-day">{item.day}</span>
+                <span class="pending-label">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
     </main>
   </RoomSidebar>

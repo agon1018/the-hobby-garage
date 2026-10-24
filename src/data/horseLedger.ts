@@ -66,7 +66,7 @@ export const ledgerBooks: LedgerBook[] = [
               -7086,
               -6898,
               -8085,
-              null,
+              -5722,
               null,
               null
             ]
@@ -85,7 +85,7 @@ export const ledgerBooks: LedgerBook[] = [
               -3300,
               -3300,
               -3300,
-              null,
+              -3300,
               null,
               null
             ]
@@ -104,7 +104,7 @@ export const ledgerBooks: LedgerBook[] = [
               -3786,
               -3598,
               -4785,
-              null,
+              -2422,
               null,
               null
             ]
@@ -123,7 +123,7 @@ export const ledgerBooks: LedgerBook[] = [
               -1188,
               -959,
               -2834,
-              null,
+              -1109,
               null,
               null
             ]
@@ -142,7 +142,7 @@ export const ledgerBooks: LedgerBook[] = [
               -1237,
               -1284,
               -1951,
-              null,
+              -1313,
               null,
               null
             ]
@@ -427,7 +427,7 @@ export const ledgerBooks: LedgerBook[] = [
               -7086,
               9709,
               32573,
-              null,
+              -5722,
               null,
               null
             ]
@@ -484,7 +484,7 @@ export const ledgerBooks: LedgerBook[] = [
               13494,
               23203,
               55776,
-              55776,
+              50054,
               55776,
               55776
             ]

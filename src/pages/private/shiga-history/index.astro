@@ -44,13 +44,18 @@ const day1: ScheduleItem[] = [
     time: '15:30〜16:40', badge: '目安', title: '虎御前山（織田軍最前線包囲陣地群）',
     body: '小谷城の正面約2kmに位置する高台から、小谷城を封じ込めた監視体制と地形を見学する。', status: 'confirmed', tags: ['史跡'],
     details: ['織田信長本陣跡、羽柴秀吉陣跡、柴田勝家陣跡、丹羽長秀陣跡が連なる尾根筋を散策する。', '小谷城を見上げる視界と圧迫感を検証する。'],
-    links: [{ label: '虎御前山 → HOTEL R9 長浜インター（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=虎御前山城跡,滋賀県&destination=HOTEL+R9+The+Yard+長浜インター,滋賀県&travelmode=driving', icon: 'map' }],
+    links: [{ label: '虎御前山 → HM Hotels Nagahama Central（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=虎御前山城跡,滋賀県&destination=HM+Hotels+Nagahama+Central,滋賀県&travelmode=driving', icon: 'map' }],
   },
   {
     time: '17:00〜', badge: '確定', title: 'ホテルチェックイン・夕食',
-    body: 'HOTEL R9 The Yard 長浜インターにチェックイン。夕食は長浜IC周辺または長浜市内の近江牛専門店・ステーキハウスを検討する。', status: 'confirmed', tags: ['宿泊', '食事'],
+    body: 'HM Hotels Nagahama Centralにチェックイン。夕食は長浜市内の近江牛専門店・地場料理店を検討する。', status: 'confirmed', tags: ['宿泊', '食事'],
+    details: ['宿泊日：2026年11月13日（金）〜14日（土）・1泊', 'キャンセル料：11月8日までは無料、11月9日以降は宿泊料金の100%。'],
     hotels: [
-      { name: 'HOTEL R9 The Yard 長浜インター', detail: '長浜ICから車で約3分・全44室', href: 'https://hotel-r9.jp/hotels/nagahamainter/' },
+      { name: 'HM Hotels Nagahama Central', detail: '長浜市高田町のトレーラー型スマートホテル', href: 'https://hangout.ne.jp/' },
+    ],
+    links: [
+      { label: 'ホテルの場所（Google マップ）', href: 'https://maps.app.goo.gl/B4E1WmHxroamUHFdA', icon: 'map' },
+      { label: '予約情報を確認', href: 'https://airhost128874.airhost.co/ja/orders/18423133?hotel=769492&pin=29453055&uid=R303883537', icon: 'web' },
     ],
   },
 ];
@@ -61,7 +66,7 @@ const day2: ScheduleItem[] = [
     body: 'ホテルをゆっくり10:00に出発。姉川の戦いや小谷城攻略で織田軍の火力を支えた、国友鉄砲の生産拠点を見学する。', status: 'confirmed', tags: ['必須'],
     details: ['当時の火縄銃や鍛冶技術の資料を鑑賞する。'],
     links: [
-      { label: 'HOTEL R9 長浜インター → 国友（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=HOTEL+R9+The+Yard+長浜インター,滋賀県&destination=国友鉄砲ミュージアム,滋賀県&travelmode=driving', icon: 'map' },
+      { label: 'HM Hotels → 国友（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=HM+Hotels+Nagahama+Central,滋賀県&destination=国友鉄砲ミュージアム,滋賀県&travelmode=driving', icon: 'map' },
       { label: '国友 → 徳川家康陣跡（地図）', href: 'https://www.google.com/maps/dir/?api=1&origin=国友鉄砲ミュージアム,滋賀県&destination=徳川家康陣跡,滋賀県&travelmode=driving', icon: 'map' },
     ],
   },
@@ -101,7 +106,6 @@ const day2: ScheduleItem[] = [
 ];
 
 const pendingList = [
-  '旅行日程の決定（11月13日〜14日 または 11月20日〜21日）',
   '1日目の夕食、2日目の朝食',
   '各施設の開館日・開館時間と最終入館時間の確認',
   '姉川5大陣跡の駐車場所・現地の徒歩経路の確認',
@@ -118,7 +122,7 @@ const pendingList = [
       <header class="title-head">
         <p class="label">Historical Field Trip · 2026</p>
         <h1>浅井包囲網・各将陣跡 ＆<br />姉川決戦網羅プラン</h1>
-        <p class="subtitle">日程候補：11月13日（金）〜14日（土）または11月20日（金）〜21日（土）｜発着：富山</p>
+        <p class="subtitle">2026年11月13日（金）〜14日（土）｜1泊2日｜発着：富山</p>
       </header>
 
       <section class="overview-section">
@@ -186,7 +190,7 @@ const pendingList = [
   .day-header { display:flex; align-items:center; gap:1rem; margin-bottom:.9rem; padding:.85rem 1.1rem; border:1px solid var(--line); border-radius:.95rem; background:#fff; } .day-header>b { display:grid; place-items:center; width:3.2rem; height:3.2rem; border-radius:.7rem; color:#fff; font-size:.72rem; } .day1>b { background:#39869b; } .day2>b { background:#da9444; } .day-header strong,.day-header small { display:block; } .day-header strong { color:#204f5b; font-family:'Hiragino Mincho ProN','Yu Mincho',serif; } .day-header small { margin-top:.18rem; color:#6b8594; }
   .timeline { margin:0; padding:0; list-style:none; } .tl-item { display:grid; grid-template-columns:7.2rem 1.6rem 1fr; } .time { display:flex; flex-direction:column; align-items:end; gap:.25rem; padding:.95rem .7rem .85rem 0; font-size:.8rem; color:#3e5560; text-align:right; } .line { position:relative; } .line::before { content:''; position:absolute; top:0; bottom:0; left:50%; width:2px; background:var(--line); transform:translateX(-50%); } .tl-item:last-child .line::before { bottom:50%; } .line i { position:relative; z-index:1; display:block; width:.72rem; height:.72rem; margin:1.05rem auto 0; border:2px solid #39869b; border-radius:50%; background:#39869b; box-shadow:0 0 0 3px rgba(57,134,155,.18); } .pending .line i { border-color:#aecdd5; background:#e8f3f6; box-shadow:none; }
   article { margin:.5rem 0 .6rem .8rem; padding:.75rem .9rem; border:1px solid var(--line); border-left:3px solid var(--teal); border-radius:.75rem; background:#fff; box-shadow:0 4px 12px rgba(39,48,68,.06); } .pending article { border-style:dashed; border-left-style:dashed; background:#f5f8f9; } article h3 { margin:0 0 .3rem; font-size:.95rem; } article p { margin:0; color:#3e5560; font-size:.86rem; line-height:1.7; } .details { margin:.6rem 0 0; padding-left:1.15rem; color:#3e5560; font-size:.84rem; line-height:1.65; } .details li + li { margin-top:.2rem; }
-  .links,.hotels { margin:.6rem 0 0; padding:0; list-style:none; } .links { display:flex; flex-wrap:wrap; gap:.4rem; } .links a,.hotels a { display:inline-flex; padding:.28em .7em; border:1px solid #b8dfe8; border-radius:999px; background:#e0f3f8; color:#1a5f75; font-size:.76rem; font-weight:700; text-decoration:none; } .hotels { display:flex; flex-direction:column; gap:.4rem; } .hotels li { display:flex; align-items:center; justify-content:space-between; gap:.7rem; } .hotels strong,.hotels small { display:block; } .hotels strong { font-size:.84rem; } .hotels small { color:#6b8594; font-size:.76rem; }
+  .links,.hotels { margin:.6rem 0 0; padding:0; list-style:none; } .links { display:flex; flex-wrap:wrap; gap:.4rem; } .links a,.hotels a { display:inline-flex; padding:.28em .7em; border:1px solid #b8dfe8; border-radius:999px; background:#e0f3f8; color:#1a5f75; font-size:.76rem; font-weight:700; text-decoration:none; } .hotels { display:flex; flex-direction:column; gap:.4rem; } .hotels li { display:flex; flex-direction:column; align-items:flex-start; gap:.35rem; } .hotels strong,.hotels small { display:block; } .hotels strong { font-size:.84rem; } .hotels small { color:#6b8594; font-size:.76rem; }
   .pending-section>ul { display:flex; flex-direction:column; gap:.45rem; margin:0; padding:0; list-style:none; } .pending-section li { padding:.6rem .95rem; border:1px dashed #b8d4db; border-radius:.65rem; background:#fff; color:#3e5560; font-size:.88rem; }
   @media (max-width:700px) { .page { padding:1rem .8rem 2.5rem; } .title-head { padding:.8rem .9rem .95rem; } .subtitle { font-size:.82rem; } .overview-grid { grid-template-columns:1fr 1fr; } .tl-item { grid-template-columns:5.2rem 1.4rem 1fr; } .time { padding-right:.5rem; font-size:.72rem; } article { margin-left:.6rem; padding:.65rem .75rem; } article h3 { font-size:.88rem; } article p { font-size:.8rem; } .hotels li { align-items:flex-start; flex-direction:column; gap:.35rem; } }
   @media (max-width:440px) { .overview-grid { grid-template-columns:1fr; } .tl-item { grid-template-columns:4.5rem 1.3rem 1fr; } }
