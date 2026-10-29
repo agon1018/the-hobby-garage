@@ -1,0 +1,244 @@
+---
+import RoomSidebar from '../../../components/RoomSidebar.astro';
+import Layout from '../../../layouts/Layout.astro';
+
+type Link = {
+  label: string;
+  href: string;
+};
+
+type ScheduleItem = {
+  time: string;
+  badge: '確定' | '観戦';
+  title: string;
+  body: string;
+  race?: string;
+  links?: Link[];
+};
+
+const schedule: ScheduleItem[] = [
+  {
+    time: '09:00',
+    badge: '確定',
+    title: '⭐を迎えに行く',
+    body: '星を迎えに行き、金沢競馬場へ向かう。',
+  },
+  {
+    time: '10:30',
+    badge: '確定',
+    title: '金沢競馬場到着',
+    body: 'JBCの一日を楽しむ。来場プレゼントや能登グルメコーナー、特設ステージも見どころ。',
+    links: [
+      { label: '金沢競馬場（地図）', href: 'https://www.google.com/maps/search/?api=1&query=金沢競馬場,石川県金沢市八田町西1' },
+      { label: '当日のイベント情報', href: 'https://www.kanazawakeiba.com/event/info-38890/' },
+    ],
+  },
+  {
+    time: '14:25',
+    badge: '観戦',
+    race: 'JpnⅠ',
+    title: 'JBCレディスクラシック 観戦',
+    body: '金沢競馬場・ダート1,500m。牝馬によるJBC競走を観戦。',
+  },
+  {
+    time: '15:10',
+    badge: '観戦',
+    race: 'JpnⅠ',
+    title: 'JBCスプリント 観戦',
+    body: '金沢競馬場・ダート1,400m。スピード自慢が集う短距離戦を観戦。',
+  },
+  {
+    time: '16:25',
+    badge: '観戦',
+    race: 'JpnⅠ',
+    title: 'JBCクラシック 観戦',
+    body: '金沢競馬場・ダート2,100m。この日のメインレースを観戦。',
+  },
+  {
+    time: '18:00',
+    badge: '確定',
+    title: '金沢競馬場から富山へ',
+    body: '金沢競馬場を出発して富山へ戻る。',
+  },
+  {
+    time: '19:00',
+    badge: '確定',
+    title: '⭐とごはん',
+    body: '星とごはんを食べる。',
+  },
+  {
+    time: '20:00',
+    badge: '確定',
+    title: '⭐を送って帰宅',
+    body: '星を送ってから自宅へ帰宅する。',
+  },
+];
+---
+
+<Layout title="JBC観戦 — プライベートの部屋" noindex>
+  <RoomSidebar
+    currentPath="/private/jbc-2026"
+    breadcrumbs={[
+      { href: '/', label: '趣味のガレージ' },
+      { href: '/private', label: 'プライベートの部屋' },
+      { label: 'JBC観戦' },
+    ]}
+  >
+    <main class="page">
+      <header class="title-head">
+        <p class="label">Day Trip · JBC 2026</p>
+        <h1>JBC観戦</h1>
+        <p class="subtitle">2026年11月3日（火・祝）｜金沢競馬場｜富山から日帰り</p>
+      </header>
+
+      <section class="overview-section" aria-labelledby="overview-title">
+        <h2 id="overview-title" class="section-title"><span>遠征概要</span></h2>
+        <div class="overview-grid">
+          <div class="ov-item">
+            <span class="ov-key">日程</span>
+            <span class="ov-val">11月3日（火・祝）</span>
+          </div>
+          <div class="ov-item">
+            <span class="ov-key">参加者</span>
+            <span class="ov-val">⭐と2人</span>
+          </div>
+          <div class="ov-item">
+            <span class="ov-key">目的地</span>
+            <span class="ov-val">金沢競馬場</span>
+          </div>
+          <div class="ov-item ov-item--highlight">
+            <span class="ov-key">メイン</span>
+            <span class="ov-val">JBCクラシック<br />16:25発走・ダート2,100m</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="race-note" aria-label="JBC競走の発走時刻">
+        <p><strong>JBC 3競走の発走予定時刻</strong>は、JBC 2026特設サイト掲載の情報を反映しています。</p>
+        <ul>
+          <li>14:25　JBCレディスクラシック</li>
+          <li>15:10　JBCスプリント</li>
+          <li>16:25　JBCクラシック</li>
+        </ul>
+        <nav class="site-links" aria-label="観戦情報サイト">
+          <a href="https://www.keiba.go.jp/jbc2026/" target="_blank" rel="noopener noreferrer">JBC特設サイト <span aria-hidden="true">↗</span></a>
+          <a href="https://nar.netkeiba.com/racecourse/racecourse_page.html?jyo_cd=46&kaisai_id=2026461103&next_week_from=20261103" target="_blank" rel="noopener noreferrer">netkeiba <span aria-hidden="true">↗</span></a>
+          <a href="https://keiba.rakuten.co.jp/race_card/list/RACEID/202611032200000000" target="_blank" rel="noopener noreferrer">楽天競馬 <span aria-hidden="true">↗</span></a>
+        </nav>
+      </section>
+
+      <section class="day-section" aria-labelledby="timeline-title">
+        <h2 id="timeline-title" class="section-title"><span>当日の予定</span></h2>
+        <div class="day-header">
+          <div class="day-badge">11.3</div>
+          <div>
+            <p class="day-date">11月3日（火・祝）</p>
+            <p class="day-theme">夢よ、走れ。JBC</p>
+          </div>
+        </div>
+
+        <ol class="timeline">
+          {schedule.map((item) => (
+            <li class={`tl-item tl-item--${item.badge === '観戦' ? 'race' : 'confirmed'}`}>
+              <div class="tl-time">
+                <span>{item.time}</span>
+                <span class={`badge badge--${item.badge === '観戦' ? 'race' : 'confirmed'}`}>{item.badge}</span>
+              </div>
+              <div class="tl-line" aria-hidden="true"><span class="tl-dot"></span></div>
+              <article class="tl-card">
+                {item.race && <span class="race-grade">{item.race}</span>}
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                {item.links && (
+                  <ul class="tl-links">
+                    {item.links.map((link) => (
+                      <li><a href={link.href} target="_blank" rel="noopener noreferrer">{link.label} <span aria-hidden="true">↗</span></a></li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </main>
+  </RoomSidebar>
+</Layout>
+
+<style>
+  .page {
+    --navy: #173b67;
+    --blue: #2869a9;
+    --sky: #dbeefd;
+    --line: #c7d8e9;
+    --gold: #bc7b20;
+    --gold-pale: #fff3d9;
+    --ink: #263545;
+    min-height: 100vh;
+    padding: 2rem 1.2rem 4rem;
+    color: var(--ink);
+    font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+    background: radial-gradient(circle at 88% 14%, rgba(40, 105, 169, .14), transparent 34%), radial-gradient(circle at 10% 85%, rgba(188, 123, 32, .12), transparent 30%), #f8fafc;
+  }
+  .title-head, .overview-section, .race-note, .day-section { max-width: 980px; margin-inline: auto; }
+  .title-head {
+    margin-bottom: 1.2rem; padding: 1.1rem 1.25rem 1.2rem; overflow: hidden; position: relative;
+    border: 1px solid var(--line); border-radius: 1.15rem; background: #fff; box-shadow: 0 12px 26px rgba(23, 59, 103, .09);
+  }
+  .title-head::after { content: ''; position: absolute; right: 12%; bottom: 0; left: 12%; height: 4px; background: linear-gradient(90deg, var(--blue), var(--gold), var(--blue)); }
+  .label, .ov-key, .section-title { margin: 0; color: var(--blue); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  h1 { margin: .3rem 0 .5rem; color: var(--navy); font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); letter-spacing: .04em; }
+  .subtitle { margin: 0; color: #4b6075; font-size: .9rem; }
+  .section-title { display: flex; align-items: center; gap: .6rem; margin: 0 0 .85rem; }
+  .section-title::before, .section-title::after { content: ''; height: 1px; flex: 1; background: var(--line); }
+  .section-title::before { flex: 0 0 1.4rem; }
+  .overview-section, .race-note { margin-bottom: 1.4rem; }
+  .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+  .ov-item { display: flex; flex-direction: column; gap: .25rem; padding: .75rem .9rem; border: 1px solid var(--line); border-radius: .8rem; background: #fff; box-shadow: 0 4px 10px rgba(23, 59, 103, .05); }
+  .ov-item--highlight { border-color: #e9c886; background: linear-gradient(135deg, #fffdf8, var(--gold-pale)); }
+  .ov-item--highlight .ov-key { color: #9c6217; }
+  .ov-val { font-size: .91rem; font-weight: 700; line-height: 1.55; }
+  .race-note { padding: .75rem 1rem; border: 1px solid #e9d2a6; border-radius: .8rem; background: #fffdf8; color: #684d29; font-size: .84rem; line-height: 1.65; }
+  .race-note p { margin: 0 0 .35rem; }
+  .race-note ul { display: flex; flex-wrap: wrap; gap: .2rem 1.1rem; margin: 0; padding-left: 1.2rem; }
+  .site-links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .65rem; }
+  .site-links a { display: inline-flex; padding: .28em .7em; border: 1px solid #bcd6eb; border-radius: 999px; background: var(--sky); color: #165d98; font-size: .76rem; font-weight: 700; text-decoration: none; }
+  .site-links a:hover { border-color: #6aa9d5; background: #cbe8fa; }
+  .day-section { margin-bottom: 1rem; }
+  .day-header { display: flex; align-items: center; gap: 1rem; margin-bottom: .9rem; padding: .85rem 1.1rem; border: 1px solid var(--line); border-radius: .95rem; background: #fff; box-shadow: 0 6px 16px rgba(23, 59, 103, .07); }
+  .day-badge { display: grid; width: 3.2rem; height: 3.2rem; place-items: center; border-radius: .7rem; background: linear-gradient(135deg, var(--blue), var(--navy)); color: #fff; font-size: .72rem; font-weight: 900; box-shadow: 0 6px 14px rgba(40, 105, 169, .3); }
+  .day-date { margin: 0 0 .15rem; color: var(--navy); font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 1.05rem; font-weight: 700; }
+  .day-theme { margin: 0; color: #6c8298; font-size: .82rem; font-weight: 600; }
+  .timeline { margin: 0; padding: 0; list-style: none; }
+  .tl-item { display: grid; grid-template-columns: 6rem 1.6rem 1fr; }
+  .tl-time { display: flex; flex-direction: column; align-items: end; gap: .25rem; padding: .95rem .65rem .8rem 0; color: #50677d; font-size: .8rem; font-weight: 800; }
+  .badge { padding: .12em .52em; border-radius: 999px; font-size: .65rem; letter-spacing: .04em; }
+  .badge--confirmed { background: #dceefa; color: #1b609c; }
+  .badge--race { background: var(--gold-pale); color: #9b5e10; }
+  .tl-line { display: flex; position: relative; justify-content: center; }
+  .tl-line::before { content: ''; position: absolute; top: 0; bottom: 0; width: 2px; background: var(--line); }
+  .tl-item:last-child .tl-line::before { bottom: 50%; }
+  .tl-dot { z-index: 1; width: .72rem; height: .72rem; margin-top: 1.05rem; border: 2px solid #7da7c8; border-radius: 50%; background: #fff; }
+  .tl-item--confirmed .tl-dot { border-color: var(--blue); background: var(--blue); box-shadow: 0 0 0 3px rgba(40, 105, 169, .16); }
+  .tl-item--race .tl-dot { border-color: var(--gold); background: var(--gold); box-shadow: 0 0 0 3px rgba(188, 123, 32, .16); }
+  .tl-card { margin: .5rem 0 .6rem .8rem; padding: .75rem .9rem; border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: .75rem; background: #fff; box-shadow: 0 4px 12px rgba(23, 59, 103, .06); }
+  .tl-item--race .tl-card { border-color: #ebd2a3; border-left-color: var(--gold); background: #fffefa; }
+  .race-grade { display: inline-block; margin-bottom: .2rem; color: #9b5e10; font-size: .7rem; font-weight: 900; letter-spacing: .08em; }
+  .tl-card h3 { margin: 0 0 .3rem; color: var(--ink); font-size: .96rem; }
+  .tl-card p { margin: 0; color: #506274; font-size: .86rem; line-height: 1.7; }
+  .tl-links { display: flex; flex-wrap: wrap; gap: .4rem; margin: .6rem 0 0; padding: 0; list-style: none; }
+  .tl-links a { display: inline-flex; padding: .28em .7em; border: 1px solid #bcd6eb; border-radius: 999px; background: var(--sky); color: #165d98; font-size: .76rem; font-weight: 700; text-decoration: none; }
+  .tl-links a:hover { border-color: #6aa9d5; background: #cbe8fa; }
+  @media (max-width: 700px) {
+    .page { padding: 1rem .8rem 2.5rem; }
+    .title-head { padding: .85rem .9rem .95rem; }
+    h1 { font-size: 1.45rem; }
+    .overview-grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .race-note ul { display: block; }
+    .tl-item { grid-template-columns: 5.1rem 1.4rem 1fr; }
+    .tl-card { margin-left: .6rem; padding: .65rem .75rem; }
+    .tl-card h3 { font-size: .89rem; }
+    .tl-card p { font-size: .8rem; }
+  }
+  @media (max-width: 440px) { .overview-grid { grid-template-columns: 1fr; } }
+</style>
