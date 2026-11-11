@@ -83,7 +83,7 @@ const { races } = Astro.props;
               <td>
                 <span class="stack">
                   <b>{race.time}</b>
-                  <small>({race.margin})</small>
+                  <small>{race.margin ? `(${race.margin})` : ''}</small>
                 </span>
               </td>
               <td>{race.last3f}</td>
