@@ -4,6 +4,10 @@ import FriendPinocchioMark from '../../components/FriendPinocchioMark.astro';
 import OwnerMoonMark from '../../components/OwnerMoonMark.astro';
 import RoomSidebar from '../../components/RoomSidebar.astro';
 import { isFriendKit, plamoKits } from '../../data/plamoKits';
+
+const sortedKits = [...plamoKits].sort(
+  (a, b) => Number(isFriendKit(a)) - Number(isFriendKit(b)),
+);
 ---
 
 <Layout title="プラモの部屋">
@@ -22,7 +26,7 @@ import { isFriendKit, plamoKits } from '../../data/plamoKits';
     </header>
 
     <section class="kit-grid">
-      {plamoKits.map((kit) => (
+      {sortedKits.map((kit) => (
         <a class="kit-card" href={`/plamo/kits/${kit.slug}`}>
           <img class="cover-bg" src={kit.cover} alt="" loading="lazy" decoding="async" />
           <div class="cover-overlay" aria-hidden="true"></div>
